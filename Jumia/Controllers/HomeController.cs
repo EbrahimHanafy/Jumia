@@ -17,7 +17,8 @@ namespace Jumia.Controllers
         {
             return View();
         }
-
+        
+        // Ebrahim
         public IActionResult Privacy()
         {
             return View();
