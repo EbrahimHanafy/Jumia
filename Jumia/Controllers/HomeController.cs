@@ -12,7 +12,7 @@ namespace Jumia.Controllers
         {
             _logger = logger;
         }
-
+        //welcome 
         public IActionResult Index()
         {
             return View();
