@@ -20,6 +20,7 @@ namespace Jumia.Controllers
         
         // Ebrahim
         // turky wa7ed bs
+        // Khaled Ahmed
         public IActionResult Privacy()
         {
             return View();
