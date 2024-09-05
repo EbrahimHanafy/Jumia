@@ -7,7 +7,7 @@ namespace Jumia.Models
 {
     public class Country
     {
-
+        //  [Key]
         public int CountryId { get; set; }
 
         [StringLength(50)]
@@ -22,10 +22,10 @@ namespace Jumia.Models
 
         public int CreatedBy { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+       // public DateTime CreatedAt { get; set; }
 
         public int? UpdatedBy { get; set; }
 
-        public DateTime? UpdatedAt { get; set; }
+       // public DateTime? UpdatedAt { get; set; }
     }
 }

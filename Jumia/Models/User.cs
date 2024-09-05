@@ -8,6 +8,7 @@ namespace Jumia.Models
 {
  public class User
     {
+        // [Key]
         public Int64  UserId { get; set; } 
 
         [StringLength(50)]
@@ -34,22 +35,22 @@ namespace Jumia.Models
         public string Phone1 { get; set; }
 
         [StringLength(45)]
-        public string Phone2 { get; set; }
-
+        public string Phone2 { get; set; } 
+       
         public int RoleId { get; set; }
-
+        // [ForeignKey("Disclaimer")]
         public int DisclaimerId { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+       // public DateTime CreatedAt { get; set; }
 
         public int CreatedBy { get; set; }
 
-        public DateTime? UpdatedAt { get; set; }
+       // public DateTime? UpdatedAt { get; set; }
 
         public int? UpdatedBy { get; set; }
 
-       
-        //public virtual Role Role { get; set; }
+       // [ForeignKey("RoleId")]
+    //  public virtual Role Role { get; set; }
     }
  //دول هيتحطوا فال DB context class 
     //public DbSet<User> Users { get; set; }

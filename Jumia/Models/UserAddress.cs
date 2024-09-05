@@ -8,7 +8,7 @@ namespace Jumia.Models
 {
     public class UserAddress
     {
-
+        //[Key]
         public int UserAddressId { get; set; }
 
         public int UserId { get; set; }
@@ -34,9 +34,11 @@ namespace Jumia.Models
 
         public bool IsDefault { get; set; }
 
-
+        // [ForeignKey("CountryId")]
         //public virtual Country Country { get; set; }
+        // [ForeignKey("GovernorateId")]
         //public virtual Governorate Governorate { get; set; }
+        //[ForeignKey("CityId")]
         //public virtual City City { get; set; }
     }
 }

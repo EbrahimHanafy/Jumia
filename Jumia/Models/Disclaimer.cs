@@ -9,7 +9,7 @@ namespace Jumia.Models
 
     public class Disclaimer
     {
-
+        //  [Key]
         public int DisclaimerId { get; set; }
 
         [StringLength(500)]
@@ -17,10 +17,10 @@ namespace Jumia.Models
 
         public int CreatedBy { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+       // public DateTime CreatedAt { get; set; }
 
         public int? UpdatedBy { get; set; }
 
-        public DateTime? UpdatedAt { get; set; }
+      //  public DateTime? UpdatedAt { get; set; }
     }
 }
