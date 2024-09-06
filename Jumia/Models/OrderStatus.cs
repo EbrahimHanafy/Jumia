@@ -23,7 +23,7 @@ namespace Jumia.Models
         //.........................................................
         // Navigation property for related Order entities (one-to-many relationship)
         public virtual ICollection<Order> Orders { get; set; }
-        // Navigation property for related Retrun entities (one-to-many relationship)
-        public virtual ICollection<Retrun> Retruns { get; set; }
+        // Navigation property for related Return entities (one-to-many relationship)
+        public virtual ICollection<Return> Returns { get; set; }
     }
 }
