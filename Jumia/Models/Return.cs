@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Jumia.Models
 {
-    public class Retrun
+    public class Return
     {
         [Key]
         public int ReturnId { get; set; }

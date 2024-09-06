@@ -30,6 +30,6 @@ namespace Jumia.Models
         // Navigation property for the related Payment
         public virtual PaymentMethod PaymentMethod { get; set; }
         // Navigation property for related Retrun entities (one-to-many relationship)
-        public virtual ICollection<Retrun> Retruns { get; set; }
+        public virtual ICollection<Return> Returns { get; set; }
     }
 }
