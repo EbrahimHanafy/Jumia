@@ -7,11 +7,11 @@ namespace Jumia.Models
 {
     public class Role
     {
-        //[Key]
+        [Key]
 
         public int RoleId { get; set; }
 
-        [StringLength(45)]
+        [Required(ErrorMessage = "Please enter this field"), MaxLength(45)]
         public string RoleName { get; set; }
 
         public bool AddProduct { get; set; }
@@ -79,5 +79,7 @@ namespace Jumia.Models
         public bool AddPaymentMethod { get; set; }
 
         public bool UpdatePaymentMethod { get; set; }
+        // Navigation property for related User  entities (one-to-many relationship)
+        public virtual ICollection<User> Users { get; set; }
     }
 }
