@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Jumia.Models
 {
-    public class ShoppingCartcs
+    public class ShoppingCart
     {
         [Key]
         public int ShoppingCartId { get; set; }
