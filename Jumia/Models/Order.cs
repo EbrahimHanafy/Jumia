@@ -52,9 +52,9 @@ namespace Jumia.Models
         // Navigation property for the related DiscountCoupon
         public virtual DiscountCoupon? DiscountCoupon { get; set; }
         // Navigation property for the related User
-        //public User  User { get; set; }
+        public User  User { get; set; }
         // Navigation property for the related UserAddress
-        //public UserAddress UserAddress { get; set; }
+        public UserAddress UserAddress { get; set; }
         // Navigation property for related OrderDetails entities (one-to-many relationship)
         public virtual ICollection<OrderDetails>  OrderDetails { get; set; }
 

@@ -41,19 +41,19 @@ namespace Jumia.Models
 
         // Navigation properties
         // Navigation property for the related Product
-        //public virtual Product Product { get; set; }
+        public virtual Product Product { get; set; }
 
         // Navigation property for the related Color
         public virtual Color? Color { get; set; }
         // Navigation property for the related Size
         public virtual Size Size { get; set; }
         // Navigation property for the related ProductImage
-        //public virtual ProductImage ProductImage { get; set; }
+        public virtual ProductImage ProductImage { get; set; }
 
         // Navigation property for related ProductInStores entities (one-to-many relationship)
-        //public virtual ICollection<ProductInStores> ProductInStores { get; set; }
+        public virtual ICollection<ProductInStore> ProductInStores { get; set; }
 
         // Navigation property for related ShippingCart entities (one-to-many relationship)
-        //public virtual ICollection<ShippingCarts> ShippingCarts { get; set; }
+        public virtual ICollection<ShoppingCart> ShippingCarts { get; set; }
     }
 }

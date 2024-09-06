@@ -41,6 +41,6 @@ namespace Jumia.Models
         public virtual Category Category { get; set; }
 
         // Navigation property for related Product entities (one-to-many relationship)
-        //public virtual ICollection<Product>? Products { get; set; }
+        public virtual ICollection<Product>? Products { get; set; }
     }
 }

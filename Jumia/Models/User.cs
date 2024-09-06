@@ -60,15 +60,15 @@ namespace Jumia.Models
         public virtual Disclaimer Disclaimer { get; set; }
 
         // Navigation property for related Order entities (one-to-many relationship)
-        //public virtual ICollection<Order> Orders{ get; set; }
+        public virtual ICollection<Order> Orders{ get; set; }
         // Navigation property for related WishList entities (one-to-many relationship)
         public virtual ICollection<WishList> WishList { get; set; }
         // Navigation property for related UserAddresses entities (one-to-many relationship)
         public virtual ICollection<UserAddress> UserAddresses { get; set; }
         // Navigation property for related ShoppingCart  entities (one-to-many relationship)
-        //public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
+        public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
         // Navigation property for related Return  entities (one-to-many relationship)
-        //public virtual ICollection<Return> Returns { get; set; }
+        public virtual ICollection<Return> Returns { get; set; }
 
 
 

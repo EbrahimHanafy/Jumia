@@ -46,9 +46,9 @@ namespace Jumia.Models
         // Navigation property for the related Orderstatus
         public virtual OrderStatus? OrderStatus { get; set; }
         // Navigation property for the related User
-        //public virtual User User { get; set; }          
+        public virtual User User { get; set; }          
         // Navigation property for the related UserAddress
-        //public virtual UserAddress? UserAddress { get; set; }
+        public virtual UserAddress? UserAddress { get; set; }
         // Navigation property for the related Refund
         public virtual Refund Refund { get; set; }
         // Navigation property for related ReturnDetails entities (one-to-many relationship)
