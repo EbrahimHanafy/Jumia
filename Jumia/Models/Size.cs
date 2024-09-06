@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace YourProjectNamespace.Models
+namespace Jumia.Models
 {
     public class Size
     {

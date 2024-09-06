@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 
-namespace YourProjectNamespace.Models
+namespace Jumia.Models
 {
     public class Color
     {

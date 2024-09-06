@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 
-namespace YourProjectNamespace.Models
+namespace Jumia.Models
 {
     public class ProductColorSize
     {
