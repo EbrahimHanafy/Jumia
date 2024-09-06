@@ -45,9 +45,7 @@ namespace Jumia.Models
         // Navigation property for the related Retrun
         public virtual Return Return  { get; set; }
         // Navigation property for the related Product
-        //public virtual Product Product { get; set; }
+        public virtual Product Product { get; set; }
 
-
-        
     }
 }

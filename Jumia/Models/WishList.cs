@@ -27,7 +27,7 @@ namespace Jumia.Models
         public int ProductId { get; set; }
         
         // Navigation property for the related Product
-        //public virtual Product Product { get; set; }
+        public virtual Product Product { get; set; }
 
         // Navigation property for the related User
         public virtual User User { get; set; }

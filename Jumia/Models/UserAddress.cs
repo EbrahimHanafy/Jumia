@@ -58,9 +58,9 @@ namespace Jumia.Models
         public virtual City City { get; set; }
 
         // Navigation property for related Order  entities (one-to-many relationship)
-        //public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
         // Navigation property for related Return  entities (one-to-many relationship)
-        //public virtual ICollection<Return> Returns { get; set; }
+        public virtual ICollection<Return> Returns { get; set; }
 
     }
 }

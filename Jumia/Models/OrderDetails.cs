@@ -49,6 +49,6 @@ namespace Jumia.Models
         // Navigation property for the related Order
         public virtual Order Order { get; set; }
         // Navigation property for the related Product
-        //public virtual Product Product { get; set; }    
+        public virtual Product Product { get; set; }    
     }
 }
