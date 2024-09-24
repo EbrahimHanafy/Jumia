@@ -9,7 +9,7 @@ namespace Jumia.Models
     {
         [Key]
         public int ProductInStoreId { get; set; }
-
+               
         [Required, NotNull]
         public int Quantity { get; set; }
 
