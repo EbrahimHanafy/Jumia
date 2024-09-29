@@ -40,6 +40,6 @@ namespace Jumia.Models
         // Navigation property for the related Store
         public virtual Store Store { get; set; }
         // Navigation property for the related ProductColorSize
-        //public virtual ProductColorSize ProductColorSize { get; set; }
+        public virtual ProductColorSize ProductColorSize { get; set; }
     }
 }

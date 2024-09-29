@@ -67,21 +67,21 @@ namespace Jumia.Models
         // Navigation property for related ProductImage entities (one-to-many relationship)
         public virtual ICollection<ProductImage> ProductImages { get; set; }
         // Navigation property for the related SubCategory
-        //public virtual SubCategory SubCategory { get; set; }
+        public virtual SubCategory SubCategory { get; set; }
         // Navigation property for the related Brand
-        //public virtual Brand? Brand { get; set; }
+        public virtual Brand? Brand { get; set; }
         // Navigation property for related ProductColorSize entities (one-to-many relationship)
-        //public virtual ICollection<ProductColorSize> ProductColorSizes { get; set; }
+        public virtual ICollection<ProductColorSize> ProductColorSizes { get; set; }
         // Navigation property for related ProductInStore entities (one-to-many relationship)
         public virtual ICollection<ProductInStore> ProductInStores { get; set; }
         // Navigation property for related ShoppingCart entities (one-to-many relationship)
-        //public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
+        public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
         // Navigation property for related OrderDetails entities (one-to-many relationship)
-        //public virtual ICollection<OrderDetails> OrderDetails { get; set; }
+        public virtual ICollection<OrderDetails> OrderDetails { get; set; }
         // Navigation property for related ReturnDetails entities (one-to-many relationship)
-        //public virtual ICollection<ReturnDetails> ReturnDetails { get; set; }
+        public virtual ICollection<ReturnDetails> ReturnDetails { get; set; }
         // Navigation property for related WishList entities (one-to-many relationship)
-        //public virtual ICollection<WishList>? WishLists { get; set; }
+        public virtual ICollection<WishList>? WishLists { get; set; }
 
     }
 }
