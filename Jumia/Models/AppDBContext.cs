@@ -9,8 +9,7 @@ namespace Jumia.Models
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=tcp:sqldepi.database.windows.net,1433;Initial Catalog=ECommerceDB;Persist Security Info=False;User ID=dbadmin;Password=Db#201093;
-                                         MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            optionsBuilder.UseSqlServer("Server=tcp:sqldepi.database.windows.net,1433;Initial Catalog=ECommerceDB;Persist Security Info=False;User ID=dbadmin;Password=Db#201093;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
         }
 
         public virtual DbSet<Brand> Brands { get; set; }
@@ -38,7 +37,8 @@ namespace Jumia.Models
         public virtual DbSet<Refund> Refunds { get; set; }
         public virtual DbSet<Return> Returns { get; set; }
         public virtual DbSet<ReturnDetails> ReturnDetails { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Permission> Permissions { get; set; }
+        public virtual DbSet<UserPermission> UserPermissions { get; set; }
         public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public virtual DbSet<Size> Sizes { get; set; }
         public virtual DbSet<Store> Stores { get; set; }

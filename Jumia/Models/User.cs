@@ -39,7 +39,6 @@ namespace Jumia.Models
 
         [MaxLength(45)]
         public string? Phone2 { get; set; }
-
         [Required, NotNull]
         public int CreatedBy { get; set; }
         [Required, NotNull]
@@ -48,16 +47,6 @@ namespace Jumia.Models
         public int? UpdatedBy { get; set; }
         [AllowNull]
         public DateTime? UpdatedAt { get; set; }
-
-        // ForeignKey for Role
-        public int RoleId { get; set; }
-        // ForeignKey for Disclaimer
-        
-        public int DisclaimerId { get; set; }
-        // Navigation property for the related Role
-        public virtual Role Role { get; set; }
-        // Navigation property for the related Disclaimer 
-        public virtual Disclaimer Disclaimer { get; set; }
 
         // Navigation property for related Order entities (one-to-many relationship)
         public virtual ICollection<Order> Orders{ get; set; }
@@ -69,6 +58,8 @@ namespace Jumia.Models
         public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
         // Navigation property for related Return  entities (one-to-many relationship)
         public virtual ICollection<Return> Returns { get; set; }
+        // Navigation property for related Return  entities (one-to-many relationship)
+        public virtual ICollection<UserPermission> UserPermissions { get; set; }
 
 
 
