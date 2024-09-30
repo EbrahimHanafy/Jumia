@@ -37,7 +37,8 @@ namespace Jumia.Models
         public virtual DbSet<Refund> Refunds { get; set; }
         public virtual DbSet<Return> Returns { get; set; }
         public virtual DbSet<ReturnDetails> ReturnDetails { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Permission> Permissions { get; set; }
+        public virtual DbSet<UserPermission> UserPermissions { get; set; }
         public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public virtual DbSet<Size> Sizes { get; set; }
         public virtual DbSet<Store> Stores { get; set; }
