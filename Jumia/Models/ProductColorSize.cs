@@ -8,7 +8,7 @@ namespace Jumia.Models
     public class ProductColorSize
     {
         [Key]
-        public long ProductColorSizeId { get; set; }
+        public int ProductColorSizeId { get; set; }
 
         // Common fields
         [Required, NotNull]

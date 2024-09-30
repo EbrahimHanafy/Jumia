@@ -7,7 +7,7 @@ namespace Jumia.Models
     public class ProductMaterialsCare
     {
         [Key]
-        public Int64 ProductMaterialsCareId { get; set; }
+        public int ProductMaterialsCareId { get; set; }
                 
         [Required, NotNull]
         public int CreatedBy { get; set; }
