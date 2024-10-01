@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+
+:root {
+    --header-height: 4rem;
+    --nav-width: 220px;
+    --first-color: #4723d9;
+    --first-color-light: #afa5d9;
+    --white-color: #f7f6fb;
+    --body-font: "Nunito", sans-serif;
+    --normal-font-size: 1rem;
+    --z-fixed: 100;
+}
+
+body {
+    position: relative;
+    margin-left: var(--nav-width);
+    padding: 0 1rem;
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    transition: 0.5s;
+    background-color: #f8f9fa;
+}
+
+/* Header */
+.header {
+    width: 100%;
+    height: var(--header-height);
+    position: sticky;
+    top: 0;
+    left: var(--nav-width);
+    background-color: var(--white-color);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: var(--z-fixed);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header_img img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.header_logout a {
+    color: var(--first-color);
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.header_logout a:hover {
+    color: var(--first-color-light);
+}
+
+/* Sidebar */
+.l-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--nav-width);
+    height: 100vh;
+    background-color: var(--first-color);
+    padding: 1rem 0;
+    z-index: var(--z-fixed);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 2px 0px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav_logo,
+.nav_link {
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+    padding: 0.75rem 2rem;
+}
+
+.nav_logo {
+    margin-bottom: 2rem;
+}
+
+.nav_logo-icon {
+    font-size: 1.5rem;
+    color: var(--white-color);
+}
+
+.nav_logo-name {
+    color: var(--white-color);
+    font-weight: 700;
+}
+
+.nav_link:hover {
+    color: #ffffff;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.nav_link {
+    color: var(--first-color-light);
+    font-weight: 400;
+    transition: 0.3s;
+}
+
+.nav_icon {
+    font-size: 1.25rem;
+}
+
+.active {
+    color: #ffffff;
+    /* Brighter white color */
+    font-weight: 700;
+    /* Bold */
+    position: relative;
+}
+
+.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background-color: #ffffff;
+    /* Bright white indicator line */
+    border-radius: 2px;
+}
+
+/* Adjust content padding to avoid overlapping with the fixed sidebar */
+.body-pd {
+    padding-left: var(--nav-width);
+}
+
+@media screen and (min-width: 768px) {
+    body {
+        margin-left: var(--nav-width);
+    }
+
+    .header {
+        padding-left: var(--nav-width);
+    }
+}
