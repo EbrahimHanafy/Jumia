@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 
 // Author: Khaled Ahmed
@@ -7,7 +8,7 @@ namespace Jumia.Models
     public class ProductInStore
     {
         [Key]
-        public Int64 ProductInStoreId { get; set; }
+        public int ProductInStoreId { get; set; }
                
         [Required, NotNull]
         public int Quantity { get; set; }
