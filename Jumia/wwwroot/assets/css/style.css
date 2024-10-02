@@ -95,7 +95,7 @@ CSS STRUCTURE:
   7.10 Home2 Page
    -Billboard
    -Video Section
-   -Categories
+   -Department
   7.11 Coming Soon Page
   7.12 Login Page
   7.13 Error Page
@@ -1243,8 +1243,8 @@ h2.product-title {
 }
 
 .padding-large {
-  padding-top: 7em;
-  padding-bottom: 7em;
+  padding-top: 0.5em;
+  padding-bottom: 2.5em;
 }
 
 .padding-xlarge {
@@ -2479,7 +2479,7 @@ i.icon.icon-arrow-io {
   bottom: 90px;
 }
 
-.product-collection .categories {
+.product-collection .Department {
   text-transform: uppercase;
 }
 
@@ -2784,7 +2784,7 @@ i.icon.icon-arrow-io {
   margin: 0;
 }
 
-a.blog-categories {
+a.blog-Department {
   font-weight: 600;
   font-size: 14px;
   line-height: 16px;
@@ -2793,7 +2793,7 @@ a.blog-categories {
   color: var(--accent-color);
 }
 
-a.blog-categories:hover {
+a.blog-Department:hover {
   color: var(--primary-color);
 }
 
@@ -3332,13 +3332,13 @@ a.blog-categories:hover {
   }
 }
 
-/** Categories
+/** Department
 --------------------------------------------------------------*/
-section.categories .category-content {
+section.Department .category-content {
   margin-bottom: 30px;
 }
 
-section.categories .category-content a {
+section.Department .category-content a {
   font-size: 1.3em;
   font-weight: 800;
 }
