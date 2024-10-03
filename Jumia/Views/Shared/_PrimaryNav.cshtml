@@ -1,3 +1,8 @@
+@model List<Department>
+@{
+    //ViewData["Title"] = "Add";
+    //SelectList deptItems = new SelectList(@Model, "Id", "Name");
+}
 <nav class="primary-nav padding-small">
     <div class="container">
         <div class="row d-flex align-items-center">
@@ -22,10 +27,25 @@
                             <li><a href="about.html" class="item-anchor" data-effect="About">About</a></li>
 
                             <li class="menu-item has-sub">
-                                <a href="#" class="item-anchor d-flex align-item-center" data-effect="Shop">Departmants<i
-                                        class="icon icon-chevron-down"></i></a>
+                                <a href="/Department/GetAllDepartments" class="item-anchor d-flex align-item-center" data-effect="Shop">
+                                    Departmants<i class="icon icon-chevron-down"></i></a>
                                 <ul class="submenu">
-                                    <li><a href="/Department/GetAllDepartments" class="item-anchor">Men</a></li> @* here dynamic list*@
+                    
+                                    @if (Model != null && Model.Any())
+                                    {
+                                        @foreach (var item in Model)
+                                        {
+                                            <li>
+                                                <a href="/Department/GetAllDepartments/@item.DepartmentId" class="item-anchor">
+                                                    @item.DepartmentName
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <li><span>No departments available</span></li>
+                                    }
                                 </ul>
                             </li>
 
