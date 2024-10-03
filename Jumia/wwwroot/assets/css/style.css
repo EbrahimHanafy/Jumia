@@ -2109,7 +2109,13 @@ blockquote cite {
   letter-spacing: 0.015em;
   font-size: 2em;
 }
-
+/* Ensure the image container is square */
+.square-image {
+    width: 150px; /* Set the desired width for the square */
+    height: 150px; /* Ensure height matches the width to make it a square */
+    overflow: hidden;
+    position: relative;
+}
 .search-popup .cat-list-item a:hover::after {
   height: 1px;
   opacity: 1;
