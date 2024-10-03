@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Jumia.Controllers
 {
-    public class CategoryController : Controller
+    public class CategoryController : BaseController
     {
         public IActionResult Index()
         {

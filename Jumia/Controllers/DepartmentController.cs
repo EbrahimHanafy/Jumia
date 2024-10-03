@@ -4,10 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Jumia.Controllers
 {
-    public class DepartmentController : Controller
+    public class DepartmentController : BaseController
     {
-        AppDBContext context = new AppDBContext();
-
         // Action for get all departments
         public IActionResult GetAllDepartments()
         {
@@ -19,16 +17,16 @@ namespace Jumia.Controllers
         }
 
         // Action for getting department categories
-        public IActionResult GetDepartmentCategories(int departmentId)
+        public IActionResult GetDepartmentCategories(int departmentId ,string departmentName)
         {
-            var departments = context.Departments.ToList();
-            ViewData["departments"] = departments;
 
             var categories = context.Categories
                                     .Where(s => s.DepartmentId == departmentId)
                                     .Include(c => c.SubCategories)
                                     .ToList();
             ViewData["DepartmentCategories"] = categories;
+            ViewData["DepartmentName"] = departmentName;
+
             return View("Index"); // Ensure this returns the correct view (e.g., Views/Department/Index.cshtml)
         }
 
