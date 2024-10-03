@@ -1,3 +1,6 @@
+@{
+
+}
 <nav class="primary-nav padding-small">
     <div class="container">
         <div class="row d-flex align-items-center">
@@ -22,10 +25,34 @@
                             <li><a href="about.html" class="item-anchor" data-effect="About">About</a></li>
 
                             <li class="menu-item has-sub">
-                                <a href="#" class="item-anchor d-flex align-item-center" data-effect="Shop">Departmants<i
-                                        class="icon icon-chevron-down"></i></a>
+                                <a href="/Department/GetAllDepartments" class="item-anchor d-flex align-item-center" data-effect="Shop">
+                                    Departments<i class="icon icon-chevron-down"></i>
+                                </a>
                                 <ul class="submenu">
-                                    <li><a href="/Department/GetDepartmentCategories" class="item-anchor">Men</a></li> @* here dynamic list*@
+                                    @if (ViewData["departments"] != null)
+                                    {
+                                        var departments = (List<Department>)ViewData["departments"];
+
+                                        if (departments.Count > 0)
+                                        {
+                                            @foreach (var item in departments)
+                                            {
+                                                <li>
+                                                    <a href="/Department/GetDepartmentCategories/@item.DepartmentId" class="item-anchor">
+                                                        @item.DepartmentName
+                                                    </a>
+                                                </li>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <li><span>No departments available</span></li>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <li><span>No departments available</span></li>
+                                    }
                                 </ul>
                             </li>
 

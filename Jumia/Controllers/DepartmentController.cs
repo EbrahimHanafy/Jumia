@@ -7,23 +7,29 @@ namespace Jumia.Controllers
     public class DepartmentController : Controller
     {
         AppDBContext context = new AppDBContext();
-        public IActionResult Index()
-        {
-            return View();
-        }
-        // Action for get all departments 
+
+        // Action for get all departments
         public IActionResult GetAllDepartments()
         {
-            ViewData["Title"] = "Men's Fashion";
-            return View("Index");  // Ensure this returns the correct view (Views/Department/Men.cshtml)
+            var departments = context.Departments.ToList();
+            ViewData["departments"] = departments;
+            // Load the departments for the view
+            
+            return View("Index");  // Ensure this returns the correct view (e.g., Views/Department/Index.cshtml)
         }
-        public IActionResult GetDepartmentCategories(/*Department department*/)
+
+        // Action for getting department categories
+        public IActionResult GetDepartmentCategories(int departmentId)
         {
-            var categories = context.Categories.Where(s => s.DepartmentId == 2)
-                                               .Include(c => c.SubCategories)
-                                               .ToList();
+            var departments = context.Departments.ToList();
+            ViewData["departments"] = departments;
+
+            var categories = context.Categories
+                                    .Where(s => s.DepartmentId == departmentId)
+                                    .Include(c => c.SubCategories)
+                                    .ToList();
             ViewData["DepartmentCategories"] = categories;
-            return View("Index");
+            return View("Index"); // Ensure this returns the correct view (e.g., Views/Department/Index.cshtml)
         }
 
     }
