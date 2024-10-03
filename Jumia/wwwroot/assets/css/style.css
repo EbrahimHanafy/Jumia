@@ -1121,9 +1121,15 @@ img.single-image {
 }
 
 img.brand-image {
+    /*
   max-width: 100%;
   height: auto;
   margin: 20px;
+  */
+    flex: 1 1 150px;
+    max-width: 200px;
+    margin: 10px;
+    text-align: center;
 }
 
 /*--- Image Shape

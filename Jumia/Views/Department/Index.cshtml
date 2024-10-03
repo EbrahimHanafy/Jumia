@@ -1,14 +1,45 @@
+@model Category
 @{
     Layout = "~/Views/Shared/_Layout.cshtml"; // Ensure the correct layout is used
-    ViewData["Title"] = "Men's Fashion";
+    //ViewData["Title"] = "Men's Fashion";
 }
 
-<!-- Link to the menDepartment.css for this page -->
+<!-- Link to the Department.css for this page -->
 <link rel="stylesheet" href="~/assets/css/Department.css" />
 
 <section class="category-section">
-    <h2>@ViewData["Title"]</h2>
-
+    <h2>Men's Fashion</h2>
+    @if (ViewData["DepartmentCategories"] != null)
+    {
+        var categories = (List<Category>?)ViewData["DepartmentCategories"];
+        @foreach (var item in categories)
+        {
+            <div class="category">
+                <h2>@item.CategoryName</h2>
+                <div id="clothing-products" class="product-store padding-large">
+                    <div class="cards">
+                        @if (item.SubCategories != null && item.SubCategories.Any())
+                        {
+                            foreach (var subCategory in item.SubCategories)
+                            {
+                                <div class="card">
+                                    <a href="/subCategory/@subCategory.SubCategoryName">
+                                        <img src="@Url.Content(@subCategory.ImageURL)" alt="@subCategory.SubCategoryName" style="width:100%">
+                                        <h3>@subCategory.SubCategoryName</h3>
+                                    </a>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <p>No subcategories available for this category.</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    @*
     <!-- Clothing Section -->
     <div class="category">
         <h2>Clothing</h2>
@@ -89,4 +120,5 @@
             </div>
         </div>
     </div>
+    *@
 </section>

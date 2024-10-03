@@ -12,6 +12,9 @@ namespace Jumia.Models
 
         [Required, StringLength(50), NotNull]
         public string BrandName { get; set; }
+        
+        [AllowNull]
+        public string? ImageURL { get; set; }
 
         // Common fields for CreatedBy, CreatedAt, UpdatedBy, UpdatedAt
         [Required, NotNull]
@@ -25,14 +28,6 @@ namespace Jumia.Models
 
         [DataType(DataType.DateTime), AllowNull]
         public DateTime? UpdatedAt { get; set; }
-
-        // Foreign Key to Image
-        [Required]
-        public int ImageId { get; set; }
-
-
-        // Navigation property for the related Image
-        public virtual Image? Image { get; set; }
 
         // Navigation property for related Product entities (one-to-many relationship)
         public virtual ICollection<Product>? Products { get; set; }

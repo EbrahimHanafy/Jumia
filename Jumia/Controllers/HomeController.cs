@@ -6,22 +6,25 @@ namespace Jumia.Controllers
 {
     public class HomeController : Controller
     {
+        AppDBContext context = new AppDBContext();
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
-        //welcome 
         public IActionResult Index()
         {
             return View();
         }
-        
-        // Ebrahim
-        // turky wa7ed bs
-        // Khaled Ahmed
-        // IbrahimSaad10
+        /*
+        public IActionResult GetBrands()
+        {
+            var Brands = context.Brands.ToList();
+            ViewData["Brands"]=Brands;
+            return View("Index");
+        }
+        */
         public IActionResult Privacy()
         {
             return View();
