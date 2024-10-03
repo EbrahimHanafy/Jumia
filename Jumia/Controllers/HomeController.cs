@@ -15,6 +15,9 @@ namespace Jumia.Controllers
         }
         public IActionResult Index()
         {
+            var brands = context.Brands.ToList();
+        ViewData["Brands"] = brands;
+
             return View();
         }
         /*
