@@ -23,7 +23,7 @@
                             foreach (var subCategory in item.SubCategories)
                             {
                                 <div class="card">
-                                    <a href="/subCategory/@subCategory.SubCategoryName">
+                                    <a href="/SubCategory/GetSubCategoryProducts/@subCategory.SubCategoryId">
                                         <img src="@Url.Content(@subCategory.ImageURL)" alt="@subCategory.SubCategoryName" style="width:100%">
                                         <h3>@subCategory.SubCategoryName</h3>
                                     </a>
@@ -39,86 +39,4 @@
             </div>
         }
     }
-    @*
-    <!-- Clothing Section -->
-    <div class="category">
-        <h2>Clothing</h2>
-        <div id="clothing-products" class="product-store padding-large">
-            <div class="cards">
-                <div class="card">
-                    <a href="/subDepartment/pants">
-                        <img src="~/assets/images/product-item1.jpg" alt="Pants" class="product-image">
-                        <h3>Pants</h3>
-                    </a>
-                </div>
-                <div class="card">
-                    <a href="/subDepartment/shirts">
-                        <img src="~/assets/images/product-item2.jpg" alt="Shirts" class="product-image">
-                        <h3>Shirts</h3>
-                    </a>
-                </div>
-                <div class="card">
-                    <a href="/subDepartment/polo">
-                        <img src="~/assets/images/product-item3.jpg" alt="Polo" class="product-image">
-                        <h3>Polo</h3>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footwear Section -->
-    <div class="category">
-        <h2>Footwear</h2>
-        <div id="footwear-products" class="product-store padding-large">
-            <div class="cards">
-                <div class="card">
-                    <a href="/subDepartment/sneakers">
-                        <img src="~/assets/images/product-item3.jpg" alt="Sneakers" class="product-image">
-                        <h3>Sneakers</h3>
-                    </a>
-                </div>
-                <div class="card">
-                    <a href="/subDepartment/boots">
-                        <img src="~/assets/images/product-item2.jpg" alt="Boots" class="product-image">
-                        <h3>Boots</h3>
-                    </a>
-                </div>
-                <div class="card">
-                    <a href="/subDepartment/loafers">
-                        <img src="~/assets/images/product-item1.jpg" alt="Loafers" class="product-image">
-                        <h3>Loafers</h3>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Accessories Section -->
-    <div class="category">
-        <h2>Accessories</h2>
-        <div id="accessories-products" class="product-store padding-large">
-            <div class="cards">
-                <div class="card">
-                    <a href="/subDepartment/watches">
-                        <img src="~/assets/images/product-item4.jpg" alt="Watches" class="product-image">
-                        <h3>Watches</h3>
-                    </a>
-                </div>
-                <div class="card">
-                    <a href="/subDepartment/belts">
-                        <img src="~/assets/images/product-item2.jpg" alt="Belts" class="product-image">
-                        <h3>Belts</h3>
-                    </a>
-                </div>
-                <div class="card">
-                    <a href="/subDepartment/sunglasses">
-                        <img src="~/assets/images/product-item3.jpg" alt="Sunglasses" class="product-image">
-                        <h3>Sunglasses</h3>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    *@
 </section>

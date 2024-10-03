@@ -11,6 +11,8 @@ namespace Jumia.Models
         [StringLength(45), Required, NotNull]
         public string ProductImageName { get; set; }
         
+        public bool IsMainImage { get; set; }
+        
         [StringLength(250), Required, NotNull]
         public string ProductImageUrl { get; set; }
 

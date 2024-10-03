@@ -1546,10 +1546,10 @@
       </div>
     </div>
   </section>
-
+  @*
   <section title="Brands" id="brand-collection" class="padding-medium bg-light-grey">
     <div class="container">
-        @*@if (ViewData["Brands"] != null)
+        @if (ViewData["Brands"] != null)
         {
             var brands = (List<Brand>?)ViewData["Brands"];
             @foreach (var item in brands)
@@ -1558,18 +1558,45 @@
                     <div class="img-thumbnail"> 
                         <img src="@Url.Content(item.ImageURL)" alt="@item.BrandName" class="brand-image">
                     </div>
-          *@          
+                  
                     <img src="~/assets/images/brand1.png" alt="phone" class="brand-image">
                     <img src="~/assets/images/brand2.png" alt="phone" class="brand-image">
                     <img src="~/assets/images/brand3.png" alt="phone" class="brand-image">
                     <img src="~/assets/images/brand4.png" alt="phone" class="brand-image">
                     <img src="~/assets/images/brand5.png" alt="phone" class="brand-image">
-           @*         
+                  
                 </div>
             }
         }
-        *@
+        
     </div>
+  </section>
+  *@
+    <section title="Brands" class="padding-medium bg-light-grey">
+        <div class="swiper product-swiper overflow-hidden">
+            <div class="swiper-wrapper">
+                @if (ViewData["Brands"] != null)
+                {
+                    var Brands = (List<Brand>?)ViewData["Brands"];
+                    @foreach (var item in Brands)
+                    {
+                        <div class="swiper-slide">
+                            
+
+                                <div class="image-holder" style="width:250px; height:100%">
+                                    <img src="@Url.Content(@item.ImageURL)" alt="@item.BrandName" class="product-image" height="100%" width="100%">
+                               </div>
+                          
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>No brands available.</p>
+                }
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
   </section>
   <section id="shipping-information">
     <hr>
