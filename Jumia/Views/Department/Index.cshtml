@@ -1,14 +1,15 @@
 @model Category
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml"; // Ensure the correct layout is used
-    //ViewData["Title"] = "Men's Fashion";
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
+                                             
+    var DepName = ViewData["DepartmentName"];
 }
 
 <!-- Link to the Department.css for this page -->
 <link rel="stylesheet" href="~/assets/css/Department.css" />
 
 <section class="category-section">
-    <h2>Men's Fashion</h2>
+    <h2 style="color:brown">@DepName</h2>
     @if (ViewData["DepartmentCategories"] != null)
     {
         var categories = (List<Category>?)ViewData["DepartmentCategories"];
@@ -23,7 +24,7 @@
                             foreach (var subCategory in item.SubCategories)
                             {
                                 <div class="card">
-                                    <a href="/SubCategory/GetSubCategoryProducts/@subCategory.SubCategoryId">
+                                    <a asp-action="GetSubCategoryProducts" asp-controller="SubCategory" asp-route-subCategoryId="@subCategory.SubCategoryId" asp-route-subCategoryName="@subCategory.SubCategoryName">
                                         <img src="@Url.Content(@subCategory.ImageURL)" alt="@subCategory.SubCategoryName" style="width:100%">
                                         <h3>@subCategory.SubCategoryName</h3>
                                     </a>

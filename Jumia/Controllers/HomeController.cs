@@ -4,9 +4,9 @@ using System.Diagnostics;
 
 namespace Jumia.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        AppDBContext context = new AppDBContext();
+        
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
