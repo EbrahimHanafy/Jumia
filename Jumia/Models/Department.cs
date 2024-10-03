@@ -12,7 +12,8 @@ namespace Jumia.Models
 
         [Required, StringLength(50), NotNull]
         public string DepartmentName { get; set; }
-
+        [AllowNull]
+        public string? ImageURL { get; set; }
         // Common fields for CreatedBy, CreatedAt, UpdatedBy, UpdatedAt
         [Required, NotNull]
         public int CreatedBy { get; set; }
@@ -25,14 +26,6 @@ namespace Jumia.Models
 
         [DataType(DataType.DateTime), AllowNull]
         public DateTime? UpdatedAt { get; set; }
-
-        // Foreign Key to Image
-        [AllowNull]
-        public int? ImageId { get; set; }
-
-
-        // Navigation property for the related Image
-        public virtual Image? Image { get; set; }
 
         // Navigation property for related Category entities (one-to-many relationship)
         public virtual ICollection<Category>? Categories { get; set; }

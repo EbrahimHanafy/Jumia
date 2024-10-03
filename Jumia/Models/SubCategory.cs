@@ -11,7 +11,10 @@ namespace Jumia.Models
         public int SubCategoryId { get; set; }
 
         [Required, StringLength(50), NotNull]
-        public string CategoryName { get; set; }
+        public string SubCategoryName { get; set; }
+        
+        [AllowNull]
+        public string? ImageURL { get; set; }
 
         // Common fields for CreatedBy, CreatedAt, UpdatedBy, UpdatedAt
         [Required, NotNull]
@@ -27,15 +30,8 @@ namespace Jumia.Models
         public DateTime? UpdatedAt { get; set; }
 
         // Foreign Key to Image
-        [AllowNull]
-        public int? ImageId { get; set; }
-
-        // Foreign Key to Image
         [Required]
         public int CategoryId { get; set; }
-
-        // Navigation property for the related Image
-        public virtual Image? Image { get; set; }
 
         // Navigation property for the related Category
         public virtual Category Category { get; set; }

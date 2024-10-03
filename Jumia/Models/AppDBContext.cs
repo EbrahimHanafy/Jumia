@@ -20,7 +20,6 @@ namespace Jumia.Models
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<DiscountCoupon> DiscountCoupons { get; set; }
         public virtual DbSet<Governorate> Governorates { get; set; }
-        public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<MaterialsCare> MaterialsCares { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderDetails> OrderDetails { get; set; }
