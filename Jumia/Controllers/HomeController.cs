@@ -15,6 +15,9 @@ namespace Jumia.Controllers
         }
         public IActionResult Index()
         {
+            var departments = context.Departments.ToList();
+            ViewData["departments"] = departments;
+
             return View();
         }
         /*

@@ -1,7 +1,5 @@
-@model List<Department>
 @{
-    //ViewData["Title"] = "Add";
-    //SelectList deptItems = new SelectList(@Model, "Id", "Name");
+
 }
 <nav class="primary-nav padding-small">
     <div class="container">
@@ -28,18 +26,27 @@
 
                             <li class="menu-item has-sub">
                                 <a href="/Department/GetAllDepartments" class="item-anchor d-flex align-item-center" data-effect="Shop">
-                                    Departmants<i class="icon icon-chevron-down"></i></a>
+                                    Departments<i class="icon icon-chevron-down"></i>
+                                </a>
                                 <ul class="submenu">
-                    
-                                    @if (Model != null && Model.Any())
+                                    @if (ViewData["departments"] != null)
                                     {
-                                        @foreach (var item in Model)
+                                        var departments = (List<Department>)ViewData["departments"];
+
+                                        if (departments.Count > 0)
                                         {
-                                            <li>
-                                                <a href="/Department/GetAllDepartments/@item.DepartmentId" class="item-anchor">
-                                                    @item.DepartmentName
-                                                </a>
-                                            </li>
+                                            @foreach (var item in departments)
+                                            {
+                                                <li>
+                                                    <a href="/Department/GetDepartmentCategories/@item.DepartmentId" class="item-anchor">
+                                                        @item.DepartmentName
+                                                    </a>
+                                                </li>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <li><span>No departments available</span></li>
                                         }
                                     }
                                     else
