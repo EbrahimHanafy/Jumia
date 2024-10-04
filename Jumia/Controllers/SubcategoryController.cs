@@ -1,17 +1,25 @@
+using Jumia.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Jumia.Controllers
 {
-    public class SubcategoryController : Controller
+    public class SubCategoryController : BaseController
     {
+        AppDBContext context = new AppDBContext();
         // Action for displaying all items under a subcategory
-        public IActionResult Index(string subcategory)
+        public IActionResult Index()
         {
-            ViewData["Title"] = char.ToUpper(subcategory[0]) + subcategory.Substring(1);
-            // Later, you'll fetch the subcategory items from the database
-            // For now, you can pass dummy data to the view.
-
-            return View(subcategory); // Make sure the view matches the subcategory name
+            return View();
+        }
+        public IActionResult GetSubCategoryProducts(int subCategoryId, string subCategoryName)
+        {
+            var Products = context.Products.Where(s => s.SubCategoryId == subCategoryId)
+                                                 .Include(c => c.ProductImages.Where(x=>x.IsMainImage == true))
+                                                 .ToList();
+            ViewData["SubCategoryProducts"] = Products;
+            ViewData["SubCategoryName"] = subCategoryName;
+            return View("Index");
         }
     }
 }
