@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-  rel="stylesheet">
+    rel="stylesheet">
   <!-- script
     ================================================== -->
   <script src="~/assets/js/modernizr.js"></script>
@@ -40,7 +40,7 @@
     <partial name="_PrimaryNav.cshtml" />
   </header>
 
-    <!-- Main Content -->
+  <!-- Main Content -->
   <main>
     @RenderBody() <!-- This is where the specific content of each page will be injected -->
   </main>
@@ -170,6 +170,22 @@
   <script src="~/assets/js/jquery-1.11.0.min.js"></script>
   <script src="~/assets/js/plugins.js"></script>
   <script src="~/assets/js/script.js"></script>
+  <script>
+    function toggleFilter(id) {
+      var element = document.getElementById(id);
+      var icon = element.previousElementSibling.querySelector('i');
+
+      if (element.style.display === "none") {
+        element.style.display = "block";
+        icon.classList.remove('fa-chevron-down');
+        icon.classList.add('fa-chevron-up');
+      } else {
+        element.style.display = "none";
+        icon.classList.remove('fa-chevron-up');
+        icon.classList.add('fa-chevron-down');
+      }
+    }
+  </script>
 </body>
 
 </html>
