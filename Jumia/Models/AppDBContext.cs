@@ -7,10 +7,16 @@ namespace Jumia.Models
 {
     public class AppDBContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=tcp:sqldepi.database.windows.net,1433;Initial Catalog=ECommerceDB;Persist Security Info=False;User ID=dbadmin;Password=Db#201093;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-        }
+        //create default constructor
+        public AppDBContext() { }
+
+        //create override base constructor
+        public AppDBContext(DbContextOptions<AppDBContext> options) : base(options) { }
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("Server=tcp:sqldepi.database.windows.net,1433;Initial Catalog=ECommerceDB;Persist Security Info=False;User ID=dbadmin;Password=Db#201093;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+        //}
 
         public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
