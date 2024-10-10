@@ -1,3 +1,11 @@
+using Jumia.Models;
+using Jumia.Repositories.Implementation;
+using Jumia.Repositories.Interfaces;
+using Jumia.SharedRepositories;
+using Jumia.UnitOfWorks;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+
 namespace Jumia
 {
     public class Program
@@ -8,6 +16,18 @@ namespace Jumia
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<AppDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("dbConnection")));
+
+            //DI register one instance for the same request
+            builder.Services.AddTransient(typeof(IGenericRepository<>),typeof(GenericRepository<>)); 
+            builder.Services.AddTransient<IBrandRepository, BrandRepository>();
+
+            builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+
+
+            //AutoMapper
+            builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             var app = builder.Build();
 
