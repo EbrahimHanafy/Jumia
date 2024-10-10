@@ -6,8 +6,6 @@ namespace Jumia.UnitOfWorks
 {
     public interface IUnitOfWork : IDisposable
     {
-        // IBrandRepository BrandRepository { get; }
-
         // Generic repository accessor
         IGenericRepository<T> Repository<T> () where T : class;
 
