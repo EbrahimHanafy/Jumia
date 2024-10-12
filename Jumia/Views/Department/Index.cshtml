@@ -1,4 +1,4 @@
-@model Category
+@model List<Category>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml"; 
                                              
@@ -10,10 +10,11 @@
 
 <section class="category-section">
     <h2 style="color:brown">@DepName</h2>
-    @if (ViewData["DepartmentCategories"] != null)
+	@*if (ViewData["DepartmentCategories"] != null)*@
+    @if (Model != null)
     {
-        var categories = (List<Category>?)ViewData["DepartmentCategories"];
-        @foreach (var item in categories)
+        //var categories = (List<Category>?)ViewData["DepartmentCategories"];
+        @foreach (var item in Model)
         {
             <div class="category">
                 <h2>@item.CategoryName</h2>
