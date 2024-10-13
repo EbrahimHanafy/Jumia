@@ -5,11 +5,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Identity;
 namespace Jumia.Models
 {
- public class User
+ public class User : IdentityUser
     {
-         [Key]
+        [Key]
         public int  UserId { get; set; } 
 
         [Required(ErrorMessage = "Please enter this field"), MaxLength(50)]
