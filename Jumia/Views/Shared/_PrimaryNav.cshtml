@@ -37,7 +37,7 @@
                                             @foreach (var item in departments)
                                             {
                                                 <li>
-                                                    <a asp-action="GetDepartmentCategories" asp-controller="Department" asp-route-departmentId="@item.DepartmentId" asp-route-departmentName="@item.DepartmentName" class="item-anchor">
+                                                    <a asp-action="GetCategoriesByDepartment" asp-controller="Department" asp-route-departmentId="@item.DepartmentId" asp-route-departmentName="@item.DepartmentName" class="item-anchor">
                                                         @item.DepartmentName
                                                     </a>
                                                 </li>

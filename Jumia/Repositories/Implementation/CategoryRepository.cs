@@ -12,5 +12,10 @@ namespace Jumia.Repositories.Implementation
         {
             _categories = context.Set<Category>();
         }
+
+        public async Task<List<Category>> GetCategoriesByDepartment(int departmentId, string departmentName)
+        {
+            return _categories.Where(s => s.DepartmentId == departmentId).Include(c => c.SubCategories).ToList();
+        }
     }
 }
