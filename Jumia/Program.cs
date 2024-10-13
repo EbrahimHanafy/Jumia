@@ -1,6 +1,8 @@
 using Jumia.Models;
 using Jumia.Repositories.Implementation;
 using Jumia.Repositories.Interfaces;
+using Jumia.Services.Implementations;
+using Jumia.Services.IServices;
 using Jumia.SharedRepositories;
 using Jumia.UnitOfWorks;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +24,10 @@ namespace Jumia
             //DI register one instance for the same request
             builder.Services.AddTransient(typeof(IGenericRepository<>),typeof(GenericRepository<>)); 
             builder.Services.AddTransient<IBrandRepository, BrandRepository>();
+            //builder.Services.AddTransient<IDepartmentRepository, DepartmentRepository>();
+            builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 
+            builder.Services.AddTransient<IDepartmentService, DepartmentService>();
             builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 

@@ -1,25 +1,20 @@
 using Jumia.Models;
+using Jumia.UnitOfWorks;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace Jumia.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController(IUnitOfWork _unitOfWork, ILogger<HomeController> logger) : Controller
     {
-        
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public async Task<IActionResult> Index()
         {
-            _logger = logger;
-        }
-        public IActionResult Index()
-        {
+            var departments = await _unitOfWork.Repository<Department>().GetAllAsync();
 
-            var departments = context.Departments.ToList();
+            //var departments = context.Departments.ToList();
             ViewData["departments"] = departments;
-            var brands = context.Brands.ToList();
-            ViewData["Brands"] = brands;
+            //var brands = context.Brands.ToList();
+            //ViewData["Brands"] = brands;
             return View();
         }
         /*

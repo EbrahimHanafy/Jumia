@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Jumia.Repositories.Implementation
 {
-    public class DepartmentRepository : GenericRepository<Department>, IDepartmentRepository
+    public class DepartmentRepository : GenericRepository<Department>
     {
-        protected readonly DbSet<Department> _departments;
+        protected DbSet<Department> _departments;
         public DepartmentRepository(AppDBContext context) : base(context)
         {
             _departments = context.Set<Department>();
