@@ -1,35 +1,27 @@
 using Jumia.Models;
+using Jumia.Services.IServices;
+using Jumia.UnitOfWorks;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace Jumia.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController(IUnitOfWork _unitOfWork, ILogger<HomeController> logger, IProductService productService) : Controller
     {
-        
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public async Task<IActionResult> Index()
         {
-            _logger = logger;
-        }
-        public IActionResult Index()
-        {
-
-            var departments = context.Departments.ToList();
+           
+            var departments = await _unitOfWork.Repository<Department>().GetAllAsync();
             ViewData["departments"] = departments;
-            var brands = context.Brands.ToList();
+
+            var brands = await _unitOfWork.Repository<Brand>().GetAllAsync();
             ViewData["Brands"] = brands;
+
+            var top10NewArrivalProducts = await productService.GetTop10NewArrivalProducts();
+            ViewData["Top10NewArrivalProducts"] = top10NewArrivalProducts;
+
             return View();
         }
-        /*
-        public IActionResult GetBrands()
-        {
-            var Brands = context.Brands.ToList();
-            ViewData["Brands"]=Brands;
-            return View("Index");
-        }
-        */
         public IActionResult Privacy()
         {
             return View();

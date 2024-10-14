@@ -14,7 +14,7 @@ namespace Jumia.Models
         public int PermissionId { get; set; }
         // ForeignKey for User
         [Required]
-        public int UserId { get; set; }
+        public int UserCode { get; set; }
 
         [Required, NotNull]
         public int CreatedBy { get; set; }

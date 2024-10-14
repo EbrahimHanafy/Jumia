@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Jumia.Controllers
 {
-    public class BaseController : Controller
+    public class BaseController(AppDBContext context) : Controller
     {
-        protected readonly AppDBContext context = new AppDBContext();
+        //protected readonly AppDBContext context = new AppDBContext();
 
         public override void OnActionExecuting(ActionExecutingContext _context)
         {

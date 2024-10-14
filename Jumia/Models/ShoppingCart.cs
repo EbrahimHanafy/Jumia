@@ -24,7 +24,7 @@ namespace Jumia.Models
         public int ProductId { get; set; }
         // Foreign key User
         [Required]
-        public int UserId { get; set; }
+        public int UserCode { get; set; }
         // Foreign key ProductColorSize
         [Required]
         public int ProductColorSizeId { get; set; }

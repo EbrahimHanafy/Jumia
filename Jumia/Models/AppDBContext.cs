@@ -1,16 +1,24 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using static System.Net.Mime.MediaTypeNames;
 using System.Drawing;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Jumia.Models
 
 {
-    public class AppDBContext : DbContext
+    public class AppDBContext : IdentityDbContext<User>
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=tcp:sqldepi.database.windows.net,1433;Initial Catalog=ECommerceDB;Persist Security Info=False;User ID=dbadmin;Password=Db#201093;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-        }
+        //create default constructor
+        public AppDBContext() { }
+
+        //create override base constructor
+        public AppDBContext(DbContextOptions<AppDBContext> options) : base(options) { }
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("Server=tcp:sqldepi.database.windows.net,1433;Initial Catalog=ECommerceDB;Persist Security Info=False;User ID=dbadmin;Password=Db#201093;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=60;");
+        //}
 
         public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
@@ -70,7 +78,7 @@ namespace Jumia.Models
             modelBuilder.Entity<UserAddress>()
                 .HasOne(ua => ua.User)
                 .WithMany(u => u.UserAddresses)
-                .HasForeignKey(ua => ua.UserId)
+                .HasForeignKey(ua => ua.Id)
                 .OnDelete(DeleteBehavior.Restrict); // Disable cascading delete for User
 
             modelBuilder.Entity<ProductColorSize>()
@@ -90,6 +98,26 @@ namespace Jumia.Models
                 .WithMany(u => u.ShoppingCarts)
                 .HasForeignKey(ua => ua.ProductId)
                 .OnDelete(DeleteBehavior.Restrict); // Disable cascading delete for Product
+
+            modelBuilder.Entity<User>().HasKey(u => u.Id);
+            modelBuilder.Entity<IdentityUserLogin<string>>(entity =>
+            {
+                entity.HasKey(e => new { e.UserId});
+            });
+
+            modelBuilder.Entity<IdentityUserRole<string>>(entity =>
+            {
+                entity.HasKey(e => new { e.RoleId});
+            });
+            modelBuilder.Entity<IdentityUserToken<string>>(entity =>
+            {
+                entity.HasKey(e => new { e.UserId });
+            });
+            // modelBuilder.Entity<IdentityUserLogin<>>().HasKey(u => u.UserId);
+            modelBuilder.Entity<User>()
+           .HasIndex(u => u.Email)
+           .IsUnique();
+
         }
     }
 }

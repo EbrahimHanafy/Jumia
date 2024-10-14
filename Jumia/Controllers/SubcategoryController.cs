@@ -1,25 +1,31 @@
 using Jumia.Models;
+using Jumia.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Jumia.Controllers
 {
-    public class SubCategoryController : BaseController
+    public class SubCategoryController(AppDBContext context , IProductService productService) : Controller
     {
-        AppDBContext context = new AppDBContext();
         // Action for displaying all items under a subcategory
         public IActionResult Index()
         {
             return View();
         }
-        public IActionResult GetSubCategoryProducts(int subCategoryId, string subCategoryName)
+        public async Task<IActionResult> GetProductsBySubCategory(int subCategoryId, string subCategoryName) 
         {
-            var Products = context.Products.Where(s => s.SubCategoryId == subCategoryId)
-                                                 .Include(c => c.ProductImages.Where(x=>x.IsMainImage == true))
-                                                 .ToList();
-            ViewData["SubCategoryProducts"] = Products;
+            var subCategoryPrducts = await productService.GetProductsBySubCategory(subCategoryId);
             ViewData["SubCategoryName"] = subCategoryName;
-            return View("Index");
+            return View("Index", subCategoryPrducts);
         }
+        //public IActionResult GetSubCategoryProducts(int subCategoryId, string subCategoryName)
+        //{
+        //    var Products = context.Products.Where(s => s.SubCategoryId == subCategoryId)
+        //                                         .Include(c => c.ProductImages.Where(x=>x.IsMainImage == true))
+        //                                         .ToList();
+        //    ViewData["SubCategoryProducts"] = Products;
+        //    ViewData["SubCategoryName"] = subCategoryName;
+        //    return View("Index");
+        //}
     }
 }
