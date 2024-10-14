@@ -21,8 +21,7 @@ namespace Jumia
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddDbContext<AppDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("dbConnection")));
-            builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<AppDBContext>(); // This adds default token providers (used for things like password reset)
-
+            builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<AppDBContext>().AddDefaultTokenProviders();
             //DI register one instance for the same request
             builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             builder.Services.AddTransient<IBrandRepository, BrandRepository>();

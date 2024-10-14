@@ -9,6 +9,7 @@ namespace Jumia.Controllers
     {
         public async Task<IActionResult> Index()
         {
+           
             var departments = await _unitOfWork.Repository<Department>().GetAllAsync();
 
             //var departments = context.Departments.ToList();

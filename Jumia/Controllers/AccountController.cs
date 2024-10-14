@@ -1,14 +1,16 @@
+using Jumia.Models;
 using Jumia.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 public class AccountController : Controller
 {
-    private readonly SignInManager<IdentityUser> _signInManager;
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly SignInManager<User> _signInManager;
+    private readonly UserManager<User> _userManager;
 
-    public AccountController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
+    public AccountController(SignInManager<User> signInManager, UserManager<User> userManager)
     {
         _signInManager = signInManager;
         _userManager = userManager;
@@ -59,4 +61,52 @@ public class AccountController : Controller
         await _signInManager.SignOutAsync();
         return RedirectToAction("Index", "Home");
     }
+
+    // GET: /Account/Register
+    [HttpGet]
+    public IActionResult Register()
+    {
+        return View();
+    }
+
+    // POST: /Account/Register
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Register(RegisterViewModel newAcount)
+    {
+        if (ModelState.IsValid == true)
+        {
+            User user = new User();
+            user.Email = newAcount.Email;
+            user.UserName = newAcount.UserName;
+            user.PasswordHash = newAcount.Password;
+            user.PhoneNumber = newAcount.Phone1;
+            user.Gender = newAcount.Gender;
+            user.CreatedAt = DateTime.Now;
+            user.CreatedBy = 1;
+            user.DateOfBirth = DateTime.Now;
+            try
+            {
+                IdentityResult result = await _userManager.CreateAsync(user, newAcount.Password);
+                if (result.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, false);
+                    // await _userManager.AddToRoleAsync(user, "User");
+                    return RedirectToAction("Index", "Home");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+            catch(Exception ex)
+            {
+                ModelState.AddModelError("", ex.InnerException.Message);
+            }
+
+        }
+        return View(newAcount);
+    }
 }
+

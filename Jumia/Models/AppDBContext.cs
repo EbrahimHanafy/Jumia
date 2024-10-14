@@ -78,7 +78,7 @@ namespace Jumia.Models
             modelBuilder.Entity<UserAddress>()
                 .HasOne(ua => ua.User)
                 .WithMany(u => u.UserAddresses)
-                .HasForeignKey(ua => ua.UserId)
+                .HasForeignKey(ua => ua.Id)
                 .OnDelete(DeleteBehavior.Restrict); // Disable cascading delete for User
 
             modelBuilder.Entity<ProductColorSize>()
@@ -99,7 +99,7 @@ namespace Jumia.Models
                 .HasForeignKey(ua => ua.ProductId)
                 .OnDelete(DeleteBehavior.Restrict); // Disable cascading delete for Product
 
-            modelBuilder.Entity<User>().HasKey(u => u.UserId);
+            modelBuilder.Entity<User>().HasKey(u => u.Id);
             modelBuilder.Entity<IdentityUserLogin<string>>(entity =>
             {
                 entity.HasKey(e => new { e.UserId});
@@ -114,6 +114,9 @@ namespace Jumia.Models
                 entity.HasKey(e => new { e.UserId });
             });
             // modelBuilder.Entity<IdentityUserLogin<>>().HasKey(u => u.UserId);
+            modelBuilder.Entity<User>()
+           .HasIndex(u => u.Email)
+           .IsUnique();
 
         }
     }
