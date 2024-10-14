@@ -5,6 +5,7 @@ using Jumia.Services.Implementations;
 using Jumia.Services.IServices;
 using Jumia.SharedRepositories;
 using Jumia.UnitOfWorks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -20,9 +21,9 @@ namespace Jumia
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddDbContext<AppDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("dbConnection")));
-
+            builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<AppDBContext>().AddDefaultTokenProviders();
             //DI register one instance for the same request
-            builder.Services.AddTransient(typeof(IGenericRepository<>),typeof(GenericRepository<>)); 
+            builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             builder.Services.AddTransient<IBrandRepository, BrandRepository>();
             builder.Services.AddTransient<IProductRepository, ProductRepository>();
             builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
@@ -53,7 +54,8 @@ namespace Jumia
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthentication(); // Ensure this is added
+            app.UseAuthorization();  // Ensure this is added
 
             // Default route (Home page)
             app.MapControllerRoute(
@@ -80,6 +82,8 @@ namespace Jumia
                 pattern: "subcategory/{subcategory}",
                 defaults: new { controller = "Subcategory", action = "Index" }
             );
+         
+
 
             app.Run();
         }

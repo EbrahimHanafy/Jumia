@@ -5,24 +5,28 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Jumia.ViewModels;
 namespace Jumia.Models
 {
- public class User
+ public class User : IdentityUser
     {
-         [Key]
-        public int  UserId { get; set; } 
+        //[Key]
+        // public string  UserId { get; set; } 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int UserCode { get; set; }
+        //[Required(ErrorMessage = "Please enter this field"), MaxLength(50)]
+        //public string UserName { get; set; }
 
-        [Required(ErrorMessage = "Please enter this field"), MaxLength(50)]
-        public string UserName { get; set; }
+        //[Required(ErrorMessage = "Please enter this field")] 
+        //public int UserType { get; set; }
 
-        [Required(ErrorMessage = "Please enter this field")] 
-        public int UserType { get; set; }
+        //[Required(ErrorMessage = "Please enter this field"), MaxLength(200)]
+        //public string Password { get; set; }
 
-        [Required(ErrorMessage = "Please enter this field"), MaxLength(200)]
-        public string Password { get; set; }
-
-        [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "Your Email is not valid.")]
-        public string Email { get; set; }
+        //[RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "Your Email is not valid.")]
+        //public string Email { get; set; }
 
         public string? ImageURL { get; set; }
 
@@ -30,15 +34,15 @@ namespace Jumia.Models
         public DateTime DateOfBirth { get; set; }
 
          [Required(ErrorMessage = "Please enter this field")]
-        public int Gender { get; set; }
+        public Gender Gender { get; set; }
        
         public bool IsActive { get; set; }
 
-        [Required(ErrorMessage = "Please enter this field"), MaxLength(45)]
-        public string Phone1 { get; set; }
+        //[Required(ErrorMessage = "Please enter this field"), MaxLength(45)]
+        //public string Phone1 { get; set; }
 
-        [MaxLength(45)]
-        public string? Phone2 { get; set; }
+        //[MaxLength(45)]
+        //public string? Phone2 { get; set; }
         [Required, NotNull]
         public int CreatedBy { get; set; }
         [Required, NotNull]

@@ -22,7 +22,7 @@ namespace Jumia.Models
         public DateTime? UpdatedAt { get; set; }
 
         // ForeignKey for User
-        public int UserId { get; set; }
+        public int UserCode { get; set; }
         // ForeignKey for Product 
         public int ProductId { get; set; }
         

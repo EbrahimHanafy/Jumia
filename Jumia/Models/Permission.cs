@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Identity;
 namespace Jumia.Models
 {
     public class Permission
