@@ -1,0 +1,36 @@
+@model LoginViewModel
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";  
+}
+
+<div class="wrapper" style="background-image: url('/assets/images/loginBG.jpg');">
+    <div class="inner">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <form asp-action="Login" method="post">
+            <h3>Login</h3>
+            <div class="form-group">
+                <div class="form-wrapper">
+                    <label for="">Email</label>
+                    <input asp-for="Email" type="text" class="form-control">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+
+                </div>
+                <div class="form-wrapper">
+                    <label for="Password">Password</label>
+                    <input asp-for="Password" type="password" class="form-control">
+                    <span asp-validation-for="Password" class="text-danger"></span>
+
+                </div>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input asp-for="RememberMe" type="checkbox"> Remember me
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <button>Login Now</button>
+            <a asp-controller="Account" asp-action="Register" class="text-center"> Register New Account</a>
+        </form>
+    </div>
+</div>

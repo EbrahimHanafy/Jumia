@@ -5,5 +5,6 @@ namespace Jumia.Repositories.Interfaces
 {
     public interface IMaterialsCareRepository : IGenericRepository<MaterialsCare>
     {
+        public Task<List<MaterialsCare>> GetMaterialByProduct(int productId);
     }
 }

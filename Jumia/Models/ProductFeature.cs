@@ -9,7 +9,7 @@ namespace Jumia.Models
         [Key]
         public int ProductFeatureId { get; set; }
 
-        [StringLength(100), Required, NotNull]
+        [Required, NotNull]
         public string FeatureName { get; set; }
 
         [Required, NotNull]

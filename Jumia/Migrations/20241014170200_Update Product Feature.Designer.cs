@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Jumia.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20241002174640_DeleteImageTable")]
-    partial class DeleteImageTable
+    [Migration("20241014170200_Update Product Feature")]
+    partial class UpdateProductFeature
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -758,8 +758,7 @@ namespace Jumia.Migrations
 
                     b.Property<string>("FeatureName")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -790,6 +789,9 @@ namespace Jumia.Migrations
 
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsMainImage")
+                        .HasColumnType("bit");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");

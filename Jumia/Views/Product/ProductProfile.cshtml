@@ -1,0 +1,503 @@
+﻿@model List<Product>
+@{
+    
+}
+<div class="container">
+    <article class="product">
+        @foreach (var prod in Model)
+        {  
+        <h1 class="product__name">@prod.ProductName</h1>
+        }
+        <div class="row">
+            <div class="col-md-6">
+                <div class="product-images">
+                @foreach (var item in Model)
+                {
+                    @foreach (var img in item.ProductImages)
+                    {
+                        if (img.IsMainImage == true)
+                        {
+                            <div class="main-image">
+                                    <img id="mainImage" src="@Url.Content(img.ProductImageUrl)" alt="@img.ProductImageName" class="img-fluid">
+                            </div>
+                        }
+                    }
+                }
+                    <div class="thumbnail-bar">
+                        @foreach (var item in Model)
+                        {
+                            @foreach (var img in item.ProductImages)
+                            {
+                            <img src="@Url.Content(img.ProductImageUrl)" alt="@img.ProductImageName" class="thumbnail active" onclick="changeImage(this)">
+@*                          <img src="https://eg.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/88/037505/2.jpg?8070" alt="Thumbnail 2" class="thumbnail" onclick="changeImage(this)">
+                            <img src="https://eg.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/88/037505/3.jpg?8070" alt="Thumbnail 3" class="thumbnail" onclick="changeImage(this)">
+                            <img src="https://eg.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/88/037505/4.jpg?8070" alt="Thumbnail 4" class="thumbnail" onclick="changeImage(this)">
+                            <img src="https://eg.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/88/037505/4.jpg?8070" alt="Thumbnail 4" class="thumbnail" onclick="changeImage(this)">
+                            <img src="https://eg.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/88/037505/4.jpg?8070" alt="Thumbnail 4" class="thumbnail" onclick="changeImage(this)">
+*@
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="product__details">
+                    @foreach (var prod in Model)
+                    {
+                        @if (prod.DiscountPersentage == 0 && prod.Discount == 0)
+                    {
+                        <div class="product__price">
+                                <h2>Price: <span class="price">$@prod.Price</span></h2>
+                        </div>
+
+                        <div class="product__price">
+                            <h2>Discount: <span class="price"> - </span></h2>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="product__price">
+                                <h2>Price: <span class="price">$@(prod.Price - prod.Discount)  <strong style="color: rgb(44, 62, 80)"> : </strong>  <span style="color:gray; text-decoration:line-through">$@prod.Price</span></span></h2>
+                        </div>
+
+                        <div class="product__price">
+                                <h2>Discount: <span class="price">@prod.DiscountPersentage%</span></h2>
+                        </div>
+                    }
+                    }
+
+                    <div class="product__price">
+                        <h2>Availability: <span class="price">5 pieces</span></h2>
+                    </div>
+                    
+                    <form class="product__form">
+                        <div class="form-group">
+                            <label class="CartLable" for="size">Size:</label>
+                            <select name="size" id="size" class="form-control">
+                            @if(ViewData["Sizes"] != null)
+                            {
+                            var Sizes = (List<Size>?)ViewData["Sizes"];
+                                @foreach (var item in Sizes)
+                                {
+                                    <option>@item.SizeName</option>
+                                }
+                             }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="CartLable" for="color">Color:</label>
+                            <select name="color" id="color" class="form-control">
+                                <option value="red">Red</option>
+                                <option value="blue">Blue</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="CartLable" for="quantity">Quantity:</label>
+                            <input name="quantity" id="quantity" class="form-control" type="number" min="1" value="1" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <section class="product__description">
+                    <h2>Product Description</h2>
+                    @foreach (var item in Model)
+                    {
+                    <p>@item.Description</p>
+                    }
+                </section>
+            </div>
+        
+            <section class="product__materials">
+                <h2>Product Features</h2>
+                <ul>
+                    @foreach (var item in Model)
+                    {
+                        foreach (var feature in item.ProductFeatures)
+                        {
+                            <li>@feature.FeatureName</li>
+                        }
+                    }
+                </ul>
+            </section>
+            
+            <section class="product__materials">
+                <h2>Materials &amp; Care</h2>
+                <ul>
+                @if (ViewData["ProductMaterialsCare"] != null)
+                {
+                    var ProductMaterialsCare = (List<MaterialsCare>?)ViewData["ProductMaterialsCare"];
+                    foreach (var item in ProductMaterialsCare)
+                    {
+                            <li>@item.MaterialsCareIcon : @item.MaterialsCareName</li>
+                    }
+                }
+                 </ul>
+            </section>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <!-- ... (previous sections remain the same) ... -->
+                <section class="product__add-review">
+                    <h2>Add Your Review</h2>
+                    <form id="reviewForm">
+                        <div class="form-group">
+                            <label for="reviewerName">Your Name:</label>
+                            <input type="text" id="reviewerName" name="reviewerName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Your Rating:</label>
+                            <div class="rating">
+                                <input type="radio" id="star5" name="rating" value="5" required><label for="star5">&#9733;</label>
+                                <input type="radio" id="star4" name="rating" value="4"><label for="star4">&#9733;</label>
+                                <input type="radio" id="star3" name="rating" value="3"><label for="star3">&#9733;</label>
+                                <input type="radio" id="star2" name="rating" value="2"><label for="star2">&#9733;</label>
+                                <input type="radio" id="star1" name="rating" value="1"><label for="star1">&#9733;</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="reviewText">Your Review:</label>
+                            <textarea id="reviewText" name="reviewText" class="form-control" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Review</button>
+                    </form>
+                </section>
+
+                <section class="product__reviews">
+                    <h2>Customer Reviews:</h2>
+                    <div class="overall-rating">
+                        <span class="rating-number">4</span>
+                        <div class="stars">
+                            <span class="star filled">&#9733;</span>
+                            <span class="star filled">&#9733;</span>
+                            <span class="star filled">&#9733;</span>
+                            <span class="star filled">&#9733;</span>
+                            <span class="star  ">&#9734;</span>
+                        </div>
+                        <span class="rating-count">(125 reviews)</span>
+                    </div>
+                    <div class="review-list">
+                        <div class="review-item">
+                            <div class="review-header">
+                                <span class="reviewer-name">John Doe</span>
+                                <div class="review-rating">
+                                    <span class="star filled">&#9733;</span>
+                                    <span class="star filled">&#9733;</span>
+                                    <span class="star filled">&#9733;</span>
+                                    <span class="star unfilled">&#9734;</span>
+                                    <span class="star unfilled">&#9734;</span>
+                                </div>
+                                <span class="review-date">May 15, 2023</span>
+                            </div>
+                            <p class="review-text">Great product! The quality is excellent and it fits perfectly. Highly recommended!</p>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-header">
+                                <span class="reviewer-name">Jane Smith</span>
+                                
+                                <div class="review-rating">
+                                    <span class="star filled">&#9733;</span>
+                                    <span class="star filled">&#9733;</span>
+                                    <span class="star filled">&#9733;</span>
+                                    <span class="star filled">&#9733;</span>
+                                    <span class="star filled">&#9733;</span>
+                                </div>
+                                <span class="review-date">April 30, 2023</span>
+                            </div>
+                            <p class="review-text">Absolutely love this! The color is true to the picture and the material is very comfortable.</p>
+                        </div>
+                        <!-- Add more review items as needed -->
+                    </div>
+                </section>
+            </div>
+        </div>
+    </article>
+</div>
+<script>
+    function changeImage(thumbnail) {
+        // Change main image
+        document.getElementById('mainImage').src = thumbnail.src.replace('150x150', '500x500');
+
+        // Update active thumbnail
+        document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
+        thumbnail.classList.add('active');
+    }
+    document.getElementById('reviewForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        // Here you would typically send the form data to a server
+        // For this example, we'll just log it to the console
+        console.log('Review submitted:', {
+            name: document.getElementById('reviewerName').value,
+            rating: document.querySelector('input[name="rating"]:checked').value,
+            review: document.getElementById('reviewText').value
+        });
+        alert('Thank you for your review!');
+        this.reset();
+    });
+</script>
+<style>
+    .product {
+        font-family: Arial, sans-serif;
+        color: #333;
+    }
+
+    .product__name {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        color: #2c3e50;
+    }
+
+    .product-images {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main-image {
+        width: 100%;
+        max-width: 500px;
+        margin-bottom: 1rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+        .main-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+    .thumbnail-bar {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 2rem;
+    }
+
+    .thumbnail {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        cursor: pointer;
+        border: 2px solid transparent;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+    }
+
+        .thumbnail:hover {
+            transform: scale(1.05);
+        }
+
+        .thumbnail.active {
+            border-color: #3498db;
+        }
+
+    .product__details {
+        background-color: #f8f9fa;
+        padding: 2rem;
+        border-radius: 8px;
+    }
+
+    .product__price .price {
+        font-size: 1.5rem;
+        color: darkred;
+        font-weight: bold;
+    }
+
+    .product__rating .rating {
+        font-size: 1.2rem;
+    }
+
+    .star {
+        font-size: 1.5rem;
+        color: #f1c40f;
+    }
+
+    .product__form .form-group {
+        margin-bottom: 0;
+    }
+
+    .CartLable {
+        font-family: "Inter", sans-serif;
+        color: #6995B1;
+    }
+    .form-control {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 0;
+    }
+
+    .btn-primary {
+        background-color: #3498db;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+    .product__description, .product__features, .product__materials {
+        margin-top: 2rem;
+        padding: 1rem;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+    }
+
+    h2 {
+        font-size: 25px;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+    }
+
+    ul {
+        padding-left: 1.5rem;
+    }
+
+    li {
+        margin-bottom: 0.5rem;
+    }
+
+    .product__reviews {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+        padding: 2rem;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+    }
+
+    .overall-rating {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .rating-number {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-right: 1rem;
+    }
+
+    .small-rating-number {
+        font-size: 1rem;
+        font-weight: bold;
+        margin-right: 1rem;
+    }
+
+    .stars {
+        font-size: 1.5rem;
+        color: #f1c40f;
+        margin-right: 1rem;
+    }
+
+    .rating-count {
+        color: #7f8c8d;
+    }
+
+    .review-list {
+        border-top: 1px solid #ddd;
+        padding-top: 1rem;
+    }
+
+    .review-item {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid #eee;
+    }
+
+    .review-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .reviewer-name {
+        font-weight: bold;
+    }
+
+    .review-rating {
+        font-size: 1rem;
+        color: #f1c40f;
+    }
+
+    .review-date {
+        color: #7f8c8d;
+        font-size: 0.9rem;
+    }
+
+    .review-text {
+        line-height: 1.6;
+    }
+
+    .star.half-filled {
+        position: relative;
+        display: inline-block;
+    }
+
+    .star.half-filled::after {
+        content: '\2733';
+        position: absolute;
+        left: 0;
+        width: 50%;
+        overflow: hidden;
+        color: #f1c40f;
+    }
+
+    .product__add-review {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+        padding: 2rem;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+    }
+
+    .rating {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+    }
+
+    .rating input {
+        display: none;
+    }
+
+    .rating label {
+        font-size: 2rem;
+        color: #ddd;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+
+    .rating label:hover,
+    .rating label:hover ~ label,
+    .rating input:checked ~ label {
+        color: #f1c40f;
+    }
+
+    #reviewForm .form-group {
+        margin-bottom: 1rem;
+    }
+
+    #reviewForm label {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    #reviewForm .btn-primary {
+        margin-top: 1rem;
+    }
+</style>

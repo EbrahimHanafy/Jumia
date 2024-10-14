@@ -1,9 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
 using System.Diagnostics.CodeAnalysis;
 namespace Jumia.Models
 {
@@ -37,7 +32,7 @@ namespace Jumia.Models
         public DateTime? UpdatedAt { get; set; }
         // ForeignKey for User
         [Required]
-        public int UserId { get; set; }
+        public string Id { get; set; }
         // ForeignKey for Country
         [Required]
         public int CountryId { get; set; }

@@ -34,9 +34,8 @@ namespace Jumia.Models
         // Foreign Key to Size
         [Required]
         public int SizeId { get; set; }
-
+        [AllowNull]
         // Foreign Key to ProductImage
-        [Required]
         public int ProductImageId { get; set; }
 
         // Navigation properties

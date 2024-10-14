@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Jumia.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20240923164507_Tedtdgsg")]
-    partial class Tedtdgsg
+    [Migration("20241014185532_update ImageId")]
+    partial class updateImageId
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,8 +44,8 @@ namespace Jumia.Migrations
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<int>("ImageId")
-                        .HasColumnType("int");
+                    b.Property<string>("ImageURL")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -54,8 +54,6 @@ namespace Jumia.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("BrandId");
-
-                    b.HasIndex("ImageId");
 
                     b.ToTable("Brands");
                 });
@@ -82,8 +80,8 @@ namespace Jumia.Migrations
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ImageId")
-                        .HasColumnType("int");
+                    b.Property<string>("ImageURL")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -94,8 +92,6 @@ namespace Jumia.Migrations
                     b.HasKey("CategoryId");
 
                     b.HasIndex("DepartmentId");
-
-                    b.HasIndex("ImageId");
 
                     b.ToTable("Categories");
                 });
@@ -225,8 +221,8 @@ namespace Jumia.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("ImageId")
-                        .HasColumnType("int");
+                    b.Property<string>("ImageURL")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -235,8 +231,6 @@ namespace Jumia.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("DepartmentId");
-
-                    b.HasIndex("ImageId");
 
                     b.ToTable("Departments");
                 });
@@ -315,41 +309,6 @@ namespace Jumia.Migrations
                     b.HasIndex("CountryId");
 
                     b.ToTable("Governorates");
-                });
-
-            modelBuilder.Entity("Jumia.Models.Image", b =>
-                {
-                    b.Property<int>("ImageId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ImageId"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ImageName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("ImageURL")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("UpdatedBy")
-                        .HasColumnType("int");
-
-                    b.HasKey("ImageId");
-
-                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("Jumia.Models.MaterialsCare", b =>
@@ -636,6 +595,39 @@ namespace Jumia.Migrations
                     b.ToTable("PaymentMethods");
                 });
 
+            modelBuilder.Entity("Jumia.Models.Permission", b =>
+                {
+                    b.Property<int>("PermissionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PermissionId"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PermissionName")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.HasKey("PermissionId");
+
+                    b.ToTable("Permissions");
+                });
+
             modelBuilder.Entity("Jumia.Models.Product", b =>
                 {
                     b.Property<int>("ProductId")
@@ -766,8 +758,7 @@ namespace Jumia.Migrations
 
                     b.Property<string>("FeatureName")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -798,6 +789,9 @@ namespace Jumia.Migrations
 
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsMainImage")
+                        .HasColumnType("bit");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -1126,123 +1120,6 @@ namespace Jumia.Migrations
                     b.ToTable("ReturnDetails");
                 });
 
-            modelBuilder.Entity("Jumia.Models.Role", b =>
-                {
-                    b.Property<int>("RoleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"));
-
-                    b.Property<bool>("ActivateClient")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("ActivateProduct")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("AddBrand")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("AddCategory")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("AddCountry")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("AddDepartment")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("AddOrderStatus")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("AddPaymentMethod")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("AddProduct")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("AddStore")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("AddSubCategory")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("CreateDiscountCoupon")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("DeleteProduct")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("RoleName")
-                        .IsRequired()
-                        .HasMaxLength(45)
-                        .HasColumnType("nvarchar(45)");
-
-                    b.Property<bool>("SeeClientInfo")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("SeeClientOrders")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("SeeClientShippingCart")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("SeeClientWishList")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("SeeStoreInfo")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("StopDiscountCoupon")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("UpdateBrand")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("UpdateCategory")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("UpdateClientInfo")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("UpdateCountry")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("UpdateDepartment")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("UpdateDiscountCoupon")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("UpdateOrderStatus")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("UpdatePaymentMethod")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("UpdateProductDiscount")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("UpdateProductInfo")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("UpdateProductPrice")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("UpdateStoreInfo")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("UpdateStoreProducts")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("UpdateSubCategory")
-                        .HasColumnType("bit");
-
-                    b.HasKey("RoleId");
-
-                    b.ToTable("Roles");
-                });
-
             modelBuilder.Entity("Jumia.Models.ShoppingCart", b =>
                 {
                     b.Property<int>("ShoppingCartId")
@@ -1357,19 +1234,19 @@ namespace Jumia.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CategoryName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ImageId")
-                        .HasColumnType("int");
+                    b.Property<string>("ImageURL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubCategoryName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -1380,8 +1257,6 @@ namespace Jumia.Migrations
                     b.HasKey("SubCategoryId");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("ImageId");
 
                     b.ToTable("SubCategories");
                 });
@@ -1430,9 +1305,6 @@ namespace Jumia.Migrations
                         .HasMaxLength(45)
                         .HasColumnType("nvarchar(45)");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -1448,8 +1320,6 @@ namespace Jumia.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("UserId");
-
-                    b.HasIndex("RoleId");
 
                     b.ToTable("Users");
                 });
@@ -1517,6 +1387,41 @@ namespace Jumia.Migrations
                     b.ToTable("UserAddresses");
                 });
 
+            modelBuilder.Entity("Jumia.Models.UserPermission", b =>
+                {
+                    b.Property<int>("UserPermissionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserPermissionId"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PermissionId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserPermissionId");
+
+                    b.HasIndex("PermissionId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserPermissions");
+                });
+
             modelBuilder.Entity("Jumia.Models.WishList", b =>
                 {
                     b.Property<int>("WishListId")
@@ -1552,17 +1457,6 @@ namespace Jumia.Migrations
                     b.ToTable("WishLists");
                 });
 
-            modelBuilder.Entity("Jumia.Models.Brand", b =>
-                {
-                    b.HasOne("Jumia.Models.Image", "Image")
-                        .WithMany("Brands")
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Image");
-                });
-
             modelBuilder.Entity("Jumia.Models.Category", b =>
                 {
                     b.HasOne("Jumia.Models.Department", "Department")
@@ -1571,13 +1465,7 @@ namespace Jumia.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Jumia.Models.Image", "Image")
-                        .WithMany("Categories")
-                        .HasForeignKey("ImageId");
-
                     b.Navigation("Department");
-
-                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("Jumia.Models.City", b =>
@@ -1589,15 +1477,6 @@ namespace Jumia.Migrations
                         .IsRequired();
 
                     b.Navigation("Governorate");
-                });
-
-            modelBuilder.Entity("Jumia.Models.Department", b =>
-                {
-                    b.HasOne("Jumia.Models.Image", "Image")
-                        .WithMany("Departments")
-                        .HasForeignKey("ImageId");
-
-                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("Jumia.Models.Governorate", b =>
@@ -1913,24 +1792,7 @@ namespace Jumia.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Jumia.Models.Image", "Image")
-                        .WithMany("SubCategories")
-                        .HasForeignKey("ImageId");
-
                     b.Navigation("Category");
-
-                    b.Navigation("Image");
-                });
-
-            modelBuilder.Entity("Jumia.Models.User", b =>
-                {
-                    b.HasOne("Jumia.Models.Role", "Role")
-                        .WithMany("Users")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("Jumia.Models.UserAddress", b =>
@@ -1964,6 +1826,25 @@ namespace Jumia.Migrations
                     b.Navigation("Country");
 
                     b.Navigation("Governorate");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Jumia.Models.UserPermission", b =>
+                {
+                    b.HasOne("Jumia.Models.Permission", "Permission")
+                        .WithMany("UserPermissions")
+                        .HasForeignKey("PermissionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Jumia.Models.User", "User")
+                        .WithMany("UserPermissions")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Permission");
 
                     b.Navigation("User");
                 });
@@ -2031,17 +1912,6 @@ namespace Jumia.Migrations
                     b.Navigation("UserAddresses");
                 });
 
-            modelBuilder.Entity("Jumia.Models.Image", b =>
-                {
-                    b.Navigation("Brands");
-
-                    b.Navigation("Categories");
-
-                    b.Navigation("Departments");
-
-                    b.Navigation("SubCategories");
-                });
-
             modelBuilder.Entity("Jumia.Models.MaterialsCare", b =>
                 {
                     b.Navigation("ProductMaterialsCares");
@@ -2069,6 +1939,11 @@ namespace Jumia.Migrations
                     b.Navigation("Payments");
 
                     b.Navigation("Refunds");
+                });
+
+            modelBuilder.Entity("Jumia.Models.Permission", b =>
+                {
+                    b.Navigation("UserPermissions");
                 });
 
             modelBuilder.Entity("Jumia.Models.Product", b =>
@@ -2111,11 +1986,6 @@ namespace Jumia.Migrations
                     b.Navigation("ReturnDetails");
                 });
 
-            modelBuilder.Entity("Jumia.Models.Role", b =>
-                {
-                    b.Navigation("Users");
-                });
-
             modelBuilder.Entity("Jumia.Models.Size", b =>
                 {
                     b.Navigation("ProductColorSize");
@@ -2140,6 +2010,8 @@ namespace Jumia.Migrations
                     b.Navigation("ShoppingCarts");
 
                     b.Navigation("UserAddresses");
+
+                    b.Navigation("UserPermissions");
 
                     b.Navigation("WishList");
                 });
