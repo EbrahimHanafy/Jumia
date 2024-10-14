@@ -25,12 +25,16 @@ namespace Jumia
             //DI register one instance for the same request
             builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             builder.Services.AddTransient<IBrandRepository, BrandRepository>();
-            //builder.Services.AddTransient<IDepartmentRepository, DepartmentRepository>();
+            builder.Services.AddTransient<IProductRepository, ProductRepository>();
             builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddTransient<IMaterialsCareRepository, MaterialsCareRepository>();
+            builder.Services.AddTransient<ISizeRepository, SizeRepository>();
 
+            builder.Services.AddTransient<ISizeService, SizeService>();
+            builder.Services.AddTransient<IProductService, ProductService>();
+            builder.Services.AddTransient<IMaterialsCareService, MaterialsCareService>();
             builder.Services.AddTransient<IDepartmentService, DepartmentService>();
             builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
-
 
             //AutoMapper
             builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());

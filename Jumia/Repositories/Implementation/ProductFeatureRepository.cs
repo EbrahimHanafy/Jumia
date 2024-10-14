@@ -12,5 +12,6 @@ namespace Jumia.Repositories.Implementation
 		{
 			_productFeatures = context.Set<ProductFeature>();
 		}
-	}
+        
+    }
 }

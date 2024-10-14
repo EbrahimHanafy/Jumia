@@ -8,34 +8,40 @@
 <!-- Link to the Department.css for this page -->
 <link rel="stylesheet" href="~/assets/css/Department.css" />
 
-<section class="category-section">
-    <h2 style="color:brown">@DepName</h2>
-	@*if (ViewData["DepartmentCategories"] != null)*@
+<section id="flash-sales" class="category-section">
+
+    <h1 style="color:midnightblue; text-align:center"> @DepName Department</h1>
+
     @if (Model != null)
     {
-        //var categories = (List<Category>?)ViewData["DepartmentCategories"];
         @foreach (var item in Model)
         {
             <div class="category">
                 <h2>@item.CategoryName</h2>
-                <div id="clothing-products" class="product-store padding-large">
-                    <div class="cards">
-                        @if (item.SubCategories != null && item.SubCategories.Any())
-                        {
-                            foreach (var subCategory in item.SubCategories)
-                            {
-                                <div class="card">
-                                    <a asp-action="GetSubCategoryProducts" asp-controller="SubCategory" asp-route-subCategoryId="@subCategory.SubCategoryId" asp-route-subCategoryName="@subCategory.SubCategoryName">
-                                        <img src="@Url.Content(@subCategory.ImageURL)" alt="@subCategory.SubCategoryName" style="width:100%">
-                                        <h3>@subCategory.SubCategoryName</h3>
-                                    </a>
-                                </div>
-                            }
-                        }
-                        else
-                        {
-                            <p>No subcategories available for this category.</p>
-                        }
+                <div id="clothing-products" class="product-store padding-large" style="align-items: center;justify-content: center;">
+                    <div class="swiper product-swiper flash-sales overflow-hidden">
+                        <div class="swiper-wrapper" >
+                            
+                               @if (item.SubCategories != null && item.SubCategories.Any())
+                                {
+                                    foreach (var subCategory in item.SubCategories)
+                                    {
+                                        <div class="swiper-slide" style="width: 300px; text-align:center">
+                                        <div class="product-item">
+                                            <a asp-action="GetProductsBySubCategory" asp-controller="SubCategory" asp-route-subCategoryId="@subCategory.SubCategoryId" asp-route-subCategoryName="@subCategory.SubCategoryName">
+                                                <img src="@Url.Content(@subCategory.ImageURL)" alt="@subCategory.SubCategoryName" class="product-image" style="height:400px">
+                                                <h3 style="text-align:center">@subCategory.SubCategoryName</h3>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <p>No subcategories available for this category.</p>
+                                }
+                        </div>
+                        <div class="swiper-pagination"></div>
                     </div>
                 </div>
             </div>
