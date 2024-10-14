@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Jumia.Repositories.Implementation
 {
-	public class SubCategoryRepository: GenericRepository<SubCategory> , ISubCategoryRepository
+	public class SubCategoryRepository: GenericRepository<SubCategory> ,ISubCategoryRepository
 	{
 		protected readonly DbSet<SubCategory> _subCategories;
 
@@ -13,5 +13,5 @@ namespace Jumia.Repositories.Implementation
 		{
 			_subCategories = context.Set<SubCategory>();
 		}
-	}
+    }
 }
