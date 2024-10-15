@@ -1,4 +1,4 @@
-@model UserAddress
+@model List<UserAddress>
 @{
     ViewData["Title"] = "Addresses";
     ViewBag.ActiveMenu = "Addresses";
@@ -37,21 +37,23 @@
         <h2>Your Addresses</h2>
          @if (Model != null)
         {
-            <!-- Default Address -->
-            <div class="address-section mt-4">
-                <h4>Default Address</h4>
+            @foreach (var item in Model)
+            {
+                <!-- Default Address -->
+                <div class="address-section mt-4">
+                    <h4>Default Address</h4>
             <div class="address-item border p-3 mb-3">
                 <div>
                    
                         <strong>Home</strong>
 
                         <br>
-                        <p>@Model.User.UserName</p>
+                        <p>@item.User.UserName</p>
                         <p>
-                            @Model.Country - @Model.City - @Model.Governorate - @Model.BuildingNumber -
-                            @Model.FloorNumber - @Model.ApartmentNumber
+                                @item.Country.CountryName - @item.Governorate.GovernorateName - @item.City.CityName - Building no: @item.BuildingNumber  -
+                               Floor no: @item.FloorNumber - Apartment no: @item.ApartmentNumber
                         </p>
-                        <p>@Model.User.PhoneNumber <span class="verified text-success">Verified</span></p>
+                            @* <p>@item.User.PhoneNumber <span class="verified text-success">Verified</span></p> *@
                     </div>
                     <div class="address-actions mt-2">
                         <a href="#" class="text-danger me-2">Delete</a>
@@ -59,7 +61,7 @@
                         <span class="text-muted">Default Address</span>
                     </div>
                 </div>
-            </div>}
+            </div>}}
 
 
             
