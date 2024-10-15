@@ -47,7 +47,7 @@ namespace Jumia.Models
         // Navigation property for the related Size
         public virtual Size Size { get; set; }
         // Navigation property for the related ProductImage
-        public virtual ProductImage ProductImage { get; set; }
+        public virtual ProductImage? ProductImage { get; set; }
 
         // Navigation property for related ProductInStores entities (one-to-many relationship)
         public virtual ICollection<ProductInStore> ProductInStores { get; set; }

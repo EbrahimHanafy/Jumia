@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 namespace Jumia.Models
 {
@@ -32,7 +33,8 @@ namespace Jumia.Models
         public DateTime? UpdatedAt { get; set; }
         // ForeignKey for User
         [Required]
-        public string Id { get; set; }
+        //[ForeignKey("UserCode")]
+        public int UserCode { get; set; }
         // ForeignKey for Country
         [Required]
         public int CountryId { get; set; }
@@ -42,16 +44,15 @@ namespace Jumia.Models
         // ForeignKey for City
         [Required]
         public int CityId { get; set; }
-
+        [Required]
         // Navigation property for the related User 
-        public virtual User User { get; set; }
+        public virtual User? User { get; set; }
         // Navigation property for the related Country 
         public virtual Country Country { get; set; }
         // Navigation property for the related Governorate 
         public virtual Governorate Governorate { get; set; }
         // Navigation property for the related City 
         public virtual City City { get; set; }
-
         // Navigation property for related Order  entities (one-to-many relationship)
         public virtual ICollection<Order> Orders { get; set; }
         // Navigation property for related Return  entities (one-to-many relationship)

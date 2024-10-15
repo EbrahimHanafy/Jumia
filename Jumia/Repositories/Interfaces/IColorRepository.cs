@@ -5,5 +5,6 @@ namespace Jumia.Repositories.Interfaces
 {
     public interface IColorRepository : IGenericRepository<Color>
     {
+        public Task<List<Color>> GetColorByProductAndSize(int productId);
     }
 }

@@ -29,12 +29,19 @@ namespace Jumia
             builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
             builder.Services.AddTransient<IMaterialsCareRepository, MaterialsCareRepository>();
             builder.Services.AddTransient<ISizeRepository, SizeRepository>();
+            builder.Services.AddTransient<IColorRepository, ColorRepository>();
+            builder.Services.AddTransient<IProductRateUserRepository, ProductRateUserRepository>();
+            builder.Services.AddTransient<IProductRateRepository, ProductRateRepository>();
 
             builder.Services.AddTransient<ISizeService, SizeService>();
+            builder.Services.AddTransient<IProductRateUserService, ProductRateUserService>();
+            builder.Services.AddTransient<IProductRateService, ProductRateService>();
+            builder.Services.AddTransient<IColorService, ColorService>();
             builder.Services.AddTransient<IProductService, ProductService>();
             builder.Services.AddTransient<IMaterialsCareService, MaterialsCareService>();
             builder.Services.AddTransient<IDepartmentService, DepartmentService>();
             builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddTransient<IUserAddressService,UserAddressService >();
 
             //AutoMapper
             builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
