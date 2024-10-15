@@ -78,7 +78,7 @@ namespace Jumia.Models
             modelBuilder.Entity<UserAddress>()
                 .HasOne(ua => ua.User)
                 .WithMany(u => u.UserAddresses)
-                .HasForeignKey(ua => ua.Id)
+                .HasForeignKey(ua => ua.UserCode)
                 .OnDelete(DeleteBehavior.Restrict); // Disable cascading delete for User
 
             modelBuilder.Entity<ProductColorSize>()

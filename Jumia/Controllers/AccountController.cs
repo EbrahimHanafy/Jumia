@@ -118,15 +118,23 @@ public class AccountController : Controller
 
     // GET: /Account/Addresses
     [HttpGet]
-    public IActionResult Addresses()
+    public async Task<IActionResult> Addresses()
     {
-        return View();
+        if (User.Identity.IsAuthenticated)
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            return View(user.UserAddresses);
+        }
+        else
+            return RedirectToAction("Login", "Account");
+  
     }
 
     // GET: /Account/Orders
     [HttpGet]
     public IActionResult Orders()
     {
+      
         return View();
     }
 

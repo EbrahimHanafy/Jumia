@@ -32,7 +32,7 @@ namespace Jumia.Models
         public DateTime? UpdatedAt { get; set; }
         // ForeignKey for User
         [Required]
-        public string Id { get; set; }
+        public string UserCode { get; set; }
         // ForeignKey for Country
         [Required]
         public int CountryId { get; set; }
