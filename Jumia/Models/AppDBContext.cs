@@ -58,6 +58,31 @@ namespace Jumia.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserAddress>()
+            .HasOne(ua => ua.User)
+            .WithMany(u => u.UserAddresses) // Assuming you have a collection of UserAddresses in your User class
+            .HasForeignKey(ua => ua.UserCode);
+
+            modelBuilder.Entity<Order>()
+            .HasOne(ua => ua.User)
+            .WithMany(u => u.Orders) // Assuming you have a collection of Orders in your User class
+            .HasForeignKey(ua => ua.UserCode);
+
+            modelBuilder.Entity<Return>()
+            .HasOne(ua => ua.User)
+            .WithMany(u => u.Returns) // Assuming you have a collection of Returns in your User class
+            .HasForeignKey(ua => ua.UserCode);
+
+            modelBuilder.Entity<ShoppingCart>()
+            .HasOne(ua => ua.User)
+            .WithMany(u => u.ShoppingCarts) // Assuming you have a collection of ShoppingCarts in your User class
+            .HasForeignKey(ua => ua.UserCode);
+
+            modelBuilder.Entity<WishList>()
+            .HasOne(ua => ua.User)
+            .WithMany(u => u.WishLists) // Assuming you have a collection of WishLists in your User class
+            .HasForeignKey(ua => ua.UserCode);
+
+            modelBuilder.Entity<UserAddress>()
                 .HasOne(ua => ua.City)
                 .WithMany(c => c.UserAddresses)
                 .HasForeignKey(ua => ua.CityId)
@@ -78,7 +103,7 @@ namespace Jumia.Models
             modelBuilder.Entity<UserAddress>()
                 .HasOne(ua => ua.User)
                 .WithMany(u => u.UserAddresses)
-                .HasForeignKey(ua => ua.Id)
+                .HasForeignKey(ua => ua.UserCode)
                 .OnDelete(DeleteBehavior.Restrict); // Disable cascading delete for User
 
             modelBuilder.Entity<ProductColorSize>()
@@ -99,7 +124,8 @@ namespace Jumia.Models
                 .HasForeignKey(ua => ua.ProductId)
                 .OnDelete(DeleteBehavior.Restrict); // Disable cascading delete for Product
 
-            modelBuilder.Entity<User>().HasKey(u => u.Id);
+            modelBuilder.Entity<User>().HasKey(u => u.UserCode);
+
             modelBuilder.Entity<IdentityUserLogin<string>>(entity =>
             {
                 entity.HasKey(e => new { e.UserId});

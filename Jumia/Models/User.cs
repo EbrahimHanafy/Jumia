@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Jumia.ViewModels;
 namespace Jumia.Models
 {
- public class User : IdentityUser
+    public class User : IdentityUser
     {
         //[Key]
         // public string  UserId { get; set; } 
@@ -55,7 +55,7 @@ namespace Jumia.Models
         // Navigation property for related Order entities (one-to-many relationship)
         public virtual ICollection<Order> Orders{ get; set; }
         // Navigation property for related WishList entities (one-to-many relationship)
-        public virtual ICollection<WishList> WishList { get; set; }
+        public virtual ICollection<WishList> WishLists { get; set; }
         // Navigation property for related UserAddresses entities (one-to-many relationship)
         public virtual ICollection<UserAddress> UserAddresses { get; set; }
         // Navigation property for related ShoppingCart  entities (one-to-many relationship)
@@ -64,8 +64,5 @@ namespace Jumia.Models
         public virtual ICollection<Return> Returns { get; set; }
         // Navigation property for related Return  entities (one-to-many relationship)
         public virtual ICollection<UserPermission> UserPermissions { get; set; }
-
-
-
     }  
 }

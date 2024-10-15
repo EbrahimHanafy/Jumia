@@ -18,10 +18,14 @@ namespace Jumia.Repositories.Implementation
 
         public async Task<List<Size>> GetSizesByProduct(int productId)
 		{
-			return await (from s in _sizes
-						  join ps in _productColorSize on s.SizeId equals ps.SizeId
-						  where ps.ProductId == productId
-						  select s).ToListAsync();
+			var Sizes = await (from size in _sizes
+						  join productColorSize in _productColorSize
+						  on size.SizeId equals productColorSize.SizeId
+						  where productColorSize.ProductId == productId
+						  select size)
+                          .Distinct()
+                          .ToListAsync();
+			return Sizes;
         }
     }
 }
