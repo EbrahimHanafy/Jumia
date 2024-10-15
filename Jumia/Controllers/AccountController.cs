@@ -97,7 +97,7 @@ public class AccountController  : Controller
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, false);
-                    // await _userManager.AddToRoleAsync(user, "User");
+                    await _userManager.AddToRoleAsync(user, "User");
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -117,9 +117,16 @@ public class AccountController  : Controller
 
     // GET: /Account/Profile
     [HttpGet]
-    public IActionResult Profile()
+    public async Task<IActionResult> Profile()
     {
-        return View();
+
+        if (User.Identity.IsAuthenticated)
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);      
+            return View(user);
+        }
+        else
+            return RedirectToAction("Login", "Account");
     }
 
     // GET: /Account/Addresses
