@@ -1,19 +1,25 @@
 using Jumia.Models;
+using Jumia.Repositories.Implementation;
+using Jumia.Services.IServices;
+using Jumia.SharedRepositories;
 using Jumia.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-public class AccountController : Controller
+public class AccountController  : Controller
 {
     private readonly SignInManager<User> _signInManager;
     private readonly UserManager<User> _userManager;
+    IUserAddressService _useraddressService;
 
-    public AccountController(SignInManager<User> signInManager, UserManager<User> userManager)
+
+    public AccountController(SignInManager<User> signInManager, UserManager<User> userManager , IUserAddressService useraddressService)
     {
         _signInManager = signInManager;
         _userManager = userManager;
+        _useraddressService= useraddressService;
     }
 
     // GET: /Account/Login
@@ -118,15 +124,25 @@ public class AccountController : Controller
 
     // GET: /Account/Addresses
     [HttpGet]
-    public IActionResult Addresses()
+    public async Task<IActionResult> Addresses()
     {
-        return View();
+        if (User.Identity.IsAuthenticated)
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var address = await _useraddressService.getall(user.UserCode);
+
+            return View(address);
+        }
+        else
+            return RedirectToAction("Login", "Account");
+  
     }
 
     // GET: /Account/Orders
     [HttpGet]
     public IActionResult Orders()
     {
+      
         return View();
     }
 

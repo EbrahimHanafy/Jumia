@@ -41,6 +41,7 @@ namespace Jumia
             builder.Services.AddTransient<IMaterialsCareService, MaterialsCareService>();
             builder.Services.AddTransient<IDepartmentService, DepartmentService>();
             builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddTransient<IUserAddressService,UserAddressService >();
 
             //AutoMapper
             builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
