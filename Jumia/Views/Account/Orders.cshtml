@@ -1,0 +1,63 @@
+@{
+    ViewData["Title"] = "Orders";
+    ViewBag.ActiveMenu = "Orders";
+}
+
+<link rel="stylesheet" href="~/assets/css/profileStyle.css">
+
+<div class="d-flex">
+    <nav class="profile-sidebar">
+        <ul class="nav profile-nav">
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveMenu == "Profile" ? "active" : "")" href="/Account/Profile">Profile
+                    Info</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveMenu == "Addresses" ? "active" : "")"
+                    href="/Account/Addresses">Addresses</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveMenu == "Orders" ? "active" : "")" href="/Account/Orders">Orders</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveMenu == "Wishlist" ? "active" : "")" href="/Account/Wishlist">Wish
+                    List</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="profile-content flex-grow-1">
+        <h2>Your Orders</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>#1234</td>
+                    <td>1st Jan 2024</td>
+                    <td>Shipped</td>
+                    <td>$199.99</td>
+                </tr>
+                <tr>
+                    <td>#5678</td>
+                    <td>15th Feb 2024</td>
+                    <td>Delivered</td>
+                    <td>$89.99</td>
+                </tr>
+                <tr>
+                    <td>#91011</td>
+                    <td>20th Mar 2024</td>
+                    <td>Processing</td>
+                    <td>$59.99</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

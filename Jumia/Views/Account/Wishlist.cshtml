@@ -1,0 +1,47 @@
+@{
+    ViewData["Title"] = "Wish List";
+    ViewBag.ActiveMenu = "Wishlist";
+}
+
+<link rel="stylesheet" href="~/assets/css/profileStyle.css">
+
+<div class="d-flex">
+    <nav class="profile-sidebar">
+        <ul class="nav profile-nav">
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveMenu == "Profile" ? "active" : "")" href="/Account/Profile">Profile
+                    Info</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveMenu == "Addresses" ? "active" : "")"
+                    href="/Account/Addresses">Addresses</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveMenu == "Orders" ? "active" : "")" href="/Account/Orders">Orders</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveMenu == "Wishlist" ? "active" : "")" href="/Account/Wishlist">Wish
+                    List</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="profile-content flex-grow-1">
+        <h2>Your Wish List</h2>
+        <ul class="wishlist-items">
+            <li>
+                <strong>Product:</strong> Winter Jacket <br>
+                <strong>Price:</strong> $149.99
+            </li>
+            <li>
+                <strong>Product:</strong> Smart Watch <br>
+                <strong>Price:</strong> $199.99
+            </li>
+            <li>
+                <strong>Product:</strong> Running Shoes <br>
+                <strong>Price:</strong> $89.99
+            </li>
+        </ul>
+    </div>
+</div>

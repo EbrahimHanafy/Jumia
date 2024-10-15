@@ -1,0 +1,100 @@
+@{
+    ViewData["Title"] = "Profile Info";
+    ViewBag.ActiveMenu = "Profile";
+}
+
+<link rel="stylesheet" href="~/assets/css/profileStyle.css">
+
+<div class="d-flex">
+    <!-- Sidebar -->
+    <nav class="profile-sidebar">
+        <ul class="nav profile-nav">
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveMenu == "Profile" ? "active" : "")" href="/Account/Profile">Profile
+                    Info</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveMenu == "Addresses" ? "active" : "")"
+                    href="/Account/Addresses">Addresses</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveMenu == "Orders" ? "active" : "")" href="/Account/Orders">Orders</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveMenu == "Wishlist" ? "active" : "")" href="/Account/Wishlist">Wish
+                    List</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="profile-content flex-grow-1">
+        <h2>Profile Info</h2>
+
+        <div class="profile-info">
+            <!-- Email Section -->
+            <div class="form-group">
+                <label for="email" class="form-label">Email: </label>
+                <input type="text" id="email" class="form-control" value="mo7mdhassan7@gmail.com" readonly>
+            </div>
+
+            <!-- First Name and Last Name Section -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="firstName" class="form-label">First Name: </label>
+                    <input type="text" id="firstName" class="form-control" value="Mohamed" readonly>
+                </div>
+                <div class="col-md-6">
+                    <label for="lastName" class="form-label">Last Name: </label>
+                    <input type="text" id="lastName" class="form-control" value="Elwakeel" readonly>
+                </div>
+            </div>
+
+            <!-- Phone Number Section -->
+            <div class="input-group mb-3">
+                <label for="phoneNumber" class="form-label">Phone Number: </label>
+                <input type="text" id="phoneNumber" class="form-control" value="+20-10-06866310" readonly>
+                <span class="input-group-text">
+                    <i class="fa fa-pencil edit-icon" aria-hidden="true"></i>
+                </span>
+            </div>
+
+            <div class="gender-nation">
+                <!-- Birthday Section -->
+                <div class="form-group">
+                    <label for="birthday" class="form-label">Birthday: </label>
+                    <input type="date" id="birthday" class="form-control" value="1994-03-27">
+                </div>
+
+                <!-- Gender Section -->
+                <div class="form-group">
+                    <label class="form-label">Gender: </label>
+                    <div class="gender-selection">
+                        <label class="gender-option">
+                            <input type="radio" name="gender" value="Male" checked>
+                            <span class="btn-gender btn-male">Male</span>
+                        </label>
+                        <label class="gender-option">
+                            <input type="radio" name="gender" value="Female">
+                            <span class="btn-gender btn-female">Female</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Nationality Section -->
+                <div class="input-group nation-select mb-3">
+                    <label for="nationality" class="form-label">Nationality: </label>
+                    <select id="nationality">
+                        <option label="egypt">Egypt</option>
+                        <option label="usa">USA</option>
+                        <option label="france">France</option>
+                        <option label="china">China</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Update Button -->
+            <button class="btn btn-primary" disabled>Update Profile</button>
+        </div>
+    </div>
+</div>
