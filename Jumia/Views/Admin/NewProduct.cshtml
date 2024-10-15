@@ -1,0 +1,121 @@
+﻿@using Jumia.DTO
+@using Jumia.ViewModels
+@model ProductProfileViewModel
+
+<div class="container">
+    <h1 class="text-center">Add New Product</h1>
+    <form asp-action="AddProduct" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="ProductName">Product Name</label>
+                    <input type="text" name="ProductName" id="ProductName" class="form-control" placeholder="Enter product name" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="Price">Price</label>
+                    <input type="number" name="Price" id="Price" class="form-control" step="0.01" placeholder="Enter product price" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="Discount">Discount</label>
+                    <input type="number" name="Discount" id="Discount" class="form-control" step="0.01" placeholder="Enter discount (optional)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="DiscountPercentage">Discount Percentage</label>
+                    <input type="number" name="DiscountPercentage" id="DiscountPercentage" class="form-control" step="0.01" placeholder="Enter discount percentage (optional)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="AvailableQuantity">Available Quantity</label>
+                    <input type="number" name="AvailableQuantity" id="AvailableQuantity" class="form-control" placeholder="Enter available quantity" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="Description">Description</label>
+                    <textarea name="Description" id="Description" class="form-control" rows="4" placeholder="Enter product description" required></textarea>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="ProductImages">Upload Images</label>
+                    <input type="file" name="ProductImages" id="ProductImages" class="form-control-file" multiple />
+                </div>
+
+                <div class="form-group">
+                    <label for="Sizes">Available Sizes</label>
+                    <select name="Sizes" id="Sizes" class="form-control" multiple>
+                        <option value="">Select sizes</option>
+                        @foreach (var size in Model.Sizes)
+                        {
+                            <option value="@size.SizeId">@size.SizeName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="Colors">Available Colors</label>
+                    <select name="Colors" id="Colors" class="form-control" multiple>
+                        <option value="">Select colors</option>
+                        @foreach (var color in Model.Colors)
+                        {
+                            <option value="@color.ColorId">@color.ColorName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="ProductFeatures">Product Features</label>
+                    <textarea name="ProductFeatures" id="ProductFeatures" class="form-control" rows="2" placeholder="List product features (comma-separated)"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="ProductMaterialsCare">Materials of Care</label>
+                    <textarea name="ProductMaterialsCare" id="ProductMaterialsCare" class="form-control" rows="2" placeholder="List materials of care (comma-separated)"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Add Product</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.getElementById('ProductImages').addEventListener('change', function () {
+        const fileInput = this;
+        const fileCount = fileInput.files.length;
+        console.log(fileCount + ' images selected');
+    });
+</script>
+
+<style>
+    .container {
+        margin-top: 30px;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .btn-primary {
+        background-color: #3498db;
+        padding: 10px 20px;
+        border: none;
+        color: white;
+        cursor: pointer;
+    }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        color: #2c3e50;
+    }
+</style>

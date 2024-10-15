@@ -2,4 +2,65 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>@ViewData["Title"]</h1>
+<!-- Link to users.css -->
+<link rel="stylesheet" href="~/assets/css/users.css" />
+
+<div class="users-page">
+
+    <!-- Search Input -->
+    <div class="search-container">
+        <form> 
+
+        <input type="text" id="search-input" placeholder="Product Id..." />
+        <input type="text" id="search-input" placeholder="Search by Product Name..." />
+        <button class="search-btn">Search</button>
+        </form>
+    </div>
+
+    <!-- Table -->
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ProductId</th>
+                    <th>ProductName</th>
+                    <th>SubCategory</th>
+                    <th>Category</th>
+                    <th>Department</th>
+                    <th>IsActive</th>
+                    <th>CreatedDate</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Placeholder rows for now -->
+                <tr>
+                    <td>1</td>
+                    <td><a asp-action="ProductDetailes" asp-controller="Admin">Product 1</a></td>
+                    <td>SubCategory 1</td>
+                    <td>Category 1</td>
+                    <td>Department 1</td>
+                    <td>No</td>
+                    <td>2024-01-01</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><a asp-action="ProductDetailes" asp-controller="Admin">Product 2</a></td>
+                    <td>SubCategory 1</td>
+                    <td>Category 1</td>
+                    <td>Department 1</td>
+                    <td>Yes</td>
+                    <td>2024-01-01</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><a asp-action="ProductDetailes" asp-controller="Admin">Product 3</a></td>
+                    <td>SubCategory 1</td>
+                    <td>Category 1</td>
+                    <td>Department 1</td>
+                    <td>No</td>
+                    <td>2024-01-01</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

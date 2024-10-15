@@ -6,14 +6,10 @@ using System.Diagnostics.Metrics;
 using System.Diagnostics.CodeAnalysis;
 namespace Jumia.Models
 {
-
     public class WishList
     {
         [Key]
         public int WishListId { get; set; }
-
-        [Required, NotNull]
-        public int CreatedBy { get; set; }
         [Required, NotNull]
         public DateTime CreatedAt { get; set; }
         [AllowNull]
@@ -22,6 +18,8 @@ namespace Jumia.Models
         public DateTime? UpdatedAt { get; set; }
 
         // ForeignKey for User
+        [Required]
+        //[ForeignKey("UserCode")]
         public int UserCode { get; set; }
         // ForeignKey for Product 
         public int ProductId { get; set; }
@@ -30,6 +28,6 @@ namespace Jumia.Models
         public virtual Product Product { get; set; }
 
         // Navigation property for the related User
-        public virtual User User { get; set; }
+        public virtual User? User { get; set; }
     }
 }
