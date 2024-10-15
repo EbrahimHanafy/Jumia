@@ -28,6 +28,12 @@ namespace Jumia.Models
         //[RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "Your Email is not valid.")]
         //public string Email { get; set; }
 
+        [Required(ErrorMessage = "Please enter this field"), MaxLength(50)]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Please enter this field"), MaxLength(50)]
+        public string LastName { get; set; }
+
         public string? ImageURL { get; set; }
 
         [Required(ErrorMessage = "Please enter this field")]
