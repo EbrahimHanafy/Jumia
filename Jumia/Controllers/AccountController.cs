@@ -100,7 +100,7 @@ public class AccountController : Controller
                     ModelState.AddModelError("", error.Description);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.InnerException.Message);
             }
@@ -108,5 +108,32 @@ public class AccountController : Controller
         }
         return View(newAcount);
     }
-}
 
+    // GET: /Account/Profile
+    [HttpGet]
+    public IActionResult Profile()
+    {
+        return View();
+    }
+
+    // GET: /Account/Addresses
+    [HttpGet]
+    public IActionResult Addresses()
+    {
+        return View();
+    }
+
+    // GET: /Account/Orders
+    [HttpGet]
+    public IActionResult Orders()
+    {
+        return View();
+    }
+
+    // GET: /Account/Wishlist
+    [HttpGet]
+    public IActionResult Wishlist()
+    {
+        return View();
+    }
+}
