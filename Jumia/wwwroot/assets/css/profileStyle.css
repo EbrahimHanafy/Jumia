@@ -165,7 +165,151 @@ input[type="date"] {
     width: 100%;
 }
 
-/* -------- */
+/* orders styles  */
+
+.order-item {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.order-status {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.order-status.delivered {
+    color: #28a745;
+}
+
+.order-status.cancelled {
+    color: #dc3545;
+}
+
+.order-details {
+    display: flex;
+    align-items: center;
+}
+
+.order-details img {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+}
+
+.order-info {
+    flex-grow: 1;
+}
+
+.order-actions {
+    margin-inline: 0.6rem;
+}
+
+.order-actions .btn {
+    width: 100%;
+    margin: 0.8rem;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* ----------- */
+
+/* Addresses style  */
+
+.address-section {
+    margin-bottom: 20px;
+}
+
+.address-item {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+}
+
+.address-actions {
+    margin-top: 10px;
+    color: #007bff;
+}
+
+.verified {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.add-address-form h4 {
+    margin-bottom: 20px;
+}
+
+button.btn-primary {
+    background-color: #007bff;
+}
+
+/* wishlist styles */
+
+.wishlist-items {
+    margin-top: 20px;
+}
+
+.wishlist-item {
+    text-align: center;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 25%;
+}
+
+.wishlist-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.product-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.product-price {
+    font-size: 1.1rem;
+    color: #28a745;
+    font-weight: bold;
+}
+
+/* -------------- */
 
 .table {
     width: 100%;
@@ -183,10 +327,19 @@ input[type="date"] {
     background-color: #f9f9f9;
 }
 
+.wishlistSection {
+    width: 80%;
+}
+
 .wishlist-items {
     list-style-type: none;
     padding-left: 0;
-    margin-top: 20px;
+    margin-top: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
 }
 
 .wishlist-items li {
