@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using Jumia.Models;
+using Jumia.Repositories.Interfaces;
 using Jumia.Services.IServices;
 using Jumia.UnitOfWorks;
 
 namespace Jumia.Services.Implementations
 {
-    public class ProductRateService(IUnitOfWork unitOfWork, IMapper mapper, ILogger<ProductRateService> logger) : IProductRateService
+    public class ProductRateService(IUnitOfWork unitOfWork, IMapper mapper, ILogger<ProductRateService> logger, IProductRateRepository productRateRepository) : IProductRateService
     {
         public async Task<ProductRate> AddProductRateService(ProductRate productRate)
         {
@@ -29,6 +30,11 @@ namespace Jumia.Services.Implementations
             }
 
             return mapper.Map<ProductRate>(newProductRate);
+        }
+
+        public Task<int> GetProductRatingAverage(int prodcutId)
+        {
+           return productRateRepository.GetProductRatingAverage(prodcutId);
         }
     }
 }

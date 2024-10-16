@@ -28,6 +28,17 @@
 
             <div class="col-md-6">
                 <div class="product__details">
+                    <div class="product__price">
+                        @if (Model.Product.BarCode != null || Model.Product.BarCode == " ")
+                        {
+
+                            <h2>Bar Code: <span class="price" style="color:black">@Model.Product.BarCode</span></h2>
+                        }
+                        else
+                        {
+                            <h2>Bar Code: <span class="price"> </span></h2>
+                        }
+                    </div>
 
                     @if (Model.Product.DiscountPersentage == 0 && Model.Product.Discount == 0)
                         {
@@ -63,31 +74,31 @@
                     </div>
                     
                     <form class="product__form">
-                        <!-- Size Dropdown -->
+                        <!-- Color Size Dropdown -->
                         <div class="form-group">
                             
-                            <label class="CartLable" for="size">Size:</label>
+                            <label class="CartLable" for="size">Color & Size:</label>
 
-                            @if (Model.Sizes != null && Model.Sizes.Any())
+                            @if (Model.ColorSizes != null && Model.ColorSizes.Any())
                             {
-                                <select id="size" class="form-control" onchange="loadColors()">
-                                        <option value="">Select Size</option>
-                                    @foreach (var size in Model.Sizes)
+                                <select id="colorsize" class="form-control" onchange="loadColors()">
+                                    <option value="" hidden >Select color & size</option>
+                                    @foreach (var colorsize in Model.ColorSizes)
                                     {
-                                        <option value="@size.SizeId">@size.SizeName</option>
+                                        <option value="@colorsize.ProductColorSizeId" style="color:@colorsize.Color.ColorName">@colorsize.Color.ColorName : @colorsize.Size.SizeName </option>
                                     }
                                 </select>
                             }
-                            else if (Model.Sizes == null)
+                            else if (Model.ColorSizes == null)
                             {
-                                <p style="color: red;">Error: Sizes data is unavailable or failed to load.</p>
+                                <p style="color: red;">Error: Colors and sizes data is unavailable or failed to load.</p>
                             }
                             else
                             {
-                                <p style="color: red;"> No available sizes for this product.</p>
+                                <p style="color: red;"> No available Colors and sizes for this product.</p>
                             }
                         </div>
-                        <!-- Color Dropdown -->
+                        @* <!-- Color Dropdown -->
                         <div class="form-group">
                             <label class="CartLable" for="color">Color:</label>
                             @if (Model.Colors != null && Model.Colors.Any())
@@ -108,7 +119,7 @@
                             {
                                 <p style="color: red;">No available colors for this product.</p>
                             }
-                        </div>
+						</div>*@
 
                         <div class="form-group">
                             <label class="CartLable" for="quantity">Quantity:</label>
@@ -171,13 +182,12 @@
                 <section class="product__reviews">
                     <h2>Customer Reviews:</h2>
                     <div class="overall-rating">
-                        <span class="rating-number">4</span>
+                        <span class="rating-number">@Model.ProductRateAverage</span>
                         <div class="stars">
-                            <span class="star filled">&#9733;</span>
-                            <span class="star filled">&#9733;</span>
-                            <span class="star filled">&#9733;</span>
-                            <span class="star filled">&#9733;</span>
-                            <span class="star  ">&#9734;</span>
+                            @for (int i = 0; i < Model.ProductRateAverage; i++)
+                            {
+                                <span class="star filled">&#9733;</span>
+                            }
                         </div>
                         <span class="rating-count">(125 reviews)</span>
                     </div>
@@ -217,6 +227,7 @@
         document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
         thumbnail.classList.add('active');
     }
+    
     document.getElementById('reviewForm').addEventListener('submit', function (e) {
         e.preventDefault();
         // Here you would typically send the form data to a server
@@ -229,6 +240,64 @@
         alert('Thank you for your review!');
         this.reset();
     });
+    // Size Function
+    // $(document).ready(function () {
+    //     $('#sizeSelect').change(function () {
+    //         var sizeId = $(this).val();
+    //         var productId = /* Get product ID from the page, maybe from a hidden input field */;
+
+    //         if (sizeId) {
+    //             $.ajax({
+    //                 url: `/Product/GetColorsBySize`, // Adjusted to point to the correct controller action
+    //                 type: 'GET',
+    //                 data: { productId: productId, sizeId: sizeId },
+    //                 success: function (response) {
+    //                     if (response.success) {
+    //                         // Clear the color dropdown
+    //                         $('#colorSelect').empty();
+    //                         $('#colorSelect').append('<option value="">Select Color</option>');
+
+    //                         // Populate colors based on the selected size
+    //                         response.data.forEach(function (color) {
+    //                             $('#colorSelect').append(`<option value="${color.colorId}">${color.colorName}</option>`);
+    //                         });
+    //                     } else {
+    //                         alert(response.message); // Display error if no colors found
+    //                     }
+    //                 }
+    //             });
+    //         }
+    //     });
+    // });
+    // Color Function
+    // $(document).ready(function () {
+    //     $('#colorSelect').change(function () {
+    //         var colorId = $(this).val();
+    //         var productId = /* Get product ID from the page, maybe from a hidden input field */;
+
+    //         if (colorId) {
+    //             $.ajax({
+    //                 url: `/Product/GetSizesByColor`, // Adjusted to point to the correct controller action
+    //                 type: 'GET',
+    //                 data: { productId: productId, colorId: colorId },
+    //                 success: function (response) {
+    //                     if (response.success) {
+    //                         // Clear the size dropdown
+    //                         $('#sizeSelect').empty();
+    //                         $('#sizeSelect').append('<option value="">Select Size</option>');
+
+    //                         // Populate sizes based on the selected color
+    //                         response.data.forEach(function (size) {
+    //                             $('#sizeSelect').append(`<option value="${size.sizeId}">${size.sizeName}</option>`);
+    //                         });
+    //                     } else {
+    //                         alert(response.message); // Display error if no sizes found
+    //                     }
+    //                 }
+    //             });
+    //         }
+    //     });
+    // });
 </script>
 <style>
     .product {
