@@ -1,57 +1,65 @@
 ﻿@model RegisterViewModel
 
-<div class="d-flex justify-content-center align-items-center vh-100">
-    <div class="col-md-6">
-        <h2 class="text-center mb-4">Register</h2>
+<!-- Link the registerStyle.css file -->
+<link rel="stylesheet" href="~/assets/css/registerStyle.css">
 
-        <!-- Validation summary for showing errors -->
-        <div asp-validation-summary="All" class="text-danger text-center"></div>
+<div class="wrapper">
+    <div class="inner">
+        <form asp-action="Register" method="post">
+            <h3>Create Your Account</h3>
 
-        <form asp-action="Register" method="post" class="border p-4 rounded bg-light shadow-sm">
-            <div class="form-group">
-                <label asp-for="UserName"></label>
-                <input asp-for="UserName" class="form-control" />
-                <span asp-validation-for="UserName" class="text-danger"></span>
-            </div>
+            <!-- Validation summary for showing errors -->
+            <div asp-validation-summary="All" class="text-danger text-center mb-3"></div>
 
             <div class="form-group">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
+                <div class="form-wrapper">
+                    <label asp-for="UserName"></label>
+                    <input asp-for="UserName" class="form-control" placeholder="Enter your username" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="Password"></label>
-                <input asp-for="Password" class="form-control" type="password" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
+                <div class="form-wrapper">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" placeholder="Enter your email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="ConfirmPassword"></label>
-                <input asp-for="ConfirmPassword" class="form-control" type="password" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
+                <div class="form-wrapper">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" class="form-control" type="password" placeholder="Enter a password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="Phone1"></label>
-                <input asp-for="Phone1" class="form-control" type="text" />
-                <span asp-validation-for="Phone1" class="text-danger"></span>
-            </div>
+                <div class="form-wrapper">
+                    <label asp-for="ConfirmPassword"></label>
+                    <input asp-for="ConfirmPassword" class="form-control" type="password"
+                        placeholder="Confirm your password" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="Phone2"></label>
-                <input asp-for="Phone2" class="form-control" type="text" />
-                <span asp-validation-for="Phone2" class="text-danger"></span>
-            </div>
+                <div class="form-wrapper">
+                    <label asp-for="Phone1"></label>
+                    <input asp-for="Phone1" class="form-control" type="text"
+                        placeholder="Enter your primary phone number" />
+                    <span asp-validation-for="Phone1" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="Gender"></label>
-                <select asp-for="Gender" class="form-control" asp-items="Html.GetEnumSelectList<Gender>()"></select>
-                <span asp-validation-for="Gender" class="text-danger"></span>
+                <div class="form-wrapper">
+                    <label asp-for="Phone2"></label>
+                    <input asp-for="Phone2" class="form-control" type="text"
+                        placeholder="Enter your secondary phone number" />
+                    <span asp-validation-for="Phone2" class="text-danger"></span>
+                </div>
+
+                <div class="form-wrapper">
+                    <label asp-for="Gender"></label>
+                    <select asp-for="Gender" class="form-control" asp-items="Html.GetEnumSelectList<Gender>()"></select>
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
             </div>
 
             <div class="text-center">
-                <button type="submit" class="btn btn-primary">Register</button>
+                <button type="submit" class="btn">Register Now</button>
             </div>
         </form>
     </div>
