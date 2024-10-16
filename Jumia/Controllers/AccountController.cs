@@ -1,19 +1,30 @@
 using Jumia.Models;
+using Jumia.Repositories.Implementation;
+using Jumia.Services.IServices;
+using Jumia.SharedRepositories;
 using Jumia.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-public class AccountController : Controller
+public class AccountController  : Controller
 {
     private readonly SignInManager<User> _signInManager;
     private readonly UserManager<User> _userManager;
+    IUserAddressService _useraddressService;
+    IUserORderService _userorderService;
+    IUserWishListService _userwishListService;
 
-    public AccountController(SignInManager<User> signInManager, UserManager<User> userManager)
+
+    public AccountController(SignInManager<User> signInManager, UserManager<User> userManager , IUserAddressService useraddressService, IUserORderService userorderService, IUserWishListService userwishListService)
     {
         _signInManager = signInManager;
         _userManager = userManager;
+        _useraddressService = useraddressService;
+        _userorderService = userorderService;
+        _userwishListService = userwishListService;
+        _userwishListService = userwishListService;
     }
 
     // GET: /Account/Login
@@ -78,6 +89,8 @@ public class AccountController : Controller
         {
             User user = new User();
             user.Email = newAcount.Email;
+            user.FirstName = newAcount.FirstName;
+            user.LastName = newAcount.LastName;
             user.UserName = newAcount.UserName;
             user.PasswordHash = newAcount.Password;
             user.PhoneNumber = newAcount.Phone1;
@@ -91,7 +104,7 @@ public class AccountController : Controller
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, false);
-                    // await _userManager.AddToRoleAsync(user, "User");
+                    //await _userManager.AddToRoleAsync(user, "User");
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -111,29 +124,61 @@ public class AccountController : Controller
 
     // GET: /Account/Profile
     [HttpGet]
-    public IActionResult Profile()
+    public async Task<IActionResult> Profile()
     {
-        return View();
+
+        if (User.Identity.IsAuthenticated)
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);      
+            return View(user);
+        }
+        else
+            return RedirectToAction("Login", "Account");
     }
 
     // GET: /Account/Addresses
     [HttpGet]
-    public IActionResult Addresses()
+    public async Task<IActionResult> Addresses()
     {
-        return View();
+        if (User.Identity.IsAuthenticated)
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var address = await _useraddressService.getall(user.UserCode);
+
+            return View(address);
+        }
+        else
+            return RedirectToAction("Login", "Account");
+  
     }
 
     // GET: /Account/Orders
     [HttpGet]
-    public IActionResult Orders()
+    public async Task<IActionResult> Orders()
     {
-        return View();
+        if (User.Identity.IsAuthenticated)
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var orders = await _userorderService.getByUSerCode(user.UserCode);
+
+            return View(orders);
+        }
+        else
+            return RedirectToAction("Login", "Account");
     }
 
     // GET: /Account/Wishlist
     [HttpGet]
-    public IActionResult Wishlist()
+    public async Task<IActionResult> Wishlist()
     {
-        return View();
+        if (User.Identity.IsAuthenticated)
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var wishLists = await _userwishListService.getByUSerCode(user.UserCode);
+
+            return View(wishLists);
+        }
+        else
+            return RedirectToAction("Login", "Account");
     }
 }

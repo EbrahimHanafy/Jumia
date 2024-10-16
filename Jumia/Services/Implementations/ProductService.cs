@@ -22,10 +22,16 @@ namespace Jumia.Services.Implementations
             return mapper.Map<List<Product>>(top10NewArrivalProducts);
         }
 
-        public async Task<List<Product>> GetProductById(int productId)
+        public async Task<Product> GetProductById(int productId)
         {
             var product = await productRepository.GetProductById(productId);
-            return mapper.Map<List<Product>>(product);
+            return mapper.Map<Product>(product);
+        }
+
+        public async Task<int> GetAvailableQunitityOfProductById(int productId)
+        {
+            var avilableQuantity = await productRepository.GetAvailableQunitityOfProductById(productId);
+            return avilableQuantity;
         }
     }
 }
