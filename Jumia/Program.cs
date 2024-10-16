@@ -20,7 +20,8 @@ namespace Jumia
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddDbContext<AppDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("dbConnection")));
+            builder.Services.AddDbContext<AppDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("dbConnection"))
+            .EnableSensitiveDataLogging().LogTo(Console.WriteLine)); 
             builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<AppDBContext>().AddDefaultTokenProviders();
             //DI register one instance for the same request
             builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
@@ -42,6 +43,9 @@ namespace Jumia
             builder.Services.AddTransient<IDepartmentService, DepartmentService>();
             builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
             builder.Services.AddTransient<IUserAddressService,UserAddressService >();
+            builder.Services.AddTransient<IUserORderService, UserOrderService>();
+            builder.Services.AddTransient<IUserWishListService, UserWishListService>();
+
 
             //AutoMapper
             builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());

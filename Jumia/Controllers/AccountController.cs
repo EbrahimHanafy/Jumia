@@ -13,13 +13,18 @@ public class AccountController  : Controller
     private readonly SignInManager<User> _signInManager;
     private readonly UserManager<User> _userManager;
     IUserAddressService _useraddressService;
+    IUserORderService _userorderService;
+    IUserWishListService _userwishListService;
 
 
-    public AccountController(SignInManager<User> signInManager, UserManager<User> userManager , IUserAddressService useraddressService)
+    public AccountController(SignInManager<User> signInManager, UserManager<User> userManager , IUserAddressService useraddressService, IUserORderService userorderService, IUserWishListService userwishListService)
     {
         _signInManager = signInManager;
         _userManager = userManager;
-        _useraddressService= useraddressService;
+        _useraddressService = useraddressService;
+        _userorderService = userorderService;
+        _userwishListService = userwishListService;
+        _userwishListService = userwishListService;
     }
 
     // GET: /Account/Login
@@ -99,7 +104,7 @@ public class AccountController  : Controller
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, false);
-                   // await _userManager.AddToRoleAsync(user, "User");
+                    //await _userManager.AddToRoleAsync(user, "User");
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -149,16 +154,31 @@ public class AccountController  : Controller
 
     // GET: /Account/Orders
     [HttpGet]
-    public IActionResult Orders()
+    public async Task<IActionResult> Orders()
     {
-      
-        return View();
+        if (User.Identity.IsAuthenticated)
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var orders = await _userorderService.getByUSerCode(user.UserCode);
+
+            return View(orders);
+        }
+        else
+            return RedirectToAction("Login", "Account");
     }
 
     // GET: /Account/Wishlist
     [HttpGet]
-    public IActionResult Wishlist()
+    public async Task<IActionResult> Wishlist()
     {
-        return View();
+        if (User.Identity.IsAuthenticated)
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var wishLists = await _userwishListService.getByUSerCode(user.UserCode);
+
+            return View(wishLists);
+        }
+        else
+            return RedirectToAction("Login", "Account");
     }
 }
