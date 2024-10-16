@@ -96,7 +96,7 @@
                             <label class="CartLable" for="quantity">Quantity:</label>
                             <input name="quantity" id="quantity" class="form-control" type="number" min="1" value="1" />
                         </div>
-                        <button type="submit" class="btn btn-primary">Add to Cart</button>
+                        <button asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-productId="" type="submit" class="btn btn-primary">Add to Cart</button>
                     </form>
                 </div>
             </div>
