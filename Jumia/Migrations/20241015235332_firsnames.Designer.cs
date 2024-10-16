@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Jumia.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20241014104029_gender")]
-    partial class gender
+    [Migration("20241015235332_firsnames")]
+    partial class firsnames
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -174,8 +174,7 @@ namespace Jumia.Migrations
 
                     b.Property<string>("CountryFlag")
                         .IsRequired()
-                        .HasMaxLength(45)
-                        .HasColumnType("nvarchar(45)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CountryName")
                         .IsRequired()
@@ -357,9 +356,6 @@ namespace Jumia.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<int?>("DiscountCouponId")
                         .HasColumnType("int");
 
@@ -400,14 +396,8 @@ namespace Jumia.Migrations
                     b.Property<int>("UserAddressId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserAddressSerial")
-                        .HasColumnType("int");
-
                     b.Property<int>("UserCode")
                         .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("OrderId");
 
@@ -419,7 +409,7 @@ namespace Jumia.Migrations
 
                     b.HasIndex("UserAddressId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserCode");
 
                     b.ToTable("Orders");
                 });
@@ -761,8 +751,7 @@ namespace Jumia.Migrations
 
                     b.Property<string>("FeatureName")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -915,13 +904,6 @@ namespace Jumia.Migrations
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
@@ -1000,9 +982,6 @@ namespace Jumia.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<double>("DiscountPercentage")
                         .HasColumnType("float");
 
@@ -1046,9 +1025,6 @@ namespace Jumia.Migrations
                     b.Property<int>("UserCode")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("ReturnId");
 
                     b.HasIndex("OrderStatusId");
@@ -1057,7 +1033,7 @@ namespace Jumia.Migrations
 
                     b.HasIndex("UserAddressId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserCode");
 
                     b.ToTable("Returns");
                 });
@@ -1138,9 +1114,6 @@ namespace Jumia.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<int>("ProductColorSizeId")
                         .HasColumnType("int");
 
@@ -1159,16 +1132,13 @@ namespace Jumia.Migrations
                     b.Property<int>("UserCode")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("ShoppingCartId");
 
                     b.HasIndex("ProductColorSizeId");
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserCode");
 
                     b.ToTable("ShoppingCarts");
                 });
@@ -1273,8 +1243,11 @@ namespace Jumia.Migrations
 
             modelBuilder.Entity("Jumia.Models.User", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserCode")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserCode"));
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -1297,14 +1270,27 @@ namespace Jumia.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<int>("Gender")
                         .HasColumnType("int");
+
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageURL")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -1339,16 +1325,10 @@ namespace Jumia.Migrations
                     b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserCode")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserCode"));
-
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserCode");
 
                     b.HasIndex("Email")
                         .IsUnique()
@@ -1387,10 +1367,6 @@ namespace Jumia.Migrations
                     b.Property<int>("GovernorateId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<bool>("IsDefault")
                         .HasColumnType("bit");
 
@@ -1402,6 +1378,9 @@ namespace Jumia.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserCode")
                         .HasColumnType("int");
 
                     b.Property<string>("Village")
@@ -1416,7 +1395,7 @@ namespace Jumia.Migrations
 
                     b.HasIndex("GovernorateId");
 
-                    b.HasIndex("Id");
+                    b.HasIndex("UserCode");
 
                     b.ToTable("UserAddresses");
                 });
@@ -1447,14 +1426,14 @@ namespace Jumia.Migrations
                     b.Property<int>("UserCode")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("UserCode1")
+                        .HasColumnType("int");
 
                     b.HasKey("UserPermissionId");
 
                     b.HasIndex("PermissionId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserCode1");
 
                     b.ToTable("UserPermissions");
                 });
@@ -1470,9 +1449,6 @@ namespace Jumia.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
@@ -1485,15 +1461,11 @@ namespace Jumia.Migrations
                     b.Property<int>("UserCode")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("WishListId");
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserCode");
 
                     b.ToTable("WishLists");
                 });
@@ -1675,7 +1647,9 @@ namespace Jumia.Migrations
 
                     b.HasOne("Jumia.Models.User", "User")
                         .WithMany("Orders")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("DiscountCoupon");
 
@@ -1882,7 +1856,9 @@ namespace Jumia.Migrations
 
                     b.HasOne("Jumia.Models.User", "User")
                         .WithMany("Returns")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("OrderStatus");
 
@@ -1928,7 +1904,9 @@ namespace Jumia.Migrations
 
                     b.HasOne("Jumia.Models.User", "User")
                         .WithMany("ShoppingCarts")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Product");
 
@@ -1970,7 +1948,7 @@ namespace Jumia.Migrations
 
                     b.HasOne("Jumia.Models.User", "User")
                         .WithMany("UserAddresses")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("UserCode")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -1993,7 +1971,7 @@ namespace Jumia.Migrations
 
                     b.HasOne("Jumia.Models.User", "User")
                         .WithMany("UserPermissions")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserCode1");
 
                     b.Navigation("Permission");
 
@@ -2009,8 +1987,8 @@ namespace Jumia.Migrations
                         .IsRequired();
 
                     b.HasOne("Jumia.Models.User", "User")
-                        .WithMany("WishList")
-                        .HasForeignKey("UserId")
+                        .WithMany("WishLists")
+                        .HasForeignKey("UserCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -2164,7 +2142,7 @@ namespace Jumia.Migrations
 
                     b.Navigation("UserPermissions");
 
-                    b.Navigation("WishList");
+                    b.Navigation("WishLists");
                 });
 
             modelBuilder.Entity("Jumia.Models.UserAddress", b =>

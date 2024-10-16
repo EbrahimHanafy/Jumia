@@ -9,18 +9,15 @@ namespace Jumia.Models
         [Key]
         public int ProductRateId { get; set; }
 
-        [Range(0,5), Required, NotNull]
+        [Required(ErrorMessage = "Please select a rating")]
+        [Range(1, 5, ErrorMessage = "Rating must be between 1 and 5")]
         public int Rate { get; set; }
 
-        [StringLength(250), AllowNull]
+        [StringLength(250, ErrorMessage = "Review cannot be longer than 250 characters")]
+        [MinLength(10, ErrorMessage = "Review must be at least 10 characters long")]
         public string? Review { get; set; }
 
-        [StringLength(50), AllowNull]
-        public string? Name { get; set; }
-
-        [DataType(DataType.EmailAddress), AllowNull]
-        public string? Email { get; set; }
-        
+        // Foreign key to Product
         [Required, NotNull]
         public int CreatedBy { get; set; }
 
@@ -38,6 +35,6 @@ namespace Jumia.Models
         public int ProductId { get; set; }
 
         // Navigation property for the related Product
-        public virtual Product Product { get; set; }
+        public virtual Product? Product { get; set; }
     }
 }

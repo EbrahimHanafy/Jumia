@@ -9,7 +9,7 @@ namespace Jumia.Services.Implementations
     {
         public async Task<List<Size>> GetSizesByProduct(int productId)
         {
-            var sizes = sizeRepository.GetSizesByProduct(productId);
+            var sizes = await sizeRepository.GetSizesByProduct(productId);
             return mapper.Map<List<Size>>(sizes);
         }
     }

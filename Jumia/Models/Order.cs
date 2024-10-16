@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Jumia.Models
@@ -21,8 +22,6 @@ namespace Jumia.Models
         public double ShippingFees { get; set; }
         [StringLength(200),AllowNull]
         public string? Notes { get; set; }
-        [Required, NotNull]
-        public int CreatedBy { get; set; }
         [DataType(DataType.DateTime), Required, NotNull]
         public DateTime CreatedAt { get; set; }
         [AllowNull]
@@ -32,10 +31,11 @@ namespace Jumia.Models
         public DateTime? UpdatedAt { get; set; }
         // Foreign key User
         [Required]
+        //[ForeignKey("UserCode")]
         public int UserCode { get; set; }
         // Foreign key UserAddress
         [Required]
-        public int UserAddressSerial { get; set; }
+        public int UserAddressId { get; set; }
         // Foreign key OrderStatus
         [Required]
         public int OrderStatusId { get; set; }
@@ -52,12 +52,10 @@ namespace Jumia.Models
         // Navigation property for the related DiscountCoupon
         public virtual DiscountCoupon? DiscountCoupon { get; set; }
         // Navigation property for the related User
-        public User  User { get; set; }
+        public User?  User { get; set; }
         // Navigation property for the related UserAddress
         public UserAddress UserAddress { get; set; }
         // Navigation property for related OrderDetails entities (one-to-many relationship)
         public virtual ICollection<OrderDetails>  OrderDetails { get; set; }
-
-
     }
 }
