@@ -11,6 +11,12 @@ namespace Jumia.ViewModels
         [Required(ErrorMessage = "Please enter Username"), MaxLength(50)]
         public string UserName { get; set; }
 
+        [Required(ErrorMessage = "Please enter First"), MaxLength(50)]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Please enter LAst"), MaxLength(50)]
+        public string LastName { get; set; }
+
         [Required]
         [EmailAddress]
         public string Email { get; set; }

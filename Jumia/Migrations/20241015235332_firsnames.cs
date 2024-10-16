@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Jumia.Migrations
 {
     /// <inheritdoc />
-    public partial class NewDB : Migration
+    public partial class firsnames : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -55,7 +55,7 @@ namespace Jumia.Migrations
                     CountryName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     CountryCode = table.Column<int>(type: "int", nullable: false),
                     PhoneLength = table.Column<int>(type: "int", nullable: false),
-                    CountryFlag = table.Column<string>(type: "nvarchar(45)", maxLength: 45, nullable: false),
+                    CountryFlag = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<int>(type: "int", nullable: true),
@@ -244,6 +244,8 @@ namespace Jumia.Migrations
                 {
                     UserCode = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     ImageURL = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Gender = table.Column<int>(type: "int", nullable: false),
