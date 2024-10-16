@@ -182,14 +182,22 @@
                 <section class="product__reviews">
                     <h2>Customer Reviews:</h2>
                     <div class="overall-rating">
-                        <span class="rating-number">@Model.ProductRateAverage</span>
-                        <div class="stars">
-                            @for (int i = 0; i < Model.ProductRateAverage; i++)
-                            {
-                                <span class="star filled">&#9733;</span>
-                            }
-                        </div>
-                        <span class="rating-count">(125 reviews)</span>
+                        @if(Model.TotalNumberOfReviwws != 0)
+                        {
+                            <span class="rating-number">@Model.ProductRateAverage</span>
+                            <div class="stars">
+                                @for (int i = 0; i < Model.ProductRateAverage; i++)
+                                {
+                                    <span class="star filled">&#9733;</span>
+                                }
+                            </div>
+                            <span class="rating-count">(@Model.TotalNumberOfReviwws reviews)</span>
+                        }
+                        else
+                        {
+                            <span class="rating-count">(No reviews)</span>
+                        }
+
                     </div>
                     <div class="review-list">
                         @if (Model.ProductRates != null && Model.ProductRates.Any())

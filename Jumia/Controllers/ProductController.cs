@@ -83,6 +83,7 @@ namespace Jumia.Controllers
 				ProductRates = await productRateUserService.GetProductRatesByProductId(productId),
                 ProductId = productId,
                 ProductRateAverage = await productRateService.GetProductRatingAverage(productId),
+                TotalNumberOfReviwws = await productRateService.GetNumberOfProductRates(productId),
                 NewRate = new ProductRate { ProductId = productId }
             };
         }

@@ -27,5 +27,10 @@ namespace Jumia.Repositories.Implementation
             double averageRate = filteredRates.Average();
             return (int)Math.Round(averageRate);
         }
+
+        public async Task<int> GetNumberOfProductRates(int prodcutId)
+        {
+            return await _productRates.CountAsync(s=>s.ProductId == prodcutId);
+        }
     }
 }
