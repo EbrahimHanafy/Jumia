@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Jumia.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20241015213325_New DB")]
-    partial class NewDB
+    [Migration("20241015235332_firsnames")]
+    partial class firsnames
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -174,8 +174,7 @@ namespace Jumia.Migrations
 
                     b.Property<string>("CountryFlag")
                         .IsRequired()
-                        .HasMaxLength(45)
-                        .HasColumnType("nvarchar(45)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CountryName")
                         .IsRequired()

@@ -84,6 +84,8 @@ public class AccountController  : Controller
         {
             User user = new User();
             user.Email = newAcount.Email;
+            user.FirstName = newAcount.FirstName;
+            user.LastName = newAcount.LastName;
             user.UserName = newAcount.UserName;
             user.PasswordHash = newAcount.Password;
             user.PhoneNumber = newAcount.Phone1;
@@ -97,7 +99,7 @@ public class AccountController  : Controller
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, false);
-                    await _userManager.AddToRoleAsync(user, "User");
+                   // await _userManager.AddToRoleAsync(user, "User");
                     return RedirectToAction("Index", "Home");
                 }
 
