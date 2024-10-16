@@ -1,0 +1,49 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Link to the shared CSS file -->
+<link rel="stylesheet" href="~/assets/css/departmentsproducts.css" />
+
+<div class="departmentDetailsContainer">
+    <h1 class="detailsTitle">Brand Details</h1>
+
+    <!-- Brand Name and Image -->
+    <div class="detailsSection">
+        <h2 class="departmentName">Sample Brand</h2>
+        <img src="/Images/Product/pant-brown.jpg" alt="Brand Image" class="departmentImage" />
+    </div>
+
+    <!-- Static Fields for Created at and Updated at -->
+    <div class="timestamps">
+        <p><strong>Created at:</strong> 2024-10-01</p>
+        <p><strong>Updated at:</strong> 2024-10-15</p>
+    </div>
+
+    <!-- Edit Button -->
+    <button class="editBtn" onclick="enableEdit()">Edit Brand</button>
+
+    <!-- Editable Form Section (Initially Hidden) -->
+    <div id="editForm" class="editFormSection" style="display: none;">
+        <form>
+            <div class="formGroup">
+                <label for="brandName">Brand Name</label>
+                <input type="text" id="brandNameInput" class="inputField" value="Sample Brand" />
+            </div>
+
+            <div class="formGroup">
+                <label for="brandImage">Upload New Image</label>
+                <input type="file" id="brandImage" class="inputField" accept=".png, .jpg" />
+                <small class="fileTypeNotice">Only PNG or JPG formats are allowed.</small>
+            </div>
+
+            <button type="submit" class="saveBtn">Save Changes</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function enableEdit() {
+        document.getElementById('editForm').style.display = 'block';
+    }
+</script>

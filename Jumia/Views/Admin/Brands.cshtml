@@ -1,0 +1,35 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Link to the shared CSS file -->
+<link rel="stylesheet" href="~/assets/css/departmentsproducts.css" />
+
+<div class="departmentsContainer">
+    <h1>@ViewData["Title"]</h1>
+
+    <!-- Search and Add New Brand Button -->
+    <div class="searchAddContainer">
+        <label for="searchInput" class="searchLabel">Search by ID or Name:</label>
+        <input type="text" id="searchInput" class="searchInput" placeholder="Enter ID or Name" />
+        <a href="/admin/addnewbrand" class="addBtn">Add New Brand</a>
+    </div>
+
+    <!-- Table -->
+    <table class="departmentsTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td><a href="/admin/branddetails/1" class="departmentLink">Sample Brand</a></td>
+                <td>2024-10-01</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
