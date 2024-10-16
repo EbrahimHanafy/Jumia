@@ -1121,15 +1121,15 @@ img.single-image {
 }
 
 img.brand-image {
-    /*
+  /*
   max-width: 100%;
   height: auto;
   margin: 20px;
   */
-    flex: 1 1 150px;
-    max-width: 200px;
-    margin: 10px;
-    text-align: center;
+  flex: 1 1 150px;
+  max-width: 200px;
+  margin: 10px;
+  text-align: center;
 }
 
 /*--- Image Shape
@@ -2382,7 +2382,7 @@ blockquote cite {
   padding: 10px;
   cursor: pointer;
   margin-bottom: 20px;
-  width: 85%;
+  width: 90%;
 }
 
 .product-item .cart-concern {
@@ -3427,6 +3427,30 @@ section.Department .category-content a {
   min-height: 300px;
 }
 
+/* Product Grid Layout */
+.items-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 30%;
+}
+
+.product-item {
+  flex: 1 1 calc(25% - 20px);
+  background-color: #fff;
+  padding: 15px;
+  border: 1px solid #e4e4e4;
+  border-radius: 10px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
 /* Sorting Styles */
 .sorting {
   display: flex;
@@ -3551,6 +3575,18 @@ section.Department .category-content a {
   padding-left: 1.5rem;
 }
 
+.filter-content {
+  display: none;
+}
+
+.card-header i {
+  transition: transform 0.3s ease;
+}
+
+.collapsed i.fa-chevron-up {
+  transform: rotate(180deg);
+}
+
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
@@ -3564,6 +3600,26 @@ section.Department .category-content a {
   }
 
   .filters {
-    margin-bottom: 30px;
+    display: block;
+    width: 100%;
+  }
+
+  .product-item {
+    flex: 1 1 calc(50% - 20px);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .product-item {
+    flex: 1 1 calc(33.33% - 20px);
+    /* 3 items per row */
+  }
+}
+
+@media (max-width: 576px) {
+  .product-item {
+    flex: 1 1 100%;
+    /* 1 item per row */
   }
 }

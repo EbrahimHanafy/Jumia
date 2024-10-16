@@ -1,0 +1,79 @@
+@model List<WishList>
+@{
+    ViewData["Title"] = "Wish List";
+    ViewBag.ActiveMenu = "Wishlist";
+}
+
+<link rel="stylesheet" href="~/assets/css/profileStyle.css">
+
+<div class="d-flex">
+    <nav class="profile-sidebar">
+        <ul class="nav profile-nav">
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveMenu == "Profile" ? "active" : "")" href="/Account/Profile">
+                    Profile
+                    Info
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveMenu == "Addresses" ? "active" : "")"
+                   href="/Account/Addresses">Addresses</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveMenu == "Orders" ? "active" : "")" href="/Account/Orders">Orders</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveMenu == "Wishlist" ? "active" : "")" href="/Account/Wishlist">
+                    Wish
+                    List
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="profile-content wishlistSection">
+        <h2>Your Wish List</h2>
+
+        <!-- Wishlist Items -->
+        <div class="wishlist-items row">
+            @if(Model !=null){
+            @foreach (var item in Model)
+            {
+                <!-- Item 1 -->
+                <div class="wishlist-item">
+                    @* <img src="@item.Product.ProductImages.FirstOrDefault(p => p.IsMainImage)?.ProductImageUrl" alt="Winter Jacket" class="img-fluid"/> *@
+
+                    <p class="product-name">@item.Product.ProductName</p>
+                    <p class="product-price">@item.Product.Price</p>
+                </div>
+            }}
+            @* <!-- Item 2 -->
+            <div class="wishlist-item">
+            <img src="~/assets/images/product-item4.jpg" alt="Smart Watch" class="img-fluid">
+            <p class="product-name">Smart Watch</p>
+            <p class="product-price">$199.99</p>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="wishlist-item">
+            <img src="~/assets/images/product-item4.jpg" alt="Running Shoes" class="img-fluid">
+            <p class="product-name">Running Shoes</p>
+            <p class="product-price">$89.99</p>
+            </div>
+
+            <div class="wishlist-item">
+            <img src="~/assets/images/product-item4.jpg" alt="Running Shoes" class="img-fluid">
+            <p class="product-name">Running Shoes</p>
+            <p class="product-price">$89.99</p>
+            </div>
+
+            <div class="wishlist-item">
+            <img src="~/assets/images/product-item4.jpg" alt="Running Shoes" class="img-fluid">
+            <p class="product-name">Running Shoes</p>
+            <p class="product-price">$89.99</p>
+            </div>
+            *@
+        </div>
+    </div>
+</div>
