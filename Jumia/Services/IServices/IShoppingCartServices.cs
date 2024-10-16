@@ -1,7 +1,9 @@
-﻿namespace Jumia.Services.IServices
+﻿using Jumia.Models;
+
+namespace Jumia.Services.IServices
 {
     public interface IShoppingCartServices
     {
-        Task AddToCart();
+        public Task<ShoppingCart> AddToCart(ShoppingCart shoppingCart);
     }
 }

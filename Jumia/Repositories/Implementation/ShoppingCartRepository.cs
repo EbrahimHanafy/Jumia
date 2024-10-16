@@ -15,11 +15,6 @@ namespace Jumia.Repositories.Implementation
 			_shoppingCarts = context.Set<ShoppingCart>();
 		}
 
-        public Task AddProductToCart(int productId, int quantity, int ProductColorSizeId)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task DecreaseItemQty(int productId, int quantity)
         {
             throw new NotImplementedException();

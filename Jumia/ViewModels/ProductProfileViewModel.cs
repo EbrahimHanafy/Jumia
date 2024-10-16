@@ -15,5 +15,6 @@ namespace Jumia.ViewModels
         public int ProductId { get; set; }
         public int ProductRateAverage { get; set; }
         public ProductRate NewRate { get; set; }
+        public ShoppingCart ShoppingCart { get; set; }
     }
 }

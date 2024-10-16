@@ -73,21 +73,23 @@
                         }
                     </div>
                     
-                    <form class="product__form">
+                    <form class="product__form" asp-action="AddProductToCart" asp-controller="Product" asp-route-productId="@Model.ProductId">
                         <!-- Color Size Dropdown -->
                         <div class="form-group">
                             
                             <label class="CartLable" for="size">Color & Size:</label>
+                            <input type="hidden" asp-for="ShoppingCart.ProductId" />
 
                             @if (Model.ColorSizes != null && Model.ColorSizes.Any())
                             {
-                                <select id="colorsize" class="form-control" onchange="loadColors()">
+                                <select asp-for="ShoppingCart.ProductColorSizeId" class="form-control" onchange="loadColors()">
                                     <option value="" hidden >Select color & size</option>
                                     @foreach (var colorsize in Model.ColorSizes)
                                     {
                                         <option value="@colorsize.ProductColorSizeId" style="color:@colorsize.Color.ColorName">@colorsize.Color.ColorName : @colorsize.Size.SizeName </option>
                                     }
                                 </select>
+                                <span asp-validation-for="ShoppingCart.ProductColorSizeId" class="text-danger"></span>
                             }
                             else if (Model.ColorSizes == null)
                             {
@@ -123,9 +125,10 @@
 
                         <div class="form-group">
                             <label class="CartLable" for="quantity">Quantity:</label>
-                            <input name="quantity" id="quantity" class="form-control" type="number" min="1" value="1" />
+                            <input asp-for="ShoppingCart.Quantity" class="form-control" type="number" min="1" value="1" />
+                            <span asp-validation-for="ShoppingCart.Quantity" class="text-danger"></span>
                         </div>
-                        <button asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-productId="" type="submit" class="btn btn-primary">Add to Cart</button>
+                        <button type="submit" class="btn btn-primary">Add to Cart</button>
                     </form>
                 </div>
             </div>

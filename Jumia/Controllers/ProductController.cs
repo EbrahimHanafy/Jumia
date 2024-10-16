@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Jumia.Controllers
 {
-    public class ProductController(IProductService productService, IMaterialsCareService materialsCareService, IProductColorSizeService productColorSizeService ,/*ISizeService sizeService, IColorService colorService,*/ IProductRateUserService productRateUserService, IProductRateService productRateService, UserManager<User> userManager, ILogger<ProductController> logger) : Controller
+    public class ProductController(IProductService productService, IShoppingCartServices shoppingCartServices , IMaterialsCareService materialsCareService, IProductColorSizeService productColorSizeService ,/*ISizeService sizeService, IColorService colorService,*/ IProductRateUserService productRateUserService, IProductRateService productRateService, UserManager<User> userManager, ILogger<ProductController> logger) : Controller
     {
         [HttpGet]
         public async Task<IActionResult> ProductProfile(int productId)
@@ -83,7 +83,8 @@ namespace Jumia.Controllers
 				ProductRates = await productRateUserService.GetProductRatesByProductId(productId),
                 ProductId = productId,
                 ProductRateAverage = await productRateService.GetProductRatingAverage(productId),
-                NewRate = new ProductRate { ProductId = productId }
+                NewRate = new ProductRate { ProductId = productId },
+                ShoppingCart = new ShoppingCart { ProductId = productId },
             };
         }
         
@@ -114,5 +115,55 @@ namespace Jumia.Controllers
         //    // Return sizes as JSON
         //    return Json(new { success = true, data = sizes });
         //}
+
+        public async Task<IActionResult> AddProductToCart(ShoppingCart shoppingCart) 
+        {
+            if (!ModelState.IsValid)
+            {
+                logger.LogWarning("Invalid model state when adding rate");
+                var productProfileVM = await LoadProductProfileViewModel(shoppingCart.ProductId);
+                productProfileVM.ShoppingCart = shoppingCart;
+                return View("ProductProfile", productProfileVM);
+            }
+
+            try
+            {
+                // Retrieve the user's Identity Id (stored as a string)
+                var identityUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                // Find the user in the database by their Identity Id
+                var user = await userManager.Users.FirstOrDefaultAsync(u => u.Id == identityUserId);
+
+                // var user = await userManager.GetUserAsync(User);
+                if (user == null)
+                {
+                    logger.LogWarning("Unable to identify user when adding rate");
+                    ModelState.AddModelError("", "Unable to identify user. Please try logging in again.");
+                    var productProfileVM = await LoadProductProfileViewModel(shoppingCart.ProductId);
+                    productProfileVM.ShoppingCart = shoppingCart;
+                    return View("ProductProfile", productProfileVM);
+                }
+
+                logger.LogInformation($"User identified with UserCode: {user.UserCode}");
+                shoppingCart.UserCode = user.UserCode;
+                
+                shoppingCart.CreatedAt = DateTime.UtcNow;
+
+                logger.LogInformation($"Saving product cart: ProductId={shoppingCart.ProductId}, Quantity={shoppingCart.Quantity}, ColorSize={shoppingCart.ProductColorSizeId}");
+                var addProduct = await shoppingCartServices.AddToCart(shoppingCart);
+                
+                logger.LogInformation($"Cart added successfully for product ID: {addProduct.ProductId}");
+
+                return RedirectToAction("ProductProfile", new { productId = addProduct.ProductId });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "An error occurred while adding cart");
+                ModelState.AddModelError("", $"An error occurred: {ex.Message}");
+                var productProfileVM = await LoadProductProfileViewModel(shoppingCart.ProductId);
+                productProfileVM.ShoppingCart = shoppingCart;
+                return View("ProductProfile", productProfileVM);
+            }
+        }
     }
 }

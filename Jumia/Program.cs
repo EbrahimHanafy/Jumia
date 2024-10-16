@@ -47,6 +47,7 @@ namespace Jumia
             builder.Services.AddTransient<IUserAddressService,UserAddressService >();
             builder.Services.AddTransient<IUserORderService, UserOrderService>();
             builder.Services.AddTransient<IUserWishListService, UserWishListService>();
+            builder.Services.AddTransient<IShoppingCartServices, ShoppingCartService>();
 
 
             //AutoMapper
