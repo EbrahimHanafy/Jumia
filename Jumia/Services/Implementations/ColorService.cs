@@ -12,5 +12,11 @@ namespace Jumia.Services.Implementations
             var Colors = await colorRepository.GetColorByProductAndSize(productId);
             return mapper.Map<List<Color>>(Colors);
         }
+
+        public async Task<List<Color>> GetColorsBySize(int productId, int sizeId)
+        {
+            var Colors = await colorRepository.GetColorsBySize(productId, sizeId);
+            return mapper.Map<List<Color>>(Colors);
+        }
     }
 }

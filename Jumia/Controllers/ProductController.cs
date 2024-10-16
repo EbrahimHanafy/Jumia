@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Jumia.ViewModels;
 using Microsoft.Extensions.Logging;
+using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Jumia.Controllers
 {
-    public class ProductController(IProductService productService, IMaterialsCareService materialsCareService, ISizeService sizeService, IColorService colorService, IProductRateUserService productRateUserService, IProductRateService productRateService, UserManager<User> userManager, ILogger<ProductController> logger) : Controller
+    public class ProductController(IProductService productService, IMaterialsCareService materialsCareService, IProductColorSizeService productColorSizeService ,/*ISizeService sizeService, IColorService colorService,*/ IProductRateUserService productRateUserService, IProductRateService productRateService, UserManager<User> userManager, ILogger<ProductController> logger) : Controller
     {
         [HttpGet]
         public async Task<IActionResult> ProductProfile(int productId)
@@ -32,7 +34,13 @@ namespace Jumia.Controllers
             }
             try
             {
-                var user = await userManager.GetUserAsync(User);
+                // Retrieve the user's Identity Id (stored as a string)
+                var identityUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                // Find the user in the database by their Identity Id
+                var user = await userManager.Users.FirstOrDefaultAsync(u => u.Id == identityUserId);
+
+                // var user = await userManager.GetUserAsync(User);
                 if (user == null)
                 {
                     logger.LogWarning("Unable to identify user when adding rate");
@@ -69,12 +77,42 @@ namespace Jumia.Controllers
                 Product = await productService.GetProductById(productId),
                 AvailableQuantity = await productService.GetAvailableQunitityOfProductById(productId),
                 ProductMaterialsCare = await materialsCareService.GetMaterialByProduct(productId),
-                Sizes = await sizeService.GetSizesByProduct(productId),
-                Colors = await colorService.GetColorByProductAndSize(productId),
-                ProductRates = await productRateUserService.GetProductRatesByProductId(productId),
+				//Sizes = await sizeService.GetSizesByProduct(productId),
+				//Colors = await colorService.GetColorByProductAndSize(productId),
+				ColorSizes = await productColorSizeService.GetProductColorSize(productId),
+				ProductRates = await productRateUserService.GetProductRatesByProductId(productId),
                 ProductId = productId,
+                ProductRateAverage = await productRateService.GetProductRatingAverage(productId),
                 NewRate = new ProductRate { ProductId = productId }
             };
         }
+        
+        //[HttpGet]
+        //public async Task<IActionResult> GetColorsBySize(int productId, int sizeId)
+        //{
+        //    var colors = await colorService.GetColorsBySize(productId, sizeId);
+
+        //    if (colors == null || !colors.Any())
+        //    {
+        //        return Json(new { success = false, message = "No colors found for this size." });
+        //    }
+
+        //    // Return colors as JSON
+        //    return Json(new { success = true, data = colors });
+        //}
+
+        //[HttpGet]
+        //public async Task<IActionResult> GetSizesByColor(int productId, int colorId)
+        //{
+        //    var sizes = await sizeService.GetSizesByColor(productId, colorId);
+
+        //    if (sizes == null || !sizes.Any())
+        //    {
+        //        return Json(new { success = false, message = "No sizes found for this color." });
+        //    }
+
+        //    // Return sizes as JSON
+        //    return Json(new { success = true, data = sizes });
+        //}
     }
 }

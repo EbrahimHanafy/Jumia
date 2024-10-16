@@ -27,5 +27,15 @@ namespace Jumia.Repositories.Implementation
                           .ToListAsync();
 			return Sizes;
         }
+
+        public async Task<List<Size>> GetSizesByColor(int productId, int colorId)
+		{
+            var sizes = await _context.ProductColorSizes
+                                       .Where(pcs => pcs.ProductId == productId && pcs.ColorId == colorId)
+                                       .Select(pcs => pcs.Size) // Select the actual Size object
+                                       .Distinct() // To avoid duplicate Sizes, if applicable
+                                       .ToListAsync();
+            return sizes;
+        }
     }
 }
