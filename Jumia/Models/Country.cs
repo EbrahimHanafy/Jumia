@@ -18,7 +18,7 @@ namespace Jumia.Models
         [Required]
         public int PhoneLength { get; set; }
 
-        [Required(ErrorMessage = "Please enter this field"), MaxLength(45)]
+    //    [Required(ErrorMessage = "Please enter this field"), MaxLength(45)]
         public string CountryFlag { get; set; }
         [Required,NotNull]
         public int CreatedBy { get; set; }

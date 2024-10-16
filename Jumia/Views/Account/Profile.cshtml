@@ -1,3 +1,5 @@
+@model User
+
 @{
     ViewData["Title"] = "Profile Info";
     ViewBag.ActiveMenu = "Profile";
@@ -10,19 +12,23 @@
     <nav class="profile-sidebar">
         <ul class="nav profile-nav">
             <li class="nav-item">
-                <a class="nav-link @(ViewBag.ActiveMenu == "Profile" ? "active" : "")" href="/Account/Profile">Profile
-                    Info</a>
+                <a class="nav-link @(ViewBag.ActiveMenu == "Profile" ? "active" : "")" href="/Account/Profile">
+                    Profile
+                    Info
+                </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link @(ViewBag.ActiveMenu == "Addresses" ? "active" : "")"
-                    href="/Account/Addresses">Addresses</a>
+                   href="/Account/Addresses">Addresses</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link @(ViewBag.ActiveMenu == "Orders" ? "active" : "")" href="/Account/Orders">Orders</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link @(ViewBag.ActiveMenu == "Wishlist" ? "active" : "")" href="/Account/Wishlist">Wish
-                    List</a>
+                <a class="nav-link @(ViewBag.ActiveMenu == "Wishlist" ? "active" : "")" href="/Account/Wishlist">
+                    Wish
+                    List
+                </a>
             </li>
         </ul>
     </nav>
@@ -34,52 +40,73 @@
         <div class="profile-info">
             <!-- Email Section -->
             <div class="form-group">
-                <label for="email" class="form-label">Email: </label>
-                <input type="text" id="email" class="form-control" value="mo7mdhassan7@gmail.com" readonly>
+                <label asp-for="Email" class="form-label">Email: </label>
+                <input type="text" id="email" class="form-control" asp-for="Email" readonly>
             </div>
 
             <!-- First Name and Last Name Section -->
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <label for="firstName" class="form-label">First Name: </label>
-                    <input type="text" id="firstName" class="form-control" value="Mohamed" readonly>
+                    <label asp-for="FirstName" class="form-label">First Name: </label>
+                    <input type="text" id="firstName" class="form-control" asp-for="FirstName" readonly>
                 </div>
                 <div class="col-md-6">
-                    <label for="lastName" class="form-label">Last Name: </label>
-                    <input type="text" id="lastName" class="form-control" value="Elwakeel" readonly>
+                    <label asp-for="LastName" class="form-label">Last Name: </label>
+                    <input type="text" id="firstName" class="form-control" asp-for="LastName" readonly>
                 </div>
             </div>
 
             <!-- Phone Number Section -->
             <div class="input-group mb-3">
-                <label for="phoneNumber" class="form-label">Phone Number: </label>
-                <input type="text" id="phoneNumber" class="form-control" value="+20-10-06866310" readonly>
-                <span class="input-group-text">
-                    <i class="fa fa-pencil edit-icon" aria-hidden="true"></i>
-                </span>
+                <label asp-for="PhoneNumber" class="form-label">Phone Number: </label>
+                <input type="text" id="phoneNumber" class="form-control" asp-for="PhoneNumber" readonly>
+                @* <span class="input-group-text">
+                <i class="fa fa-pencil edit-icon" aria-hidden="true"></i>
+                </span> *@
             </div>
 
             <div class="gender-nation">
                 <!-- Birthday Section -->
                 <div class="form-group">
-                    <label for="birthday" class="form-label">Birthday: </label>
-                    <input type="date" id="birthday" class="form-control" value="1994-03-27">
+                    <label asp-for="DateOfBirth" class="form-label">Birthday: </label>
+                    <input type="date" id="birthday" class="form-control" asp-for="DateOfBirth">
                 </div>
-
-                <!-- Gender Section -->
-                <div class="form-group">
+                @if (Model.Gender == Gender.Male)
+                {
+                    <div class="form-group">
                     <label class="form-label">Gender: </label>
                     <div class="gender-selection">
-                        <label class="gender-option">
-                            <input type="radio" name="gender" value="Male" checked>
+                        <label class="gender-option" for="gender-male">
+                            <input type="radio" id="gender-male" name="gender" value="Male" checked />
                             <span class="btn-gender btn-male">Male</span>
                         </label>
-                        <label class="gender-option">
-                            <input type="radio" name="gender" value="Female">
+                        <label class="gender-option" for="gender-female">
+                            <input type="radio" id="gender-female" name="gender" value="Female"
+                                    />
                             <span class="btn-gender btn-female">Female</span>
                         </label>
                     </div>
                 </div>
+                }
+                @if (Model.Gender == Gender.Female)
+                {
+                    <div class="form-group">
+                        <label class="form-label">Gender: </label>
+                        <div class="gender-selection">
+                            <label class="gender-option" for="gender-male">
+                                <input type="radio" id="gender-male" name="gender" value="Male"  />
+                                <span class="btn-gender btn-male">Male</span>
+                            </label>
+                            <label class="gender-option" for="gender-female">
+                                <input type="radio" id="gender-female" name="gender" value="Female" checked />
+                                <span class="btn-gender btn-female">Female</span>
+                            </label>
+                        </div>
+                    </div>
+                }
+
+
+
 
                 <!-- Nationality Section -->
                 <div class="input-group nation-select mb-3">

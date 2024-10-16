@@ -9,6 +9,8 @@ namespace Jumia.Repositories.Interfaces
 
         public Task<List<Product>> GetTop10NewArrivalProducts();
 
-        public Task<List<Product>> GetProductById(int productId);
+        public Task<Product> GetProductById(int productId);
+
+        public Task<int> GetAvailableQunitityOfProductById(int productId);
     }
 }

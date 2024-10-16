@@ -28,7 +28,6 @@ namespace Jumia.Controllers
                 ModelState.AddModelError("Error", ex.Message);
                 return View(brand);
             }
-
         }
     }
 }

@@ -1,3 +1,4 @@
+using Jumia.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Jumia.Controllers
@@ -36,6 +37,16 @@ namespace Jumia.Controllers
         {
             ViewData["Title"] = "Products";
             return View();
+        }
+        public IActionResult ProductDetailes()
+        {
+            ViewData["Title"] = "Product Detailes";
+            return View();
+        }
+        // Add New Product Page
+        public IActionResult NewProduct()
+        {
+            return View("NewProduct");
         }
 
         // Stores Page
