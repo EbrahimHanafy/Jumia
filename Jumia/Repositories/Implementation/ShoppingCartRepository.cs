@@ -8,6 +8,7 @@ namespace Jumia.Repositories.Implementation
 	public class ShoppingCartRepository : GenericRepository<ShoppingCart> , IShoppingCartRepository
 	{
 		protected readonly DbSet<ShoppingCart> _shoppingCarts;
+        
 
 		public ShoppingCartRepository(AppDBContext context) : base(context) 
 		{
