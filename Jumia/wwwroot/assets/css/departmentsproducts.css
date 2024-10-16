@@ -1,0 +1,211 @@
+.departmentsContainer {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.searchAddContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.searchLabel {
+    margin-right: 10px;
+}
+
+.searchInput {
+    padding: 5px;
+    margin-right: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.addBtn {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.addBtn:hover {
+    background-color: #0056b3;
+}
+
+.departmentsTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.departmentsTable th,
+.departmentsTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.departmentsTable th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.departmentsTable td {
+    font-size: 14px;
+}
+
+
+/* addNewDepartments styles */
+
+.addDepartmentContainer {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.formGroup {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.inputField {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.fileTypeNotice {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #777;
+}
+
+.submitBtn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submitBtn:hover {
+    background-color: #0056b3;
+}
+
+/* DepartmentDetails styles  */
+
+.departmentDetailsContainer {
+    padding: 0.5rem;
+    font-family: 'Arial', sans-serif;
+    max-width: 700px;
+    margin: 0.5rem auto;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.detailsTitle {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.detailsSection {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.departmentName {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.departmentImage {
+    width: 40%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 2px solid #ddd;
+}
+
+.timestamps {
+    font-size: 16px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.timestamps p {
+    margin: 5px 0;
+}
+
+.editBtn {
+    display: block;
+    width: 45%;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.editBtn:hover {
+    background-color: #0056b3;
+}
+
+.editFormSection {
+    margin-top: 30px;
+}
+
+.formGroup {
+    margin-bottom: 20px;
+}
+
+.inputField {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.fileTypeNotice {
+    font-size: 12px;
+    color: #777;
+}
+
+.saveBtn {
+    display: block;
+    width: 150px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.saveBtn:hover {
+    background-color: #218838;
+}

@@ -17,10 +17,10 @@ namespace Jumia.Controllers
             return View();
         }
 
-        // Roles Page
-        public IActionResult Roles()
+        // Departments & Products Page
+        public IActionResult DepartmentProducts()
         {
-            ViewData["Title"] = "Roles";
+            ViewData["Title"] = "Departments & Products";
             return View();
         }
 
@@ -58,5 +58,63 @@ namespace Jumia.Controllers
             ViewData["Title"] = "Discount Coupons";
             return View();
         }
+
+        // Departments Page
+        public IActionResult Departments()
+        {
+            ViewData["Title"] = "Departments";
+            return View();
+        }
+
+        // Categories Page
+        public IActionResult Categories()
+        {
+            ViewData["Title"] = "Categories";
+            return View();
+        }
+
+        // Sub Categories Page
+        public IActionResult SubCategories()
+        {
+            ViewData["Title"] = "Sub Categories";
+            return View();
+        }
+
+        // Brands Page
+        public IActionResult Brands()
+        {
+            ViewData["Title"] = "Brands";
+            return View();
+        }
+
+        // Add New Department Page
+        public IActionResult AddNewDepartment()
+        {
+            ViewData["Title"] = "Add New Department";
+            return View();
+        }
+
+        // Department Details Page
+        public IActionResult DepartmentDetails(int id)
+        {
+            ViewData["Title"] = "Department Details";
+            // you'll fetch the department details from the database using the id.
+            return View();
+        }
+
+        // Add New Brand Page
+        public IActionResult AddNewBrand()
+        {
+            ViewData["Title"] = "Add New Brand";
+            return View();
+        }
+
+        // Brand Details Page
+        public IActionResult BrandDetails(int id)
+        {
+            ViewData["Title"] = "Brand Details";
+            return View();
+        }
+
     }
 }
