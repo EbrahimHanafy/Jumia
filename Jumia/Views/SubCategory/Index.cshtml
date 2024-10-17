@@ -6,7 +6,7 @@
 <section id="products-section" class="product-store padding-large">
     <div class="container">
         <div class="row">
-            <!-- Sidebar with Filters -->
+            @* <!-- Sidebar with Filters -->
             <aside class="col-md-3">
                 <div class="container-fluid mt-100">
                     <div class="row d-flex justify-content-center">
@@ -198,14 +198,14 @@
                     </div>
                 </div>
 
-            </aside>
+            </aside> *@
 
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <section id="featured-products" class="product-store padding-large">
                     <div class="container">
+                        @*
                         <div class="section-header d-flex flex-wrap align-items-center justify-content-between">
-                            <h2>@ViewData["Title"] Collection</h2>
-
+                            <h2 style="color:brown">@subCatName Collection</h2>
                             <div class="sorting">
                                 <label>Sort By: </label>
                                 <select class="form-control" id="sort-options">
@@ -217,192 +217,48 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="overflow-hidden items-container">
-                            <div class="product-grid">
-                                <div class="product-item">
-                                    <div class="image-holder">
-                                        <img src="~/assets/images/product-item1.jpg" alt="Books" class="product-image">
-                                    </div>
-                                    <div class="cart-concern">
-                                        <div class="cart-button d-flex justify-content-between align-items-center">
-                                            <button type="button"
-                                                    class="btn-wrap cart-link d-flex align-items-center">
-                                                add to cart
-                                                <i class="icon icon-arrow-io"></i>
-                                            </button>
-
-                                            <button type="button" class="wishlist-btn">
-                                                <i class="icon icon-heart"></i>
-                                            </button>
+                        *@
+                        <div class="row product-gallery">
+                            @if (Model != null)
+                            {
+                                @foreach (var item in Model)
+                                {
+                                    <div class="col-md-4 col-sm-6 product-item">
+                                        <div class="image-holder">
+                                            @foreach (var img in item.ProductImages)
+                                            {
+                                                <img src="@Url.Content(@img.ProductImageUrl)" alt="@img.ProductImageName" class="product-image img-fluid">
+                                            }
                                         </div>
-                                    </div>
-                                    <div class="product-detail">
-                                        <h3 class="product-title">
-                                            <a href="single-product.html">Full sleeve cover shirt</a>
-                                        </h3>
-                                        <span class="item-price text-primary">$40.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-grid">
-                                <div class="product-item">
-                                    <div class="image-holder">
-                                        <img src="~/assets/images/product-item2.jpg" alt="Books" class="product-image">
-                                    </div>
-                                    <div class="cart-concern">
-                                        <div class="cart-button d-flex justify-content-between align-items-center">
-                                            <button type="button"
-                                                    class="btn-wrap cart-link d-flex align-items-center">
-                                                add to cart
-                                                <i class="icon icon-arrow-io"></i>
-                                            </button>
-
-                                            <button type="button" class="wishlist-btn">
-                                                <i class="icon icon-heart"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="product-detail">
-                                        <h3 class="product-title">
-                                            <a href="single-product.html">Volunteer Half blue</a>
-                                        </h3>
-                                        <span class="item-price text-primary">$38.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-grid">
-                                <div class="product-item">
-                                    <div class="image-holder">
-                                        <img src="~/assets/images/product-item3.jpg" alt="Books" class="product-image">
-                                    </div>
-                                    <div class="cart-concern">
-                                        <div class="cart-button d-flex justify-content-between align-items-center">
-                                            <button type="button"
-                                                    class="btn-wrap cart-link d-flex align-items-center">
-                                                add to cart
-                                                <i class="icon icon-arrow-io"></i>
-                                            </button>
-
-                                            <button type="button" class="wishlist-btn">
-                                                <i class="icon icon-heart"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="product-detail">
-                                        <h3 class="product-title">
-                                            <a href="single-product.html">Double yellow shirt</a>
-                                        </h3>
-                                        <span class="item-price text-primary">$44.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-grid">
-                                <div class="product-item">
-                                    <div class="image-holder">
-                                        <img src="~/assets/images/product-item4.jpg" alt="Books" class="product-image">
-                                    </div>
-                                    <div class="cart-concern">
-                                        <div class="cart-button d-flex justify-content-between align-items-center">
-                                            <button type="button"
-                                                    class="btn-wrap cart-link d-flex align-items-center">
-                                                add to cart
-                                                <i class="icon icon-arrow-io"></i>
-                                            </button>
-
-                                            </aside>
-                                            <div class="col-md-9">
-                                                <section id="featured-products" class="product-store padding-large">
-                                                    <div class="container">
-                                                        <div class="section-header d-flex flex-wrap align-items-center justify-content-between">
-                                                            <h2 style="color:brown">@subCatName Collection</h2>
-
-                                                            <div class="sorting">
-                                                                <label>Sort By: </label>
-                                                                <select class="form-control" id="sort-options">
-                                                                    <option>Recommended</option>
-                                                                    <option>Price: High to Low</option>
-                                                                    <option>Price: Low to High</option>
-                                                                    <option>New Arrivals</option>
-                                                                    <option>Best Rated</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="swiper product-swiper overflow-hidden">
-                                                            <div class="swiper-wrapper">
-                                                                @if (Model != null)
-                                                                {
-
-                                                                    @foreach (var item in Model)
-                                                                    {
-                                                                        <div class="swiper-slide">
-                                                                            <div class="product-item">
-                                                                                @foreach (var img in item.ProductImages)
-                                                                                {
-                                                                                    <div class="image-holder">
-                                                                                        <img src="@Url.Content(@img.ProductImageUrl)" alt="@img.ProductImageName" class="product-image" style="height:300px">
-                                                                                    </div>
-                                                                                }
-                                                                                <div class="cart-concern">
-                                                                                    <div class="cart-button d-flex justify-content-between align-items-center">
-                                                                                        <button type="button" class="btn-wrap cart-link d-flex align-items-center">
-                                                                                            add to cart
-                                                                                            <i class="icon icon-arrow-io"></i>
-                                                                                        </button>
-
-                                                                                        <button type="button" class="wishlist-btn">
-                                                                                            <i class="icon icon-heart"></i>
-                                                                                        </button>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="product-detail">
-                                                                                    <h3 class="product-title">
-                                                                                        <a asp-action="ProductProfile" asp-controller="Product" asp-route-productId="@item.ProductId">@item.ProductName</a>
-                                                                                    </h3>
-                                                                                    <span class="item-price text-primary">@item.Price Pound</span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    }
-                                                                }
-                                                                else
-                                                                {
-                                                                    <p>No products available for this sub-category.</p>
-                                                                }
-                                                            </div>
-                                                        </div>
-                                                        <div class="swiper-pagination"></div>
-                                                    </div>
-                                                </section>
+                                        <div class="cart-concern">
+                                            <div class="cart-button d-flex justify-content-between align-items-center">
+                                                <button type="button" class="btn-wrap cart-link d-flex align-items-center">
+													add to WishList <i class="icon icon-arrow-io">  </i>
+                                                </button>
+                                                <button type="button" class="btn-wrap cart-link d-flex align-items-center">
+                                                    <i class="icon icon-heart"></i>
+                                                </button>
+                                                
                                             </div>
                                         </div>
+                                        <div class="product-detail">
+                                            <h3 class="product-title">
+                                                <a asp-action="ProductProfile" asp-controller="Product" asp-route-productId="@item.ProductId">@item.ProductName</a>
+                                            </h3>
+                                            <span class="item-price text-primary">@item.Price Pound</span>
+                                        </div>
                                     </div>
+                                }
+                            }
+                            else
+                            {
+                                <p>No products available for this sub-category.</p>
+                            }
+                        </div>
+                    </div>
                 </section>
-
-                <button type="button"
-                        class="wishlist-btn">
-                    <i class="icon icon-heart"></i>
-                </button>
             </div>
+
         </div>
-        @* <div class="product-detail">
-        <h3 class="product-title">
-        <a
-        href="single-product.html">@item.ProductName</a>
-        </h3>
-        <span
-        class="item-price text-primary">@item.Price
-        Pound</span>
-        *@
     </div>
-    </div>
-    </div>
-    }
-    }
-    else
-    {
-    <p>No products available for this sub-category.</p>
-    }
-    </div>
-    </div>
-    </div>
-</section>
+ </section>

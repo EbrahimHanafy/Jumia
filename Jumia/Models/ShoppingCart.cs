@@ -29,11 +29,11 @@ namespace Jumia.Models
         public int ProductColorSizeId { get; set; }
         //.........................................................
         // Navigation property for the related Product
-        public virtual Product Product { get; set; }
+        public virtual Product? Product { get; set; }
         // Navigation property for the related User
         public virtual User? User { get; set; }
         // Navigation property for the related ProductColorSize
-        public virtual ProductColorSize ProductColorSize { get; set; }
+        public virtual ProductColorSize? ProductColorSize { get; set; }
 
     }
 }

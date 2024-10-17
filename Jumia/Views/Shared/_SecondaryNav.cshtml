@@ -29,7 +29,8 @@
                         
                         <li><a asp-controller="Account" asp-action="Login"><i class="icon icon-user"></i></a></li>
                     }
-                    <li><a href="cart.html"><i class="icon icon-shopping-cart"></i></a></li>
+                   
+                    <li><a asp-action="GetCartProducts" asp-controller="ShoppingCart"><i class="icon icon-shopping-cart"></i></a></li>
                     @* <li><a href="wishlist.html"><i class="icon icon-heart"></i></a></li> *@
                     @* <li class="user-items search-item pe-3">
                     <a href="#" class="search-button"><i class="icon icon-search"></i></a>

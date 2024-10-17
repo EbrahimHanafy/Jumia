@@ -1,17 +1,33 @@
+@model List<Department>
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <!-- Link to the custom CSS file -->
 <link rel="stylesheet" href="~/assets/css/departmentsproducts.css" />
-
+@{
+    var message = TempData["Message"] as string;
+    if (!string.IsNullOrEmpty(message))
+    {
+        <div class="alert alert-success">
+            <!-- Or alert-danger for errors -->
+            @message
+        </div>
+    }
+}
 <div class="departmentsContainer">
     <h1>@ViewData["Title"]</h1>
 
     <!-- Search and Add New Department Button -->
     <div class="searchAddContainer">
-        <label for="searchInput" class="searchLabel">Search by ID or Name:</label>
-        <input type="text" id="searchInput" class="searchInput" placeholder="Enter ID or Name" />
+        <form asp-action="SearchForDepartments" asp-controller="Department" method="post">
+            <label for="searchInput" class="searchLabel">Search by ID or Name:</label>
+            <input type="text" id="searchInput" name="searchTerm" class="searchInput" placeholder="Enter ID or Name" />
+            <button type="submit" class="addBtn">Search</button>
+        </form>
+    </div>
+
+    <div class="searchAddContainer">
         <a href="/admin/addnewdepartment" class="addBtn">Add New Department</a>
     </div>
 
@@ -25,11 +41,14 @@
             </tr>
         </thead>
         <tbody>
+            @foreach (var item in Model)
+            {
             <tr>
-                <td>1</td>
-                <td><a href="/admin/departmentdetails/1" class="departmentLink">Sample Department</a></td>
-                <td>2024-10-01</td>
+                <td>@item.DepartmentId</td>
+                <td><a asp-action="GetDepartmentById" asp-controller="Department" asp-route-departmentId="@item.DepartmentId" class="departmentLink">@item.DepartmentName</a></td>
+                <td>@item.CreatedAt</td>
             </tr>
+            }
         </tbody>
     </table>
 </div>

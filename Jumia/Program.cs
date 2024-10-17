@@ -5,6 +5,7 @@ using Jumia.Services.Implementations;
 using Jumia.Services.IServices;
 using Jumia.SharedRepositories;
 using Jumia.UnitOfWorks;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -13,6 +14,14 @@ namespace Jumia
 {
     public class Program
     {
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.Configure<FormOptions>(options =>
+            {
+                options.MultipartBodyLengthLimit = 104857600; // 100 MB file size limit
+            });
+        }
+
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
@@ -34,6 +43,8 @@ namespace Jumia
             builder.Services.AddTransient<IProductRateUserRepository, ProductRateUserRepository>();
             builder.Services.AddTransient<IProductRateRepository, ProductRateRepository>();
             builder.Services.AddTransient<IProductColorSizeRepository, ProductColorSizeRepository>();
+            builder.Services.AddTransient<IShoppingCartRepository, ShoppingCartRepository>();
+            builder.Services.AddTransient<IDepartmentRepository, DepartmentRepository>();
 
             builder.Services.AddTransient<IProductColorSizeService, ProductColorSizeService>();
             builder.Services.AddTransient<ISizeService, SizeService>();
@@ -47,6 +58,7 @@ namespace Jumia
             builder.Services.AddTransient<IUserAddressService,UserAddressService >();
             builder.Services.AddTransient<IUserORderService, UserOrderService>();
             builder.Services.AddTransient<IUserWishListService, UserWishListService>();
+            builder.Services.AddTransient<IShoppingCartServices, ShoppingCartService>();
 
 
             //AutoMapper

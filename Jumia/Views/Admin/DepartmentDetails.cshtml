@@ -1,27 +1,38 @@
+@model Department
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <!-- Link to the custom CSS file -->
 <link rel="stylesheet" href="~/assets/css/departmentsproducts.css" />
-
 <div class="departmentDetailsContainer">
     <h1 class="detailsTitle">Department Details</h1>
 
     <!-- Department Name and Image -->
     <div class="detailsSection">
-        <h2 class="departmentName">Sample Department</h2>
-        <img src="/Images/Product/pant-brown.jpg" alt="Department Image" class="departmentImage" />
+        <h2 class="departmentName"> @Model.DepartmentName Department</h2>
+        @if (Model.ImageURL != null)
+        {
+            <img src="@Url.Content(Model.ImageURL)" alt="@Model.DepartmentName" class="departmentImage" />
+        }
+        else
+        {
+            <img src="~/assets/images/No-Img-Available.jpg" alt="No img available" class="departmentImage" />
+        }
     </div>
 
     <!-- Static Fields for Created at and Updated at -->
     <div class="timestamps">
-        <p><strong>Created at:</strong> 2024-10-01</p>
-        <p><strong>Updated at:</strong> 2024-10-15</p>
+        <p><strong>Created at:</strong> @Model.CreatedAt</p>
+        @if(Model.UpdatedAt != null)
+        {
+            <p><strong>Updated at:</strong> @Model.UpdatedAt</p>
+        }
     </div>
 
     <!-- Edit Button -->
     <button class="editBtn" onclick="enableEdit()">Edit Department</button>
+    <a asp-action="DeleteDepartment" asp-controller="Department" asp-route-departmentId="@Model.DepartmentId" class="btn-danger">Delete Department</a>
 
     <!-- Editable Form Section (Initially Hidden) -->
     <div id="editForm" class="editFormSection" style="display: none;">

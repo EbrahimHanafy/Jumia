@@ -73,21 +73,23 @@
                         }
                     </div>
                     
-                    <form class="product__form">
+                    <form class="product__form" asp-action="AddProductToCart" asp-controller="Product" asp-route-productId="@Model.ProductId" id="addToCartForm">
                         <!-- Color Size Dropdown -->
                         <div class="form-group">
                             
                             <label class="CartLable" for="size">Color & Size:</label>
+                            <input type="hidden" asp-for="ShoppingCart.ProductId" />
 
                             @if (Model.ColorSizes != null && Model.ColorSizes.Any())
                             {
-                                <select id="colorsize" class="form-control" onchange="loadColors()">
+                                <select asp-for="ShoppingCart.ProductColorSizeId" class="form-control" onchange="loadColors()">
                                     <option value="" hidden >Select color & size</option>
                                     @foreach (var colorsize in Model.ColorSizes)
                                     {
                                         <option value="@colorsize.ProductColorSizeId" style="color:@colorsize.Color.ColorName">@colorsize.Color.ColorName : @colorsize.Size.SizeName </option>
                                     }
                                 </select>
+                                <span asp-validation-for="ShoppingCart.ProductColorSizeId" class="text-danger"></span>
                             }
                             else if (Model.ColorSizes == null)
                             {
@@ -98,34 +100,12 @@
                                 <p style="color: red;"> No available Colors and sizes for this product.</p>
                             }
                         </div>
-                        @* <!-- Color Dropdown -->
-                        <div class="form-group">
-                            <label class="CartLable" for="color">Color:</label>
-                            @if (Model.Colors != null && Model.Colors.Any())
-                            {
-                                <select id="color" class="form-control">
-                                    <option value="">Select Color</option>
-                                    @foreach (var color in Model.Colors)
-                                    {
-                                        <option value="@color.ColorId">@color.ColorName</option>
-                                    }
-                                </select>
-                            }
-                            else if (Model.Colors == null)
-                            {
-                                <p style="color: red;">Error: Colors data is unavailable or failed to load.</p>
-                            }
-                            else
-                            {
-                                <p style="color: red;">No available colors for this product.</p>
-                            }
-						</div>*@
-
                         <div class="form-group">
                             <label class="CartLable" for="quantity">Quantity:</label>
-                            <input name="quantity" id="quantity" class="form-control" type="number" min="1" value="1" />
+                            <input asp-for="ShoppingCart.Quantity" class="form-control" type="number" min="1" value="1" />
+                            <span asp-validation-for="ShoppingCart.Quantity" class="text-danger"></span>
                         </div>
-                        <button asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-productId="" type="submit" class="btn btn-primary">Add to Cart</button>
+                        <button type="submit" class="btn btn-primary">Add to Cart</button>
                     </form>
                 </div>
             </div>
@@ -182,14 +162,22 @@
                 <section class="product__reviews">
                     <h2>Customer Reviews:</h2>
                     <div class="overall-rating">
-                        <span class="rating-number">@Model.ProductRateAverage</span>
-                        <div class="stars">
-                            @for (int i = 0; i < Model.ProductRateAverage; i++)
-                            {
-                                <span class="star filled">&#9733;</span>
-                            }
-                        </div>
-                        <span class="rating-count">(125 reviews)</span>
+                        @if(Model.TotalNumberOfReviwws != 0)
+                        {
+                            <span class="rating-number">@Model.ProductRateAverage</span>
+                            <div class="stars">
+                                @for (int i = 0; i < Model.ProductRateAverage; i++)
+                                {
+                                    <span class="star filled">&#9733;</span>
+                                }
+                            </div>
+                            <span class="rating-count">(@Model.TotalNumberOfReviwws reviews)</span>
+                        }
+                        else
+                        {
+                            <span class="rating-count">(No reviews)</span>
+                        }
+
                     </div>
                     <div class="review-list">
                         @if (Model.ProductRates != null && Model.ProductRates.Any())
@@ -218,6 +206,31 @@
         </div>
     </article>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    // Function to show a SweetAlert confirmation before adding a review to this product
+    function confirmAddingReview(event) {
+        event.preventDefault(); // Prevent the form from submitting immediately
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You want to submit this review',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, submit it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If confirmed, submit the form
+                event.target.submit();
+            }
+        });
+
+        return false; // Prevent form submission until SweetAlert is confirmed
+    }
+</script>
 <script>
     function changeImage(thumbnail) {
         // Change main image
@@ -240,64 +253,6 @@
         alert('Thank you for your review!');
         this.reset();
     });
-    // Size Function
-    // $(document).ready(function () {
-    //     $('#sizeSelect').change(function () {
-    //         var sizeId = $(this).val();
-    //         var productId = /* Get product ID from the page, maybe from a hidden input field */;
-
-    //         if (sizeId) {
-    //             $.ajax({
-    //                 url: `/Product/GetColorsBySize`, // Adjusted to point to the correct controller action
-    //                 type: 'GET',
-    //                 data: { productId: productId, sizeId: sizeId },
-    //                 success: function (response) {
-    //                     if (response.success) {
-    //                         // Clear the color dropdown
-    //                         $('#colorSelect').empty();
-    //                         $('#colorSelect').append('<option value="">Select Color</option>');
-
-    //                         // Populate colors based on the selected size
-    //                         response.data.forEach(function (color) {
-    //                             $('#colorSelect').append(`<option value="${color.colorId}">${color.colorName}</option>`);
-    //                         });
-    //                     } else {
-    //                         alert(response.message); // Display error if no colors found
-    //                     }
-    //                 }
-    //             });
-    //         }
-    //     });
-    // });
-    // Color Function
-    // $(document).ready(function () {
-    //     $('#colorSelect').change(function () {
-    //         var colorId = $(this).val();
-    //         var productId = /* Get product ID from the page, maybe from a hidden input field */;
-
-    //         if (colorId) {
-    //             $.ajax({
-    //                 url: `/Product/GetSizesByColor`, // Adjusted to point to the correct controller action
-    //                 type: 'GET',
-    //                 data: { productId: productId, colorId: colorId },
-    //                 success: function (response) {
-    //                     if (response.success) {
-    //                         // Clear the size dropdown
-    //                         $('#sizeSelect').empty();
-    //                         $('#sizeSelect').append('<option value="">Select Size</option>');
-
-    //                         // Populate sizes based on the selected color
-    //                         response.data.forEach(function (size) {
-    //                             $('#sizeSelect').append(`<option value="${size.sizeId}">${size.sizeName}</option>`);
-    //                         });
-    //                     } else {
-    //                         alert(response.message); // Display error if no sizes found
-    //                     }
-    //                 }
-    //             });
-    //         }
-    //     });
-    // });
 </script>
 <style>
     .product {

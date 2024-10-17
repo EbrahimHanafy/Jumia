@@ -36,5 +36,11 @@ namespace Jumia.Services.Implementations
         {
            return productRateRepository.GetProductRatingAverage(prodcutId);
         }
+
+        public Task<int> GetNumberOfProductRates(int prodcutId)
+        {
+            return productRateRepository.GetNumberOfProductRates(prodcutId);
+        }
+
     }
 }
