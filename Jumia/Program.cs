@@ -34,6 +34,7 @@ namespace Jumia
             builder.Services.AddTransient<IProductRateUserRepository, ProductRateUserRepository>();
             builder.Services.AddTransient<IProductRateRepository, ProductRateRepository>();
             builder.Services.AddTransient<IProductColorSizeRepository, ProductColorSizeRepository>();
+            builder.Services.AddTransient<IShoppingCartRepository, ShoppingCartRepository>();
 
             builder.Services.AddTransient<IProductColorSizeService, ProductColorSizeService>();
             builder.Services.AddTransient<ISizeService, SizeService>();
@@ -47,6 +48,7 @@ namespace Jumia
             builder.Services.AddTransient<IUserAddressService,UserAddressService >();
             builder.Services.AddTransient<IUserORderService, UserOrderService>();
             builder.Services.AddTransient<IUserWishListService, UserWishListService>();
+            builder.Services.AddTransient<IShoppingCartServices, ShoppingCartService>();
 
 
             //AutoMapper

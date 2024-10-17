@@ -2377,7 +2377,7 @@ blockquote cite {
 
 .product-item img.product-image {
   background: var(--light-color);
-  border: 1px solid var(--grey-color);
+  border: 1px solid var(--grey-color);*/
   border-radius: 6px;
   padding: 10px;
   cursor: pointer;
@@ -3443,11 +3443,6 @@ section.Department .category-content a {
 
 .product-item {
   flex: 1 1 calc(25% - 20px);
-  background-color: #fff;
-  padding: 15px;
-  border: 1px solid #e4e4e4;
-  border-radius: 10px;
-  box-sizing: border-box;
   text-align: center;
 }
 
