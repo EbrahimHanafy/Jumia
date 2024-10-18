@@ -1,0 +1,85 @@
+﻿.journal-container {
+    margin: 40px;
+}
+
+.journal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+    .journal-header h1 {
+        font-size: 36px;
+        font-weight: bold;
+        color: #333;
+    }
+
+.read-all {
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.journal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.journal-item {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.journal-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.journal-date {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    margin-top: 10px;
+    color: #666;
+}
+
+    .journal-date .day {
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .journal-date .month {
+        text-transform: uppercase;
+    }
+
+.journal-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 15px;
+}
+
+.journal-category {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+.journal-description {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .journal-grid {
+        grid-template-columns: 1fr;
+    }
+}
