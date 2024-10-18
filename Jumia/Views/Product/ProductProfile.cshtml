@@ -13,7 +13,7 @@
                         if (img.IsMainImage == true)
                         {
                             <div class="main-image">
-                                    <img id="mainImage" src="@Url.Content(img.ProductImageUrl)" alt="@img.ProductImageName" class="img-fluid">
+                                    <img id="mainImage" src="@Url.Content(img.ProductImageUrl)" alt="@img.ProductImageName" class="img-fluid" style="height:500px">
                             </div>
                         }
                      }
@@ -43,7 +43,7 @@
                     @if (Model.Product.DiscountPersentage == 0 && Model.Product.Discount == 0)
                         {
                         <div class="product__price">
-                            <h2>Price: <span class="price">$@Model.Product.Price</span></h2>
+                            <h2>Price: <span class="price">@Model.Product.Price Pound</span></h2>
                         </div>
 
                         <div class="product__price">
@@ -53,7 +53,7 @@
                         else
                         {
                         <div class="product__price">
-                            <h2>Price: <span class="price">$@(Model.Product.Price - Model.Product.Discount)  <strong style="color: rgb(44, 62, 80)"> : </strong>  <span style="color:gray; text-decoration:line-through">$@Model.Product.Price</span></span></h2>
+                            <h2>Price: <span class="price">@(Model.Product.Price - Model.Product.Discount) Pound <strong style="color: rgb(44, 62, 80)"> : </strong>  <span style="color:gray; text-decoration:line-through">@Model.Product.Price Pound</span></span></h2>
                         </div>
 
                         <div class="product__price">

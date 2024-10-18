@@ -13,5 +13,7 @@ namespace Jumia.Services.IServices
         public Task<bool> IsDepartmentHasTransactions(int departmentId);
 
         public Task<bool> DeleteDepartment(int departmentId);
+
+        public Task<Department> UpdateDepartment(Department department);
     }
 }

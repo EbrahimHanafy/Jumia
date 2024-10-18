@@ -58,6 +58,15 @@ namespace Jumia.Services.Implementations
                 // Perform the deletion
                 await unitOfWork.Repository<Department>().DeleteAsync(departmentId);
 
+                // Optionally delete the old image file if it exists
+                if (!string.IsNullOrEmpty(department.ImageURL))
+                {
+                    var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", department.ImageURL.TrimStart('/'));
+                    if (System.IO.File.Exists(oldImagePath))
+                    {
+                        System.IO.File.Delete(oldImagePath);
+                    }
+                }
                 // Save the changes
                 await unitOfWork.Save();
 
@@ -70,6 +79,39 @@ namespace Jumia.Services.Implementations
 
                 return false; // Return false in case of failure
             }
+        }
+        
+        public async Task<Department> UpdateDepartment(Department department)
+        {
+            // Fetch the existing department from the database to ensure it exists
+            var existingDepartment = await context.Departments.FindAsync(department.DepartmentId);
+
+            if (existingDepartment == null)
+            {
+                throw new ArgumentException("Department not found");
+            }
+            // Map the new department data to the existing one
+            mapper.Map(department, existingDepartment);
+
+            // Save changes to the database
+            try
+            {
+                context.Departments.Update(existingDepartment);
+                await context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                // Handle concurrency issues, for example, by throwing a custom error
+                throw new Exception("Failed to update the department due to a concurrency issue.", ex);
+            }
+            catch (Exception ex)
+            {
+                // Handle other types of errors
+                throw new Exception("An error occurred while updating the department.", ex);
+            }
+
+            // Return the updated department
+            return existingDepartment;
         }
     }
 }

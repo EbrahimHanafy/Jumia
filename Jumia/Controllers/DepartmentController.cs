@@ -121,5 +121,74 @@ namespace Jumia.Controllers
                 }
             }
         }
+
+        public async Task<IActionResult> UpdateDepartment(Department newDepartment, int currentDepartmentId, IFormFile? departmentImage)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("~/Views/Admin/UpdateDepartment.cshtml", newDepartment);
+            }
+
+            try
+            {
+                // Fetch the existing department from the database
+                var existingDepartment = await unitOfWork.Repository<Department>().GetByIdAsync(currentDepartmentId);
+
+                if (existingDepartment == null)
+                {
+                    return NotFound();
+                }
+
+                // If a new image is provided, replace the existing image
+                if (departmentImage != null && departmentImage.Length > 0)
+                {
+                    // Get the file extension of the new image
+                    var fileExtension = Path.GetExtension(departmentImage.FileName);
+
+                    // Create a unique filename for the new image
+                    var uniqueFileName = $"{Path.GetFileNameWithoutExtension(departmentImage.FileName)}_{DateTime.Now:yyyyMMddHHmmss}{fileExtension}";
+
+                    // Define the path to save the new image
+                    var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", "Department", uniqueFileName);
+
+                    // Ensure the directory exists
+                    Directory.CreateDirectory(Path.GetDirectoryName(imagePath));
+
+                    // Save the new image file to the specified path
+                    using (var fileStream = new FileStream(imagePath, FileMode.Create))
+                    {
+                        await departmentImage.CopyToAsync(fileStream);
+                    }
+
+                    // Optionally delete the old image file if it exists
+                    if (!string.IsNullOrEmpty(existingDepartment.ImageURL))
+                    {
+                        var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", existingDepartment.ImageURL.TrimStart('/'));
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
+
+                    // Set the new ImageURL property to the relative path for database storage
+                    existingDepartment.ImageURL = $"/Images/Department/{uniqueFileName}";
+                }
+
+                // Update the other department properties (without changing CreatedAt and CreatedBy)
+                existingDepartment.DepartmentName = newDepartment.DepartmentName;
+                existingDepartment.UpdatedBy = 7; // Replace with the actual user if available
+                existingDepartment.UpdatedAt = DateTime.UtcNow;
+
+                // Save changes to the database
+                await departmentService.UpdateDepartment(existingDepartment);
+                // Redirect to the department details page after successfully updating the department
+                return RedirectToAction("GetDepartmentById", new { departmentId = currentDepartmentId });
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", $"An error occurred: {ex.Message}");
+                return RedirectToAction("GetDepartmentById", new { departmentId = currentDepartmentId });
+            }
+        }
     }
 }

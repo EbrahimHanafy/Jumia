@@ -32,26 +32,68 @@
 
     <!-- Edit Button -->
     <button class="editBtn" onclick="enableEdit()">Edit Department</button>
-    <a asp-action="DeleteDepartment" asp-controller="Department" asp-route-departmentId="@Model.DepartmentId" class="btn-danger">Delete Department</a>
+    <a asp-action="DeleteDepartment" asp-controller="Department" asp-route-departmentId="@Model.DepartmentId" onclick="confirmRemoving(event)" class="btn-danger">Delete Department</a>
 
     <!-- Editable Form Section (Initially Hidden) -->
     <div id="editForm" class="editFormSection" style="display: none;">
-        <form>
-            <div class="formGroup">
-                <label for="departmentName">Department Name</label>
-                <input type="text" id="departmentNameInput" class="inputField" value="Sample Department" />
+        <form asp-action="UpdateDepartment" asp-controller="Department" asp-route-currentDepartmentId="@Model.DepartmentId" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="DepartmentName" class="form-label">Department Name</label>
+                <input asp-for="DepartmentName" type="text" id="departmentName" class="form-control" placeholder="Enter department name" required />
+                <span asp-validation-for="DepartmentName" class="text-danger"></span>
             </div>
 
-            <div class="formGroup">
-                <label for="departmentImage">Upload New Image</label>
-                <input type="file" id="departmentImage" class="inputField" accept=".png, .jpg" />
-                <small class="fileTypeNotice">Only PNG or JPG formats are allowed.</small>
+            <div class="form-group">
+                <label for="departmentImage" class="form-label">Upload Department Image</label>
+                <input type="file" name="departmentImage" id="departmentImage" class="form-control-file" accept=".png, .jpg, .jpeg" />
+                <small class="form-text text-muted">Only PNG or JPG formats are allowed (max size: 2MB).</small>
+                <span asp-validation-for="ImageURL" class="text-danger"></span>
             </div>
 
-            <button type="submit" class="saveBtn">Save Changes</button>
+            <!-- Display current image if exists -->
+            @if (Model.ImageURL != null)
+            {
+                <div class="form-group">
+                    <label>Current Image:</label>
+                    <div>
+                        <img src="@Model.ImageURL" alt="Department Image" class="img-thumbnail" style="max-width: 200px;" />
+                    </div>
+                </div>
+            }
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <a asp-action="GetDepartmentById" asp-route-departmentId="@Model.DepartmentId" class="btn btn-secondary">Cancel</a>
+            </div>
         </form>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    // Function to show a SweetAlert confirmation before removing an item from the cart
+    function confirmRemoving(event) {
+        event.preventDefault(); // Prevent the form from submitting immediately
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'you want to delete this department?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, remove it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect to the delete action
+                window.location.href = event.target.href; // Navigate to the delete action's URL
+            }
+        });
+
+        // Return false to prevent the form submission until user confirmation
+        return false;
+    }
+</script>
 
 <script>
     function enableEdit() {
