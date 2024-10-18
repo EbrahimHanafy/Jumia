@@ -1,6 +1,6 @@
 @model LoginViewModel
 @{
-    Layout = "~/Views/Shared/_LoginLayout.cshtml";  
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
 <div class="wrapper" style="background-image: url('/assets/images/loginBG.jpg');">
@@ -8,7 +8,7 @@
         <div asp-validation-summary="All" class="text-danger"></div>
 
         <form asp-action="Login" method="post">
-            <h3>Login</h3>
+            <h3>Login8</h3>
             <div class="form-group">
                 <div class="form-wrapper">
                     <label for="">Email</label>
@@ -30,7 +30,12 @@
                 </label>
             </div>
             <button>Login Now</button>
-            <a asp-controller="Account" asp-action="Register" class="text-center"> Register New Account</a>
+            <!-- Register Section -->
+            <div class="register-section text-center mt-4">
+                <p>If you don't have an account, <a asp-controller="Account" asp-action="Register" class="register-link">
+                        Register here</a>
+                </p>
+            </div>
         </form>
     </div>
 </div>

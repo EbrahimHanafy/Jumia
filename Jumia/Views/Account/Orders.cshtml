@@ -1,0 +1,77 @@
+@model List<Order>
+@{
+    ViewData["Title"] = "Orders";
+    //ViewBag.ActiveMenu = "Orders";
+}
+
+<link rel="stylesheet" href="~/assets/css/profileStyle.css">
+
+<div class="d-flex">
+    <!-- Sidebar -->
+    <nav class="profile-sidebar">
+        <ul class="nav profile-nav">
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveMenu == "Profile" ? "active" : "")" href="/Account/Profile">
+                    Profile
+                    Info
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveMenu == "Addresses" ? "active" : "")"
+                   href="/Account/Addresses">Addresses</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveMenu == "Orders" ? "active" : "")" href="/Account/Orders">Orders</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveMenu == "Wishlist" ? "active" : "")" href="/Account/Wishlist">
+                    Wish
+                    List
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="profile-content flex-grow-1">
+        <h2>Completed Orders</h2>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+               @*  <!-- Order 1 -->  *@
+                <div class="order-item">
+                    <div class="order-status delivered">@item.Orderstatus.Status</div>
+                    <div class="order-details">
+                        @* <img src="@item.OrderDetails.Select(o =>  new{o.Product.ProductImages.Where(s =>s.IsMainImage==true).Take(1)})" alt="Order Image"> *@
+                        <div class="order-info">
+                            <p>Order ID: <strong>@item.OrderId</strong></p>
+                            @* <p>QTY : <strong>@item.OrderDetails</strong></p>  *@
+                            <p>Total : <strong>@item.TotalAmount</strong></p>
+
+
+
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-primary">Details</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        <!-- Order 2 -->
+        @* <div class="order-item">
+            <div class="order-status cancelled">Cancelled on Saturday, 13th Jul, 03:18 PM</div>
+            <div class="order-details"> 
+                <img src="https://via.placeholder.com/100" alt="Order Image"> 
+                <div class="order-info">
+                    <p>Kemei 600 Multifunctional Rechargeable Electric Hair Trimmer Grooming Kit</p>
+                    <p>Order ID: <strong>NEG670074544026</strong></p>
+                </div>
+                <div class="order-actions">
+                    <button class="btn btn-secondary">Details</button>
+                </div>
+            </div>
+        </div> *@
+    </div>
+</div>

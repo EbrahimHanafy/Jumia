@@ -1,19 +1,14 @@
-﻿@model List<Product>
-@{
-    
-}
+﻿@using Jumia.DTO
+@using Jumia.ViewModels
+@model ProductProfileViewModel
+
 <div class="container">
-    <article class="product">
-        @foreach (var prod in Model)
-        {  
-        <h1 class="product__name">@prod.ProductName</h1>
-        }
+    <article class="product">       
+        <h1 class="product__name">@Model.Product.ProductName</h1>
         <div class="row">
             <div class="col-md-6">
                 <div class="product-images">
-                @foreach (var item in Model)
-                {
-                    @foreach (var img in item.ProductImages)
+                    @foreach (var img in Model.Product.ProductImages)
                     {
                         if (img.IsMainImage == true)
                         {
@@ -21,80 +16,94 @@
                                     <img id="mainImage" src="@Url.Content(img.ProductImageUrl)" alt="@img.ProductImageName" class="img-fluid">
                             </div>
                         }
-                    }
-                }
-                    <div class="thumbnail-bar">
-                        @foreach (var item in Model)
-                        {
-                            @foreach (var img in item.ProductImages)
+                     }
+                    <div class="thumbnail-bar"> 
+                            @foreach (var img in Model.Product.ProductImages)
                             {
                             <img src="@Url.Content(img.ProductImageUrl)" alt="@img.ProductImageName" class="thumbnail active" onclick="changeImage(this)">
-@*                          <img src="https://eg.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/88/037505/2.jpg?8070" alt="Thumbnail 2" class="thumbnail" onclick="changeImage(this)">
-                            <img src="https://eg.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/88/037505/3.jpg?8070" alt="Thumbnail 3" class="thumbnail" onclick="changeImage(this)">
-                            <img src="https://eg.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/88/037505/4.jpg?8070" alt="Thumbnail 4" class="thumbnail" onclick="changeImage(this)">
-                            <img src="https://eg.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/88/037505/4.jpg?8070" alt="Thumbnail 4" class="thumbnail" onclick="changeImage(this)">
-                            <img src="https://eg.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/88/037505/4.jpg?8070" alt="Thumbnail 4" class="thumbnail" onclick="changeImage(this)">
-*@
                             }
-                        }
                     </div>
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="product__details">
-                    @foreach (var prod in Model)
-                    {
-                        @if (prod.DiscountPersentage == 0 && prod.Discount == 0)
-                    {
+                    <div class="product__price">
+                        @if (Model.Product.BarCode != null || Model.Product.BarCode == " ")
+                        {
+
+                            <h2>Bar Code: <span class="price" style="color:black">@Model.Product.BarCode</span></h2>
+                        }
+                        else
+                        {
+                            <h2>Bar Code: <span class="price"> </span></h2>
+                        }
+                    </div>
+
+                    @if (Model.Product.DiscountPersentage == 0 && Model.Product.Discount == 0)
+                        {
                         <div class="product__price">
-                                <h2>Price: <span class="price">$@prod.Price</span></h2>
+                            <h2>Price: <span class="price">$@Model.Product.Price</span></h2>
                         </div>
 
                         <div class="product__price">
                             <h2>Discount: <span class="price"> - </span></h2>
                         </div>
-                    }
-                    else
-                    {
+                        }
+                        else
+                        {
                         <div class="product__price">
-                                <h2>Price: <span class="price">$@(prod.Price - prod.Discount)  <strong style="color: rgb(44, 62, 80)"> : </strong>  <span style="color:gray; text-decoration:line-through">$@prod.Price</span></span></h2>
+                            <h2>Price: <span class="price">$@(Model.Product.Price - Model.Product.Discount)  <strong style="color: rgb(44, 62, 80)"> : </strong>  <span style="color:gray; text-decoration:line-through">$@Model.Product.Price</span></span></h2>
                         </div>
 
                         <div class="product__price">
-                                <h2>Discount: <span class="price">@prod.DiscountPersentage%</span></h2>
+                            <h2>Discount: <span class="price">@Model.Product.DiscountPersentage%</span></h2>
                         </div>
-                    }
-                    }
+                        }
 
                     <div class="product__price">
-                        <h2>Availability: <span class="price">5 pieces</span></h2>
+                        @if (Model.AvailableQuantity != 0)
+                        {
+                            int AvailableQuantity = (Model.AvailableQuantity);
+                            <h2>Availability: <span class="price">@AvailableQuantity pieces</span></h2>
+                        }
+                        else
+                        {
+                            <h2>Availability: <span class="price" style="color:red">Not available in stock</span></h2>
+                        }
                     </div>
                     
-                    <form class="product__form">
+                    <form class="product__form" asp-action="AddProductToCart" asp-controller="Product" asp-route-productId="@Model.ProductId" id="addToCartForm">
+                        <!-- Color Size Dropdown -->
                         <div class="form-group">
-                            <label class="CartLable" for="size">Size:</label>
-                            <select name="size" id="size" class="form-control">
-                            @if(ViewData["Sizes"] != null)
+                            
+                            <label class="CartLable" for="size">Color & Size:</label>
+                            <input type="hidden" asp-for="ShoppingCart.ProductId" />
+
+                            @if (Model.ColorSizes != null && Model.ColorSizes.Any())
                             {
-                            var Sizes = (List<Size>?)ViewData["Sizes"];
-                                @foreach (var item in Sizes)
-                                {
-                                    <option>@item.SizeName</option>
-                                }
-                             }
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="CartLable" for="color">Color:</label>
-                            <select name="color" id="color" class="form-control">
-                                <option value="red">Red</option>
-                                <option value="blue">Blue</option>
-                            </select>
+                                <select asp-for="ShoppingCart.ProductColorSizeId" class="form-control" onchange="loadColors()">
+                                    <option value="" hidden >Select color & size</option>
+                                    @foreach (var colorsize in Model.ColorSizes)
+                                    {
+                                        <option value="@colorsize.ProductColorSizeId" style="color:@colorsize.Color.ColorName">@colorsize.Color.ColorName : @colorsize.Size.SizeName </option>
+                                    }
+                                </select>
+                                <span asp-validation-for="ShoppingCart.ProductColorSizeId" class="text-danger"></span>
+                            }
+                            else if (Model.ColorSizes == null)
+                            {
+                                <p style="color: red;">Error: Colors and sizes data is unavailable or failed to load.</p>
+                            }
+                            else
+                            {
+                                <p style="color: red;"> No available Colors and sizes for this product.</p>
+                            }
                         </div>
                         <div class="form-group">
                             <label class="CartLable" for="quantity">Quantity:</label>
-                            <input name="quantity" id="quantity" class="form-control" type="number" min="1" value="1" />
+                            <input asp-for="ShoppingCart.Quantity" class="form-control" type="number" min="1" value="1" />
+                            <span asp-validation-for="ShoppingCart.Quantity" class="text-danger"></span>
                         </div>
                         <button type="submit" class="btn btn-primary">Add to Cart</button>
                     </form>
@@ -106,38 +115,40 @@
             <div class="col-12">
                 <section class="product__description">
                     <h2>Product Description</h2>
-                    @foreach (var item in Model)
-                    {
-                    <p>@item.Description</p>
-                    }
+                    <p>@Model.Product.Description</p>
                 </section>
             </div>
         
             <section class="product__materials">
                 <h2>Product Features</h2>
                 <ul>
-                    @foreach (var item in Model)
+                    @foreach (var feature in Model.Product.ProductFeatures)
                     {
-                        foreach (var feature in item.ProductFeatures)
-                        {
-                            <li>@feature.FeatureName</li>
-                        }
+                        <li>@feature.FeatureName</li>
                     }
                 </ul>
             </section>
             
             <section class="product__materials">
-                <h2>Materials &amp; Care</h2>
-                <ul>
-                @if (ViewData["ProductMaterialsCare"] != null)
+                <h2>Materials of Care</h2>
+                
+                @if (Model.ProductMaterialsCare != null && Model.ProductMaterialsCare.Any())
                 {
-                    var ProductMaterialsCare = (List<MaterialsCare>?)ViewData["ProductMaterialsCare"];
-                    foreach (var item in ProductMaterialsCare)
-                    {
+                    <ul>
+                        @foreach (var item in Model.ProductMaterialsCare)
+                        {
                             <li>@item.MaterialsCareIcon : @item.MaterialsCareName</li>
-                    }
+                        }
+                    </ul>
                 }
-                 </ul>
+                else if (Model.ProductMaterialsCare == null)
+				{
+                    <p style="color: red;">Error: Materials of care data is unavailable or failed to load.</p>
+                }
+                else
+                {
+                    <p style="color: red;"> This product not assigned to any materials of care.</p>
+                }
             </section>
         </div>
 
@@ -145,73 +156,49 @@
             <div class="col-12">
                 <!-- ... (previous sections remain the same) ... -->
                 <section class="product__add-review">
-                    <h2>Add Your Review</h2>
-                    <form id="reviewForm">
-                        <div class="form-group">
-                            <label for="reviewerName">Your Name:</label>
-                            <input type="text" id="reviewerName" name="reviewerName" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Your Rating:</label>
-                            <div class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" required><label for="star5">&#9733;</label>
-                                <input type="radio" id="star4" name="rating" value="4"><label for="star4">&#9733;</label>
-                                <input type="radio" id="star3" name="rating" value="3"><label for="star3">&#9733;</label>
-                                <input type="radio" id="star2" name="rating" value="2"><label for="star2">&#9733;</label>
-                                <input type="radio" id="star1" name="rating" value="1"><label for="star1">&#9733;</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="reviewText">Your Review:</label>
-                            <textarea id="reviewText" name="reviewText" class="form-control" rows="4" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit Review</button>
-                    </form>
+                    <partial name="_AddRate" model="Model.NewRate" />
                 </section>
 
                 <section class="product__reviews">
                     <h2>Customer Reviews:</h2>
                     <div class="overall-rating">
-                        <span class="rating-number">4</span>
-                        <div class="stars">
-                            <span class="star filled">&#9733;</span>
-                            <span class="star filled">&#9733;</span>
-                            <span class="star filled">&#9733;</span>
-                            <span class="star filled">&#9733;</span>
-                            <span class="star  ">&#9734;</span>
-                        </div>
-                        <span class="rating-count">(125 reviews)</span>
+                        @if(Model.TotalNumberOfReviwws != 0)
+                        {
+                            <span class="rating-number">@Model.ProductRateAverage</span>
+                            <div class="stars">
+                                @for (int i = 0; i < Model.ProductRateAverage; i++)
+                                {
+                                    <span class="star filled">&#9733;</span>
+                                }
+                            </div>
+                            <span class="rating-count">(@Model.TotalNumberOfReviwws reviews)</span>
+                        }
+                        else
+                        {
+                            <span class="rating-count">(No reviews)</span>
+                        }
+
                     </div>
                     <div class="review-list">
-                        <div class="review-item">
-                            <div class="review-header">
-                                <span class="reviewer-name">John Doe</span>
-                                <div class="review-rating">
-                                    <span class="star filled">&#9733;</span>
-                                    <span class="star filled">&#9733;</span>
-                                    <span class="star filled">&#9733;</span>
-                                    <span class="star unfilled">&#9734;</span>
-                                    <span class="star unfilled">&#9734;</span>
+                        @if (Model.ProductRates != null && Model.ProductRates.Any())
+                        {
+                            @foreach (var rate in Model.ProductRates)
+                            {
+                                <div class="review-item">
+                                    <div class="review-header">
+                                        <span class="reviewer-name">@rate.UserName</span>
+                                        <div class="review-rating">
+                                            @for (int i = 0; i < rate.Rate; i++)
+                                            {
+                                                <span class="star filled">&#9733;</span> 
+                                            }
+                                        </div>
+                                        <span class="review-date">@rate.RateDate.ToString("MM/dd/yyyy")</span>
+                                    </div>
+                                    <p class="review-text">@rate.Review</p>
                                 </div>
-                                <span class="review-date">May 15, 2023</span>
-                            </div>
-                            <p class="review-text">Great product! The quality is excellent and it fits perfectly. Highly recommended!</p>
-                        </div>
-                        <div class="review-item">
-                            <div class="review-header">
-                                <span class="reviewer-name">Jane Smith</span>
-                                
-                                <div class="review-rating">
-                                    <span class="star filled">&#9733;</span>
-                                    <span class="star filled">&#9733;</span>
-                                    <span class="star filled">&#9733;</span>
-                                    <span class="star filled">&#9733;</span>
-                                    <span class="star filled">&#9733;</span>
-                                </div>
-                                <span class="review-date">April 30, 2023</span>
-                            </div>
-                            <p class="review-text">Absolutely love this! The color is true to the picture and the material is very comfortable.</p>
-                        </div>
+                            }
+                        }
                         <!-- Add more review items as needed -->
                     </div>
                 </section>
@@ -219,6 +206,31 @@
         </div>
     </article>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    // Function to show a SweetAlert confirmation before adding a review to this product
+    function confirmAddingReview(event) {
+        event.preventDefault(); // Prevent the form from submitting immediately
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You want to submit this review',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, submit it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If confirmed, submit the form
+                event.target.submit();
+            }
+        });
+
+        return false; // Prevent form submission until SweetAlert is confirmed
+    }
+</script>
 <script>
     function changeImage(thumbnail) {
         // Change main image
@@ -228,6 +240,7 @@
         document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
         thumbnail.classList.add('active');
     }
+    
     document.getElementById('reviewForm').addEventListener('submit', function (e) {
         e.preventDefault();
         // Here you would typically send the form data to a server

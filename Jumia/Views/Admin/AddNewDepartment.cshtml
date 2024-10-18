@@ -1,0 +1,26 @@
+@model Department
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Link to the custom CSS file -->
+<link rel="stylesheet" href="~/assets/css/departmentsproducts.css" />
+
+<div class="addDepartmentContainer">
+    <h1>Add New Department</h1>
+
+    <form asp-action="AddNewDepartment" asp-controller="Department" method="post" enctype="multipart/form-data">
+        <div class="formGroup">
+            <label asp-for="DepartmentName">Department Name</label>
+            <input asp-for="DepartmentName" type="text" id="departmentName" class="inputField" placeholder="Enter department name" required />
+        </div>
+
+        <div class="formGroup">
+            <label for="departmentImage">Upload Department Image</label>
+            <input type="file" name="departmentImage" id="departmentImage" class="inputField" accept=".png, .jpg" required />
+            <small class="fileTypeNotice">Only PNG or JPG formats are allowed.</small>
+        </div>
+
+        <button type="submit" class="submitBtn">Add Department</button>
+    </form>
+</div>

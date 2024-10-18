@@ -5,6 +5,7 @@ using Jumia.Services.Implementations;
 using Jumia.Services.IServices;
 using Jumia.SharedRepositories;
 using Jumia.UnitOfWorks;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -13,6 +14,14 @@ namespace Jumia
 {
     public class Program
     {
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.Configure<FormOptions>(options =>
+            {
+                options.MultipartBodyLengthLimit = 104857600; // 100 MB file size limit
+            });
+        }
+
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
@@ -20,7 +29,8 @@ namespace Jumia
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddDbContext<AppDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("dbConnection")));
+            builder.Services.AddDbContext<AppDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("dbConnection"))
+            .EnableSensitiveDataLogging().LogTo(Console.WriteLine)); 
             builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<AppDBContext>().AddDefaultTokenProviders();
             //DI register one instance for the same request
             builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
@@ -29,12 +39,27 @@ namespace Jumia
             builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
             builder.Services.AddTransient<IMaterialsCareRepository, MaterialsCareRepository>();
             builder.Services.AddTransient<ISizeRepository, SizeRepository>();
+            builder.Services.AddTransient<IColorRepository, ColorRepository>();
+            builder.Services.AddTransient<IProductRateUserRepository, ProductRateUserRepository>();
+            builder.Services.AddTransient<IProductRateRepository, ProductRateRepository>();
+            builder.Services.AddTransient<IProductColorSizeRepository, ProductColorSizeRepository>();
+            builder.Services.AddTransient<IShoppingCartRepository, ShoppingCartRepository>();
+            builder.Services.AddTransient<IDepartmentRepository, DepartmentRepository>();
 
+            builder.Services.AddTransient<IProductColorSizeService, ProductColorSizeService>();
             builder.Services.AddTransient<ISizeService, SizeService>();
+            builder.Services.AddTransient<IProductRateUserService, ProductRateUserService>();
+            builder.Services.AddTransient<IProductRateService, ProductRateService>();
+            builder.Services.AddTransient<IColorService, ColorService>();
             builder.Services.AddTransient<IProductService, ProductService>();
             builder.Services.AddTransient<IMaterialsCareService, MaterialsCareService>();
             builder.Services.AddTransient<IDepartmentService, DepartmentService>();
             builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddTransient<IUserAddressService,UserAddressService >();
+            builder.Services.AddTransient<IUserORderService, UserOrderService>();
+            builder.Services.AddTransient<IUserWishListService, UserWishListService>();
+            builder.Services.AddTransient<IShoppingCartServices, ShoppingCartService>();
+
 
             //AutoMapper
             builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());

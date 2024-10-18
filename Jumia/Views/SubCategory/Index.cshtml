@@ -6,261 +6,259 @@
 <section id="products-section" class="product-store padding-large">
     <div class="container">
         <div class="row">
-            <!-- Sidebar with Filters -->
+            @* <!-- Sidebar with Filters -->
             <aside class="col-md-3">
-<div class="container-fluid mt-100">
-    <div class="row d-flex justify-content-center">
-        <div class="col-md-4">
-            <div class="card">
-                <!-- Size Filter -->
-                <article class="filter-group">
-                    <header class="card-header">
-                        <a href="#" data-toggle="collapse" data-target="#collapse_aside1" data-abc="true" aria-expanded="false" class="collapsed">
-                            <i class="icon-control fa fa-chevron-down"></i>
-                            <h6 class="title">Size</h6>
-                        </a>
-                    </header>
-                    <div class="filter-content collapse" id="collapse_aside1" style="">
-                        <div class="card-body">
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light">XS</span>
-                            </label>
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light">S</span>
-                            </label>
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light">M</span>
-                            </label>
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light">L</span>
-                            </label>
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light">XL</span>
-                            </label>
-                        </div>
-                    </div>
-                </article>
+                <div class="container-fluid mt-100">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <!-- Size Filter -->
+                                <article class="filter-group">
+                                    <header class="card-header">
+                                        <a href="#" onclick="toggleFilter('collapse_aside1')" class="collapsed">
+                                            <i class="icon-control fa fa-chevron-down"></i>
+                                            <h6 class="title">Size</h6>
+                                        </a>
+                                    </header>
+                                    <div class="filter-content collapse" id="collapse_aside1" style="">
+                                        <div class="card-body">
+                                            <label class="checkbox-btn">
+                                                <input type="checkbox">
+                                                <span class="btn btn-light">XS</span>
+                                            </label>
+                                            <label class="checkbox-btn">
+                                                <input type="checkbox">
+                                                <span class="btn btn-light">S</span>
+                                            </label>
+                                            <label class="checkbox-btn">
+                                                <input type="checkbox">
+                                                <span class="btn btn-light">M</span>
+                                            </label>
+                                            <label class="checkbox-btn">
+                                                <input type="checkbox">
+                                                <span class="btn btn-light">L</span>
+                                            </label>
+                                            <label class="checkbox-btn">
+                                                <input type="checkbox">
+                                                <span class="btn btn-light">XL</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </article>
 
-                <!-- Color Filter -->
-                <article class="filter-group">
-                    <header class="card-header">
-                        <a href="#" data-toggle="collapse" data-target="#collapse_aside2" data-abc="true" aria-expanded="false" class="collapsed">
-                            <i class="icon-control fa fa-chevron-down"></i>
-                            <h6 class="title">Color</h6>
-                        </a>
-                    </header>
-                    <div class="filter-content collapse" id="collapse_aside2" style="">
-                        <div class="card-body">
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light">Red</span>
-                            </label>
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light">Blue</span>
-                            </label>
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light">Black</span>
-                            </label>
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light">Green</span>
-                            </label>
-                        </div>
-                    </div>
-                </article>
+                                <!-- Color Filter -->
+                                <article class="filter-group">
+                                    <header class="card-header">
+                                        <a href="#" onclick="toggleFilter('collapse_aside1')" class="collapsed">
+                                            <i class="icon-control fa fa-chevron-down"></i>
+                                            <h6 class="title">Color</h6>
+                                        </a>
+                                    </header>
+                                    <div class="filter-content collapse" id="collapse_aside2" style="">
+                                        <div class="card-body">
+                                            <label class="checkbox-btn">
+                                                <input type="checkbox">
+                                                <span class="btn btn-light">Red</span>
+                                            </label>
+                                            <label class="checkbox-btn">
+                                                <input type="checkbox">
+                                                <span class="btn btn-light">Blue</span>
+                                            </label>
+                                            <label class="checkbox-btn">
+                                                <input type="checkbox">
+                                                <span class="btn btn-light">Black</span>
+                                            </label>
+                                            <label class="checkbox-btn">
+                                                <input type="checkbox">
+                                                <span class="btn btn-light">Green</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </article>
 
-                <!-- Brand Filter -->
-                <article class="filter-group">
-                    <header class="card-header">
-                        <a href="#" data-toggle="collapse" data-target="#collapse_aside3" data-abc="true" aria-expanded="false" class="collapsed">
-                            <i class="icon-control fa fa-chevron-down"></i>
-                            <h6 class="title">Brands</h6>
-                        </a>
-                    </header>
-                    <div class="filter-content collapse" id="collapse_aside3" style="">
-                        <div class="card-body">
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light">Nike</span>
-                            </label>
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light">Adidas</span>
-                            </label>
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light">Puma</span>
-                            </label>
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light">Zara</span>
-                            </label>
-                        </div>
-                    </div>
-                </article>
+                                <!-- Brand Filter -->
+                                <article class="filter-group">
+                                    <header class="card-header">
+                                        <a href="#" onclick="toggleFilter('collapse_aside1')" class="collapsed">
+                                            <i class="icon-control fa fa-chevron-down"></i>
+                                            <h6 class="title">Brands</h6>
+                                        </a>
+                                    </header>
+                                    <div class="filter-content collapse" id="collapse_aside3" style="">
+                                        <div class="card-body">
+                                            <label class="checkbox-btn">
+                                                <input type="checkbox">
+                                                <span class="btn btn-light">Nike</span>
+                                            </label>
+                                            <label class="checkbox-btn">
+                                                <input type="checkbox">
+                                                <span class="btn btn-light">Adidas</span>
+                                            </label>
+                                            <label class="checkbox-btn">
+                                                <input type="checkbox">
+                                                <span class="btn btn-light">Puma</span>
+                                            </label>
+                                            <label class="checkbox-btn">
+                                                <input type="checkbox">
+                                                <span class="btn btn-light">Zara</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </article>
 
-                <!-- Material Care Filter -->
-                <article class="filter-group">
-                    <header class="card-header">
-                        <a href="#" data-toggle="collapse" data-target="#collapse_aside4" data-abc="true" aria-expanded="false" class="collapsed">
-                            <i class="icon-control fa fa-chevron-down"></i>
-                            <h6 class="title">Material Care</h6>
-                        </a>
-                    </header>
-                    <div class="filter-content collapse" id="collapse_aside4" style="">
-                        <div class="card-body">
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light">Cotton</span>
-                            </label>
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light">Polyester</span>
-                            </label>
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light">Leather</span>
-                            </label>
-                        </div>
-                    </div>
-                </article>
+                                <!-- Material Care Filter -->
+                                <article class="filter-group">
+                                    <header class="card-header">
+                                        <a href="#" onclick="toggleFilter('collapse_aside1')" class="collapsed">
+                                            <i class="icon-control fa fa-chevron-down"></i>
+                                            <h6 class="title">Material Care</h6>
+                                        </a>
+                                    </header>
+                                    <div class="filter-content collapse" id="collapse_aside4" style="">
+                                        <div class="card-body">
+                                            <label class="checkbox-btn">
+                                                <input type="checkbox">
+                                                <span class="btn btn-light">Cotton</span>
+                                            </label>
+                                            <label class="checkbox-btn">
+                                                <input type="checkbox">
+                                                <span class="btn btn-light">Polyester</span>
+                                            </label>
+                                            <label class="checkbox-btn">
+                                                <input type="checkbox">
+                                                <span class="btn btn-light">Leather</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </article>
 
-                <!-- Price Filter -->
-                <article class="filter-group">
-                    <header class="card-header">
-                        <a href="#" data-toggle="collapse" data-target="#collapse_aside5" data-abc="true" aria-expanded="false" class="collapsed">
-                            <i class="icon-control fa fa-chevron-down"></i>
-                            <h6 class="title">Price Range</h6>
-                        </a>
-                    </header>
-                    <div class="filter-content collapse" id="collapse_aside5" style="">
-                        <div class="card-body">
-                            <input type="range" class="custom-range" min="0" max="500" name="">
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label>Min</label>
-                                    <input class="form-control" placeholder="$0" type="number">
-                                </div>
-                                <div class="form-group text-right col-md-6">
-                                    <label>Max</label>
-                                    <input class="form-control" placeholder="$500" type="number">
-                                </div>
+                                <!-- Price Filter -->
+                                <article class="filter-group">
+                                    <header class="card-header">
+                                        <a href="#" onclick="toggleFilter('collapse_aside1')" class="collapsed">
+                                            <i class="icon-control fa fa-chevron-down"></i>
+                                            <h6 class="title">Price Range</h6>
+                                        </a>
+                                    </header>
+                                    <div class="filter-content collapse" id="collapse_aside5" style="">
+                                        <div class="card-body">
+                                            <input type="range" class="custom-range" min="0" max="500" name="">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label>Min</label>
+                                                    <input class="form-control" placeholder="$0" type="number">
+                                                </div>
+                                                <div class="form-group text-right col-md-6">
+                                                    <label>Max</label>
+                                                    <input class="form-control" placeholder="$500" type="number">
+                                                </div>
+                                            </div>
+                                            <a href="#"
+                                               class="highlight-button btn btn-medium button xs-margin-bottom-five"
+                                               data-abc="true">Apply Now</a>
+                                        </div>
+                                    </div>
+                                </article>
+
+                                <!-- Rating Filter -->
+                                <article class="filter-group">
+                                    <header class="card-header">
+                                        <a href="#" onclick="toggleFilter('collapse_aside1')" class="collapsed">
+                                            <i class="icon-control fa fa-chevron-down"></i>
+                                            <h6 class="title">Rating</h6>
+                                        </a>
+                                    </header>
+                                    <div class="filter-content collapse" id="collapse_aside6" style="">
+                                        <div class="card-body">
+                                            <label class="checkbox-btn">
+                                                <input type="checkbox">
+                                                <span class="btn btn-light">1 Star & Up</span>
+                                            </label>
+                                            <label class="checkbox-btn">
+                                                <input type="checkbox">
+                                                <span class="btn btn-light">2 Stars & Up</span>
+                                            </label>
+                                            <label class="checkbox-btn">
+                                                <input type="checkbox">
+                                                <span class="btn btn-light">3 Stars & Up</span>
+                                            </label>
+                                            <label class="checkbox-btn">
+                                                <input type="checkbox">
+                                                <span class="btn btn-light">4 Stars & Up</span>
+                                            </label>
+                                            <label class="checkbox-btn">
+                                                <input type="checkbox">
+                                                <span class="btn btn-light">5 Stars</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </article>
                             </div>
-                            <a href="#" class="highlight-button btn btn-medium button xs-margin-bottom-five" data-abc="true">Apply Now</a>
                         </div>
                     </div>
-                </article>
+                </div>
 
-                <!-- Rating Filter -->
-                <article class="filter-group">
-                    <header class="card-header">
-                        <a href="#" data-toggle="collapse" data-target="#collapse_aside6" data-abc="true" aria-expanded="false" class="collapsed">
-                            <i class="icon-control fa fa-chevron-down"></i>
-                            <h6 class="title">Rating</h6>
-                        </a>
-                    </header>
-                    <div class="filter-content collapse" id="collapse_aside6" style="">
-                        <div class="card-body">
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light">1 Star & Up</span>
-                            </label>
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light">2 Stars & Up</span>
-                            </label>
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light">3 Stars & Up</span>
-                            </label>
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light">4 Stars & Up</span>
-                            </label>
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light">5 Stars</span>
-                            </label>
+            </aside> *@
+
+            <div class="col-md-12">
+                <section id="featured-products" class="product-store padding-large">
+                    <div class="container">
+                        @*
+                        <div class="section-header d-flex flex-wrap align-items-center justify-content-between">
+                            <h2 style="color:brown">@subCatName Collection</h2>
+                            <div class="sorting">
+                                <label>Sort By: </label>
+                                <select class="form-control" id="sort-options">
+                                    <option>Recommended</option>
+                                    <option>Price: High to Low</option>
+                                    <option>Price: Low to High</option>
+                                    <option>New Arrivals</option>
+                                    <option>Best Rated</option>
+                                </select>
+                            </div>
+                        </div>
+                        *@
+                        <div class="row product-gallery">
+                            @if (Model != null)
+                            {
+                                @foreach (var item in Model)
+                                {
+                                    <div class="col-md-4 col-sm-6 product-item">
+                                        <div class="image-holder">
+                                            @foreach (var img in item.ProductImages)
+                                            {
+                                                <img src="@Url.Content(@img.ProductImageUrl)" alt="@img.ProductImageName" class="product-image img-fluid">
+                                            }
+                                        </div>
+                                        <div class="cart-concern">
+                                            <div class="cart-button d-flex justify-content-between align-items-center">
+                                                <button type="button" class="btn-wrap cart-link d-flex align-items-center">
+													add to WishList <i class="icon icon-arrow-io">  </i>
+                                                </button>
+                                                <button type="button" class="btn-wrap cart-link d-flex align-items-center">
+                                                    <i class="icon icon-heart"></i>
+                                                </button>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="product-detail">
+                                            <h3 class="product-title">
+                                                <a asp-action="ProductProfile" asp-controller="Product" asp-route-productId="@item.ProductId">@item.ProductName</a>
+                                            </h3>
+                                            <span class="item-price text-primary">@item.Price Pound</span>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <p>No products available for this sub-category.</p>
+                            }
                         </div>
                     </div>
-                </article>
+                </section>
             </div>
+
         </div>
     </div>
-</div>
-
-            </aside>
-<div class="col-md-9">
-<section id="featured-products" class="product-store padding-large">
-    <div class="container">
-        <div class="section-header d-flex flex-wrap align-items-center justify-content-between">
-            <h2 style="color:brown">@subCatName Collection</h2>
-                            
-            <div class="sorting">
-                <label>Sort By: </label>
-                <select class="form-control" id="sort-options">
-                    <option>Recommended</option>
-                    <option>Price: High to Low</option>
-                    <option>Price: Low to High</option>
-                    <option>New Arrivals</option>
-                    <option>Best Rated</option>
-                </select>
-            </div>
-        </div>
-        <div class="swiper product-swiper overflow-hidden">
-            <div class="swiper-wrapper">
-                 @if (Model != null)
-                 {
-                     
-                     @foreach (var item in Model)
-                     {
-                         <div class="swiper-slide">
-                             <div class="product-item">
-                                 @foreach(var img in item.ProductImages)
-                                 {
-                                 <div class="image-holder">
-                                     <img src="@Url.Content(@img.ProductImageUrl)" alt="@img.ProductImageName" class="product-image" style="height:300px">
-                                 </div>
-                                 }
-                                 <div class="cart-concern">
-                                     <div class="cart-button d-flex justify-content-between align-items-center">
-                                         <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart
-                                             <i class="icon icon-arrow-io"></i>
-                                         </button>
-
-                                         <button type="button" class="wishlist-btn">
-                                             <i class="icon icon-heart"></i>
-                                         </button>
-                                     </div>
-                                 </div>
-                                 <div class="product-detail">
-                                     <h3 class="product-title">
-                                     <a asp-action="ProductProfile" asp-controller="Product" asp-route-productId="@item.ProductId">@item.ProductName</a>
-                                     </h3>
-                                     <span class="item-price text-primary">@item.Price Pound</span>
-                                 </div>
-                             </div>
-                         </div>
-                     }
-                 }
-                 else
-                 {
-                     <p>No products available for this sub-category.</p>
-                 }
-            </div>
-        </div>
-        <div class="swiper-pagination"></div>
-    </div>
-</section>
-</div>
- </div>
-    </div>
-</section>
-
+ </section>

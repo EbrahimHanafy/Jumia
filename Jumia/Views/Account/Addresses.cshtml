@@ -1,0 +1,108 @@
+@model List<UserAddress>
+@{
+    ViewData["Title"] = "Addresses";
+    ViewBag.ActiveMenu = "Addresses";
+}
+
+<link rel="stylesheet" href="~/assets/css/profileStyle.css">
+
+<div class="d-flex">
+    <!-- Sidebar -->
+    <nav class="profile-sidebar">
+        <ul class="nav profile-nav">
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveMenu == "Profile" ? "active" : "")" href="/Account/Profile">
+                    Profile
+                    Info
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveMenu == "Addresses" ? "active" : "")"
+                   href="/Account/Addresses">Addresses</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveMenu == "Orders" ? "active" : "")" href="/Account/Orders">Orders</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveMenu == "Wishlist" ? "active" : "")" href="/Account/Wishlist">
+                    Wish
+                    List
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="profile-content flex-grow-1">
+        <h2>Your Addresses</h2>
+         @if (Model != null)
+        {
+            @foreach (var item in Model)
+            {
+                <!-- Default Address -->
+                <div class="address-section mt-4">
+                    <h4>Default Address</h4>
+            <div class="address-item border p-3 mb-3">
+                <div>
+                   
+                        <strong>Home</strong>
+
+                        <br>
+                        <p>@item.User.UserName</p>
+                        <p>
+                                @item.Country.CountryName - @item.Governorate.GovernorateName - @item.City.CityName - Building no: @item.BuildingNumber  -
+                               Floor no: @item.FloorNumber - Apartment no: @item.ApartmentNumber
+                        </p>
+                            @* <p>@item.User.PhoneNumber <span class="verified text-success">Verified</span></p> *@
+                    </div>
+                    <div class="address-actions mt-2">
+                        <a href="#" class="text-danger me-2">Delete</a>
+                        <a href="#" class="text-primary me-2">Edit</a>
+                        <span class="text-muted">Default Address</span>
+                    </div>
+                </div>
+            </div>}}
+
+
+            
+            
+            @* <!-- Other Addresses -->
+            <div class="address-section mt-4">
+                <h4>Other Addresses</h4>
+                <div class="address-item border p-3 mb-3">
+                    <div>
+                        <strong>Work</strong><br>
+                        <p>mohamed elwakkel</p>
+                        <p>188 Building, 6th of October - Degla, Egypt</p>
+                        <p>Phone: +20-11-7503185 <span class="verified text-success">Verified</span></p>
+                    </div>
+                    <div class="address-actions mt-2">
+                        <a href="#" class="text-danger me-2">Delete</a>
+                        <a href="#" class="text-primary me-2">Edit</a>
+                        <a href="#" class="text-secondary">Set as Default</a>
+                    </div>
+                    
+                </div>
+            </div>
+             *@
+            <!-- Add New Address Form -->
+            <div class="add-address-form mt-5">
+                <h4>Add New Address</h4>
+                <form>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Address</label>
+                        <textarea class="form-control" id="address" rows="3" placeholder="Enter your address"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" id="phone" placeholder="Enter your phone number">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Address</button>
+                </form>
+            </div>
+        </div>
+    </div>

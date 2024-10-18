@@ -10,12 +10,5 @@ namespace Jumia.Controllers
         {
             return View();
         }
-
-        //public IActionResult GetDepartmentCategories(Department department)
-        //{
-        //    var Categories = context.Categories.Where(s=>s.DepartmentId == department.DepartmentId).ToList();
-        //    ViewData["DepartmentCategories"] = Categories;
-        //    return View("/Department/Index");
-        //}
     }
 }
