@@ -1,0 +1,64 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Link to the shared CSS file -->
+<link rel="stylesheet" href="~/assets/css/departmentsproducts.css" />
+
+<div class="departmentDetailsContainer">
+    <h1 class="detailsTitle">Sub Category Details</h1>
+
+    <!-- Sub Category Name, Category, and Image -->
+    <div class="detailsSection">
+        <h2 class="departmentName">Sample Sub Category</h2>
+        <p><strong>Category:</strong> Phones</p> <!-- Category associated with the sub category -->
+        <img src="/Images/Product/pant-brown.jpg" alt="Sub Category Image" class="departmentImage" />
+    </div>
+
+    <!-- Static Fields for Created at and Updated at -->
+    <div class="timestamps">
+        <p><strong>Created at:</strong> 2024-10-01</p>
+        <p><strong>Updated at:</strong> 2024-10-15</p>
+    </div>
+
+    <!-- Edit Button -->
+    <button class="editBtn" onclick="enableEdit()">Edit Sub Category</button>
+
+    <!-- Editable Form Section (Initially Hidden) -->
+    <div id="editForm" class="editFormSection" style="display: none;">
+        <form>
+            <!-- Editable Sub Category Name -->
+            <div class="formGroup">
+                <label for="subCategoryNameInput">Sub Category Name</label>
+                <input type="text" id="subCategoryNameInput" class="inputField" value="Sample Sub Category" />
+            </div>
+
+            <!-- Editable Category Selection -->
+            <div class="formGroup">
+                <label for="categorySelect">Category</label>
+                <select id="categorySelect" class="inputField">
+                    <option value="1">Phones</option>
+                    <option value="2">Laptops</option>
+                    <option value="3">Tablets</option>
+                    <!-- Add more options dynamically if fetched from an API -->
+                </select>
+            </div>
+
+            <!-- Editable Sub Category Image -->
+            <div class="formGroup">
+                <label for="subCategoryImage">Upload New Image</label>
+                <input type="file" id="subCategoryImage" class="inputField" accept=".png, .jpg" />
+                <small class="fileTypeNotice">Only PNG or JPG formats are allowed.</small>
+            </div>
+
+            <!-- Save Button -->
+            <button type="submit" class="saveBtn">Save Changes</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function enableEdit() {
+        document.getElementById('editForm').style.display = 'block';
+    }
+</script>

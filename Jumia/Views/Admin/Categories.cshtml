@@ -2,7 +2,36 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div>
+<!-- Link to the shared CSS file -->
+<link rel="stylesheet" href="~/assets/css/departmentsproducts.css" />
+
+<div class="departmentsContainer">
     <h1>@ViewData["Title"]</h1>
-    <p>Categories</p>
+
+    <!-- Search and Add New Category Button -->
+    <div class="searchAddContainer">
+        <label for="searchInput" class="searchLabel">Search by ID or Name:</label>
+        <input type="text" id="searchInput" class="searchInput" placeholder="Enter ID or Name" />
+        <a href="/admin/addnewcategory" class="addBtn">Add New Category</a>
+    </div>
+
+    <!-- Table -->
+    <table class="departmentsTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category Name</th>
+                <th>Department</th> <!-- New Department Column -->
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td><a href="/admin/categorydetails/1" class="departmentLink">Sample Category</a></td>
+                <td>Electronics</td> <!-- Example department value -->
+                <td>2024-10-01</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
