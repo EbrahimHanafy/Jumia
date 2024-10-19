@@ -12,14 +12,13 @@
 }
 
 .inner {
-    min-width: 850px;
+    min-width: 65%;
     margin: auto;
-    padding-top: 68px;
-    padding-bottom: 48px;
+    padding-block: 3.5rem;
     background-color: rgba(255, 255, 255, 0.8);
-    /* Light background for better contrast */
-    border-radius: 10px;
+    border-radius: 1rem;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    margin-block: 2rem;
 }
 
 .inner h3 {
@@ -33,8 +32,9 @@
 }
 
 form {
-    width: 50%;
-    padding-left: 45px;
+    width: 90%;
+    margin: auto;
+    padding-inline: 2.5rem;
 }
 
 /* Form Groups */
@@ -71,9 +71,9 @@ form {
 /* Button Styling */
 button {
     border: none;
-    width: 152px;
-    height: 40px;
-    margin: auto;
+    width: 45%;
+    height: 2.6rem;
+    margin: auto !important;
     margin-top: 29px;
     cursor: pointer;
     display: flex;
@@ -81,7 +81,7 @@ button {
     justify-content: center;
     padding: 0;
     background: #ae3c33;
-    font-size: 13px;
+    font-size: 1.1rem;
     color: #fff;
     text-transform: uppercase;
     font-family: "Muli-SemiBold";

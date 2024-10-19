@@ -1,0 +1,49 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Link to the shared CSS file -->
+<link rel="stylesheet" href="~/assets/css/departmentsproducts.css" />
+
+<div class="addDepartmentContainer">
+    <h1>Add New Sub Category</h1>
+
+    <form>
+        <!-- Select List for Departments -->
+        <div class="formGroup">
+            <label for="departmentSelect">Select Department</label>
+            <select id="departmentSelect" class="inputField" required>
+                <option value="" disabled selected>Select a department</option>
+                <option value="1">Electronics</option>
+                <option value="2">Fashion</option>
+                <option value="3">Home Appliances</option>
+                <!-- Add more options dynamically if fetched from an API -->
+            </select>
+        </div>
+
+        <!-- Select List for Categories -->
+        <div class="formGroup">
+            <label for="categorySelect">Select Category</label>
+            <select id="categorySelect" class="inputField" required>
+                <option value="" disabled selected>Select a category</option>
+                <option value="1">Phones</option>
+                <option value="2">Laptops</option>
+                <option value="3">Tablets</option>
+                <!-- Add more options dynamically if fetched from an API based on the selected department -->
+            </select>
+        </div>
+
+        <div class="formGroup">
+            <label for="subCategoryName">Sub Category Name</label>
+            <input type="text" id="subCategoryName" class="inputField" placeholder="Enter sub category name" required />
+        </div>
+
+        <div class="formGroup">
+            <label for="subCategoryImage">Upload Sub Category Image</label>
+            <input type="file" id="subCategoryImage" class="inputField" accept=".png, .jpg" required />
+            <small class="fileTypeNotice">Only PNG or JPG formats are allowed.</small>
+        </div>
+
+        <button type="submit" class="saveBtn">Add Sub Category</button>
+    </form>
+</div>

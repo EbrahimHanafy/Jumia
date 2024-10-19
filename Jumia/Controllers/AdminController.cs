@@ -127,5 +127,34 @@ namespace Jumia.Controllers
             return View();
         }
 
+        // Category Details Page
+        public IActionResult CategoryDetails(int id)
+        {
+            ViewData["Title"] = "Category Details";
+            return View(); // Return the CategoryDetails.cshtml view
+        }
+
+        // Add New Category Page
+        public IActionResult AddNewCategory()
+        {
+            ViewData["Title"] = "Add New Category";
+            return View(); // Return the AddNewCategory.cshtml view
+        }
+
+        // Sub Category Details Page
+        public IActionResult SubCategoryDetails(int id)
+        {
+            ViewData["Title"] = "Sub Category Details";
+            // Fetch the sub category details from the database using the id
+            return View();
+        }
+
+        // Add New Sub Category Page
+        public IActionResult AddNewSubCategory()
+        {
+            ViewData["Title"] = "Add New Sub Category";
+            return View();
+        }
+
     }
 }
