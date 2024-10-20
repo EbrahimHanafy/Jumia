@@ -1493,7 +1493,7 @@
             {
               <div class="swiper-slide">
                 <div class="product-item">
-                  <a asp-action="GetProductsByBrand" asp-controller="Product" asp-route-brandId="@item.BrandId" asp-route-brandName="@item.BrandName">
+                  <a asp-action="GetBrandProducts" asp-controller="Brand" asp-route-brandId="@item.BrandId" asp-route-brandName="@item.BrandName">
                      <img src="@Url.Content(item.ImageURL)" alt="@item.BrandName" class="product-image">
                   </a>
                 </div>

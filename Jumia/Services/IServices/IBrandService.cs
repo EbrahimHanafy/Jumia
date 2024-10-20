@@ -2,7 +2,7 @@
 
 namespace Jumia.Services.IServices
 {
-    public interface IBrandServices
+    public interface IBrandService
     {
         public Task<Brand> AddBrand(Brand brand);
     }
