@@ -1,7 +1,7 @@
+@model List<Product>
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
 <!-- Link to users.css -->
 <link rel="stylesheet" href="~/assets/css/users.css" />
 
@@ -10,7 +10,6 @@
     <!-- Search Input -->
     <div class="search-container">
         <form> 
-
         <input type="text" id="search-input" placeholder="Product Id..." />
         <input type="text" id="search-input" placeholder="Search by Product Name..." />
         <button class="search-btn">Search</button>
@@ -24,42 +23,34 @@
                 <tr>
                     <th>ProductId</th>
                     <th>ProductName</th>
+                    <th>BarCode</th>
                     <th>SubCategory</th>
-                    <th>Category</th>
-                    <th>Department</th>
+                    <th>Barnd</th>
                     <th>IsActive</th>
                     <th>CreatedDate</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- Placeholder rows for now -->
-                <tr>
-                    <td>1</td>
-                    <td><a asp-action="ProductDetailes" asp-controller="Admin">Product 1</a></td>
-                    <td>SubCategory 1</td>
-                    <td>Category 1</td>
-                    <td>Department 1</td>
-                    <td>No</td>
-                    <td>2024-01-01</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td><a asp-action="ProductDetailes" asp-controller="Admin">Product 2</a></td>
-                    <td>SubCategory 1</td>
-                    <td>Category 1</td>
-                    <td>Department 1</td>
-                    <td>Yes</td>
-                    <td>2024-01-01</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td><a asp-action="ProductDetailes" asp-controller="Admin">Product 3</a></td>
-                    <td>SubCategory 1</td>
-                    <td>Category 1</td>
-                    <td>Department 1</td>
-                    <td>No</td>
-                    <td>2024-01-01</td>
-                </tr>
+                @foreach(var item in Model)
+                {
+                    <tr>
+                        <td>@item.ProductId</td>
+                        <td><a asp-action="GetProductById" asp-controller="Product" asp-route-productId="@item.ProductId">@item.ProductName</a></td>
+                        <td>@item.BarCode</td>
+                        <td>@item.SubCategory?.SubCategoryName</td>
+                        <td>@item.Brand?.BrandName</td>
+                        @if(item.IsActive == true)
+                        {
+                            <td>Yes</td>
+                        }
+                        else
+                        {
+                            <td>No</td>
+                        }
+                        <td>@item.CreatedAt.Date</td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>

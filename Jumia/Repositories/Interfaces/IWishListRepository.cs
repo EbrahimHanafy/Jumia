@@ -5,5 +5,6 @@ namespace Jumia.Repositories.Interfaces
 {
 	public interface IWishListRepository : IGenericRepository<WishList>
 	{
+		
 	}
 }

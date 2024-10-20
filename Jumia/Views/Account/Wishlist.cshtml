@@ -1,4 +1,4 @@
-@model List<WishList>
+@model List<WishListProductViewModel>
 @{
     ViewData["Title"] = "Wish List";
     ViewBag.ActiveMenu = "Wishlist";
@@ -43,11 +43,16 @@
                 <!-- Item 1 -->
                 <div class="wishlist-item">
                     @* <img src="@item.Product.ProductImages.FirstOrDefault(p => p.IsMainImage)?.ProductImageUrl" alt="Winter Jacket" class="img-fluid"/> *@
-
-                    <p class="product-name">@item.Product.ProductName</p>
+                    <img src="@Url.Content(item.Image.ProductImageUrl)" alt="Winter Jacket" class="img-fluid"/>
+                        <a asp-action="ProductProfile" asp-controller="Product" asp-route-productId="@item.Product.ProductId" class="product-name">@item.Product.ProductName</a>                   
                     <p class="product-price">@item.Product.Price</p>
                 </div>
-            }}
+                }
+            }
+            else
+            {
+                <p> No products in your wishlist. </p>
+            }
             @* <!-- Item 2 -->
             <div class="wishlist-item">
             <img src="~/assets/images/product-item4.jpg" alt="Smart Watch" class="img-fluid">

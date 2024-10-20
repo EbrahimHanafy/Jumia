@@ -203,7 +203,7 @@
             <div class="col-md-12">
                 <section id="featured-products" class="product-store padding-large">
                     <div class="container">
-                        @*
+                        
                         <div class="section-header d-flex flex-wrap align-items-center justify-content-between">
                             <h2 style="color:brown">@subCatName Collection</h2>
                             <div class="sorting">
@@ -217,13 +217,13 @@
                                 </select>
                             </div>
                         </div>
-                        *@
+                       
                         <div class="row product-gallery">
                             @if (Model != null)
                             {
                                 @foreach (var item in Model)
                                 {
-                                    <div class="col-md-4 col-sm-6 product-item">
+                                    <div class="col-md-2 col-sm-2 product-item">
                                         <div class="image-holder">
                                             @foreach (var img in item.ProductImages)
                                             {
