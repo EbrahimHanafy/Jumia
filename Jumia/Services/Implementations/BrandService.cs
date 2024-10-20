@@ -6,7 +6,7 @@ using Jumia.UnitOfWorks;
 
 namespace Jumia.Services.Implementations
 {
-    public class BrandServices(IUnitOfWork _unitOfWork, IMapper mapper) : IBrandServices
+    public class BrandService(IUnitOfWork _unitOfWork, IMapper mapper) : IBrandService
     {
         private readonly List<Brand> _brands = new List<Brand>();
         public async Task<Brand> AddBrand(Brand brand)

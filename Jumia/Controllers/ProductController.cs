@@ -139,5 +139,11 @@ namespace Jumia.Controllers
                 return View("ProductProfile", productProfileVM);
             }
         }
+        
+        public async Task<IActionResult> GetAllProducts()
+        {
+            var products = await productService.GetAllProducts();
+            return View("~/Views/Admin/Products.cshtml", products);
+        }
     }
 }

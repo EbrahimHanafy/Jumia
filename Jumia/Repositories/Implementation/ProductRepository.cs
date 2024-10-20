@@ -22,7 +22,12 @@ namespace Jumia.Repositories.Implementation
                                   .Include(c => c.ProductImages.Where(x => x.IsMainImage == true))
                                   .ToListAsync();
         }
-
+        public async Task<List<Product>> GetProductsByBrand(int BrandId) 
+        {
+            return await _products.Where(s => s.BrandId == BrandId)
+                                  .Include(c => c.ProductImages.Where(x => x.IsMainImage == true))
+                                  .ToListAsync();
+        }
         public async Task<List<Product>> GetTop10NewArrivalProducts()
         {
             return await _products.OrderByDescending(p=>p.CreatedAt).Take(10)

@@ -45,7 +45,9 @@ namespace Jumia
             builder.Services.AddTransient<IProductColorSizeRepository, ProductColorSizeRepository>();
             builder.Services.AddTransient<IShoppingCartRepository, ShoppingCartRepository>();
             builder.Services.AddTransient<IDepartmentRepository, DepartmentRepository>();
+            builder.Services.AddTransient<IBrandRepository, BrandRepository>();
 
+            builder.Services.AddTransient<IBrandService, BrandService>();
             builder.Services.AddTransient<IProductColorSizeService, ProductColorSizeService>();
             builder.Services.AddTransient<ISizeService, SizeService>();
             builder.Services.AddTransient<IProductRateUserService, ProductRateUserService>();

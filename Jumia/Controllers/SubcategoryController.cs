@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Jumia.Controllers
 {
-    public class SubCategoryController(AppDBContext context , IProductService productService) : Controller
+    public class SubCategoryController( IProductService productService) : Controller
     {
         // Action for displaying all items under a subcategory
         public IActionResult Index()
@@ -18,14 +18,5 @@ namespace Jumia.Controllers
             ViewData["SubCategoryName"] = subCategoryName;
             return View("Index", subCategoryPrducts);
         }
-        //public IActionResult GetSubCategoryProducts(int subCategoryId, string subCategoryName)
-        //{
-        //    var Products = context.Products.Where(s => s.SubCategoryId == subCategoryId)
-        //                                         .Include(c => c.ProductImages.Where(x=>x.IsMainImage == true))
-        //                                         .ToList();
-        //    ViewData["SubCategoryProducts"] = Products;
-        //    ViewData["SubCategoryName"] = subCategoryName;
-        //    return View("Index");
-        //}
     }
 }

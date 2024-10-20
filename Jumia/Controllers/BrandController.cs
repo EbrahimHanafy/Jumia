@@ -1,10 +1,11 @@
 ﻿using Jumia.Models;
+using Jumia.Services.Implementations;
 using Jumia.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Jumia.Controllers
 {
-    public class BrandController(IBrandServices brandService) : Controller
+    public class BrandController(IBrandService brandService, IProductService productService) : Controller
     {
         public IActionResult Index()
         {
@@ -28,6 +29,12 @@ namespace Jumia.Controllers
                 ModelState.AddModelError("Error", ex.Message);
                 return View(brand);
             }
+        }
+        public async Task<IActionResult> GetBrandProducts(int brandId, string brandName) 
+        {
+            var brandProducts = await productService.GetProductsByBrand(brandId);
+            ViewData["BrandName"] = brandName;
+            return View("BrandDetails", brandProducts);
         }
     }
 }

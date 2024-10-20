@@ -1,0 +1,210 @@
+﻿<div class="container">
+    <div class="order-details-section">
+        <h2>Order Details</h2>
+        <div class="order-details-grid">
+            <div class="order-detail-item">
+                <p class="label">Order ID</p>
+                <p class="value">OrderId</p>
+            </div>
+            <div class="order-detail-item">
+                <p class="label">Order Date</p>
+                <p class="value">OrderDate.ToString("dd/MM/yyyy")</p>
+            </div>
+            <div class="order-detail-item">
+                <p class="label">Total Amount</p>
+                <p class="value">TotalAmount</p>
+            </div>
+            <div class="order-detail-item">
+                <p class="label">Total Discount</p>
+                <p class="value">TotalDiscount</p>
+            </div>
+            <div class="order-detail-item">
+                <p class="label">Discount Percentage</p>
+                <p class="value">DiscountPercentage%</p>
+            </div>
+            <div class="order-detail-item">
+                <p class="label">Total Tax</p>
+                <p class="value">TotalTax</p>
+            </div>
+            <div class="order-detail-item">
+                <p class="label">Tax Percentage</p>
+                <p class="value">TaxPercentage%</p>
+            </div>
+            <div class="order-detail-item">
+                <p class="label">Shipping Fees</p>
+                <p class="value">ShippingFees</p>
+            </div>
+            <div class="order-detail-item">
+                <p class="label">Number of Products</p>
+                <p class="value">NumberOfProducts</p>
+            </div>
+            <div class="order-detail-item">
+                <p class="label">Total Quantity</p>
+                <p class="value">TotalQuantity</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="order-items-section">
+        <button type="button" class="collapsible">View Order Items</button>
+        <div class="content">
+            <div class="order-item">
+                <p><strong>Product Name:</strong> ProductName</p>
+                <p><strong>Price:</strong> Price</p>
+                <p><strong>Quantity:</strong> Quantity</p>
+            </div>
+            <div class="order-item">
+                <p><strong>Product Name:</strong> ProductName</p>
+                <p><strong>Price:</strong> Price</p>
+                <p><strong>Quantity:</strong> Quantity</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="payment-method-section">
+        <h3>Payment Method</h3>
+        <select id="paymentMethod" name="PaymentMethod" class="form-control">
+            <option value="creditCard">Credit Card</option>
+            <option value="paypal">PayPal</option>
+            <option value="bankTransfer">Bank Transfer</option>
+        </select>
+    </div>
+
+    <div class="address-details-section">
+        <h3>Delivery Address</h3>
+        <div class="form-group">
+            <label for="streetAddress">Street Address:</label>
+            <input type="text" id="streetAddress" name="StreetAddress" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="city">City:</label>
+            <input type="text" id="city" name="City" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="postalCode">Postal Code:</label>
+            <input type="text" id="postalCode" name="PostalCode" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="Country" class="form-control" />
+        </div>
+    </div>
+</div>
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    for (var i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    }
+</script>
+<style>
+
+    /* Order Details Section */
+    .order-details-section {
+        border-bottom: 2px solid #ecf0f1;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+    }
+
+    .order-details-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+    }
+
+    .order-detail-item {
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-radius: 4px;
+    }
+
+        .order-detail-item p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .order-detail-item .label {
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+
+        .order-detail-item .value {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+    /* Collapsible Section for Order Items */
+    .collapsible {
+        background-color: #3498db;
+        color: white;
+        cursor: pointer;
+        padding: 15px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 18px;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        transition: background-color 0.3s;
+    }
+
+        .collapsible:hover {
+            background-color: #2980b9;
+        }
+
+    .content {
+        display: none;
+        overflow: hidden;
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 4px;
+    }
+
+    .order-item {
+        background-color: #fff;
+        margin-bottom: 15px;
+        padding: 15px;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Payment Method Section */
+    .payment-method-section, .address-details-section {
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 2px solid #ecf0f1;
+    }
+
+    select, input {
+        padding: 12px;
+        margin-top: 5px;
+        border-radius: 4px;
+        border: 1px solid #bdc3c7;
+        font-size: 16px;
+        transition: border-color 0.3s;
+    }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+    /* Form Group */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #7f8c8d;
+    }
+</style>
