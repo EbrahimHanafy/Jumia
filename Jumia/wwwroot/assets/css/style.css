@@ -2109,13 +2109,17 @@ blockquote cite {
   letter-spacing: 0.015em;
   font-size: 2em;
 }
+
 /* Ensure the image container is square */
 .square-image {
-    width: 150px; /* Set the desired width for the square */
-    height: 150px; /* Ensure height matches the width to make it a square */
-    overflow: hidden;
-    position: relative;
+  width: 150px;
+  /* Set the desired width for the square */
+  height: 150px;
+  /* Ensure height matches the width to make it a square */
+  overflow: hidden;
+  position: relative;
 }
+
 .search-popup .cat-list-item a:hover::after {
   height: 1px;
   opacity: 1;
@@ -2377,12 +2381,18 @@ blockquote cite {
 
 .product-item img.product-image {
   background: var(--light-color);
-  border: 1px solid var(--grey-color);*/
+  border: 1px solid var(--grey-color);
   border-radius: 6px;
   padding: 10px;
   cursor: pointer;
   margin-bottom: 20px;
-  width: 90%;
+  width: 100%;
+  height: 15rem;
+  transition: transform 0.3s ease;
+}
+
+.product-item img.product-image:hover {
+  transform: scale(1.05);
 }
 
 .product-item .cart-concern {
