@@ -1,6 +1,8 @@
-﻿using Jumia.Models;
+﻿using Jumia.DTO;
+using Jumia.Models;
 using Jumia.Repositories.Interfaces;
 using Jumia.SharedRepositories;
+using Jumia.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace Jumia.Repositories.Implementation
@@ -9,11 +11,15 @@ namespace Jumia.Repositories.Implementation
     {
         protected readonly DbSet<Product> _products;
         private readonly DbSet<ProductInStore> _productInStore;
+        private readonly DbSet<WishList> _wishList;
+        private readonly DbSet<ProductImage> _productImages;
 
         public ProductRepository(AppDBContext context) : base(context)
         {
             _products = context.Set<Product>();
             _productInStore = context.Set<ProductInStore>();
+            _wishList = context.Set<WishList>();
+            _productImages = context.Set<ProductImage>();
         }
         
         public async Task<List<Product>> GetProductsBySubCategory(int SubCategoryId)
@@ -50,6 +56,21 @@ namespace Jumia.Repositories.Implementation
             return await _productInStore
                         .Where(s => s.ProductId == productId)
                         .SumAsync(s => s.Quantity);
+        }
+
+        public async Task<List<WishListProductViewModel>> GetWishListProducts(int userCode)
+        {
+            return await (from p in _products
+                          join pi in _productImages on p.ProductId equals pi.ProductId
+                          join w in _wishList on p.ProductId equals w.ProductId
+                          where w.UserCode == userCode && pi.IsMainImage == true
+                          orderby w.CreatedAt descending
+                          select new WishListProductViewModel
+                          {
+                              Product = p,
+                              Image = pi
+                          }
+                          ).ToListAsync();
         }
     }
 }

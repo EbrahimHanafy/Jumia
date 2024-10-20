@@ -15,9 +15,9 @@ public class AccountController  : Controller
     IUserAddressService _useraddressService;
     IUserORderService _userorderService;
     IUserWishListService _userwishListService;
+    IProductService _productService;
 
-
-    public AccountController(SignInManager<User> signInManager, UserManager<User> userManager , IUserAddressService useraddressService, IUserORderService userorderService, IUserWishListService userwishListService)
+    public AccountController(SignInManager<User> signInManager, UserManager<User> userManager , IUserAddressService useraddressService, IUserORderService userorderService, IUserWishListService userwishListService, IProductService productService)
     {
         _signInManager = signInManager;
         _userManager = userManager;
@@ -25,6 +25,7 @@ public class AccountController  : Controller
         _userorderService = userorderService;
         _userwishListService = userwishListService;
         _userwishListService = userwishListService;
+        _productService = productService;
     }
 
     // GET: /Account/Login
@@ -174,9 +175,11 @@ public class AccountController  : Controller
         if (User.Identity.IsAuthenticated)
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            var wishLists = await _userwishListService.getByUSerCode(user.UserCode);
+            //var wishLists = await _userwishListService.getByUSerCode(user.UserCode);
 
-            return View(wishLists);
+            var wishListProducts = await _productService.GetWishListPeoducts(user.UserCode);
+
+            return View(wishListProducts);
         }
         else
             return RedirectToAction("Login", "Account");

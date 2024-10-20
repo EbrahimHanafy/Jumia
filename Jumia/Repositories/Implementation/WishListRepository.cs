@@ -13,5 +13,6 @@ namespace Jumia.Repositories.Implementation
 		{
 			_wishLists = context.Set<WishList>();
 		}
-	}
+        
+    }
 }

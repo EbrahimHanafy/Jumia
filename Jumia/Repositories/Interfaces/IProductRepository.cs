@@ -1,5 +1,6 @@
 ﻿using Jumia.Models;
 using Jumia.SharedRepositories;
+using Jumia.ViewModels;
 
 namespace Jumia.Repositories.Interfaces
 {
@@ -14,5 +15,7 @@ namespace Jumia.Repositories.Interfaces
         public Task<Product> GetProductById(int productId);
 
         public Task<int> GetAvailableQunitityOfProductById(int productId);
+
+        public Task<List<WishListProductViewModel>> GetWishListProducts(int userCode);
     }
 }

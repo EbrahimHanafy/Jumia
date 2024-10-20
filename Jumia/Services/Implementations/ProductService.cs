@@ -4,6 +4,7 @@ using Jumia.Repositories.Interfaces;
 using Jumia.Services.IServices;
 using Jumia.SharedRepositories;
 using Jumia.UnitOfWorks;
+using Jumia.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace Jumia.Services.Implementations
@@ -41,6 +42,11 @@ namespace Jumia.Services.Implementations
         {
             var products = await unitOfWork.Repository<Product>().GetAllAsync();
             return mapper.Map<List<Product>>(products);
+        }
+        public async Task<List<WishListProductViewModel>> GetWishListPeoducts(int Usercode)
+        {
+            var wishListproducts = await productRepository.GetWishListProducts(Usercode);
+            return mapper.Map<List<WishListProductViewModel>>(wishListproducts);
         }
     }
 }
